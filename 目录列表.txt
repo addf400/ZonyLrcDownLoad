@@ -1,0 +1,69 @@
+卷 软件 的文件夹 PATH 列表
+卷序列号为 0002-DB83
+D:.
+│  .gitattributes
+│  .gitignore
+│  javaapk.com文件列表生成.bat
+│  Program.cs
+│  Resource1.Designer.cs
+│  Resource1.resx
+│  Zony Lrc Download 2.0.csproj
+│  Zony Lrc Download 2.0.psess
+│  Zony Lrc Download 2.0.sln
+│  Zony Lrc Download 2.0150709.vsp
+│  目录列表.txt
+│  
+├─bin
+│  └─Debug
+│          ID3.dll
+│          log.txt
+│          Zony Lrc Download 2.0.exe
+│          Zony Lrc Download 2.0.exe.CodeAnalysisLog.xml
+│          Zony Lrc Download 2.0.exe.lastcodeanalysissucceeded
+│          Zony Lrc Download 2.0.pdb
+│          Zony Lrc Download 2.0.vshost.exe
+│          Zony Lrc Download 2.0.vshost.exe.manifest
+│          
+├─DLL
+│      ID3.dll
+│      
+├─Form
+│      About.cs
+│      About.Designer.cs
+│      About.resx
+│      Lrc_Main.cs
+│      Lrc_Main.Designer.cs
+│      Lrc_Main.resx
+│      Update.cs
+│      Update.Designer.cs
+│      Update.resx
+│      
+├─Icon
+│      6.ico
+│      
+├─obj
+│  └─Debug
+│      │  DesignTimeResolveAssemblyReferencesInput.cache
+│      │  Zony Lrc Download 2.0.csproj.FileListAbsolute.txt
+│      │  Zony Lrc Download 2.0.csproj.GenerateResource.Cache
+│      │  Zony Lrc Download 2.0.csprojResolveAssemblyReference.cache
+│      │  Zony Lrc Download 2.0.exe
+│      │  Zony Lrc Download 2.0.pdb
+│      │  Zony_Lrc_Download_2._0.About.resources
+│      │  Zony_Lrc_Download_2._0.Lrc_Main.resources
+│      │  Zony_Lrc_Download_2._0.Properties.Resources.resources
+│      │  Zony_Lrc_Download_2._0.Resource1.resources
+│      │  Zony_Lrc_Download_2._0.Update.resources
+│      │  
+│      └─TempPE
+├─Program
+│      Log.cs
+│      LrcMain_Main.cs
+│      
+└─Properties
+        AssemblyInfo.cs
+        Resources.Designer.cs
+        Resources.resx
+        Settings.Designer.cs
+        Settings.settings
+        

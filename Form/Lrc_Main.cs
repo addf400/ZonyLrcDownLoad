@@ -25,8 +25,7 @@ namespace Zony_Lrc_Download_2._0
         }
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            About s1 = new About();
-            s1.Show();
+            new About().ShowDialog();
         }
 
         private void Button_SelectDirectory_Click(object sender, EventArgs e)
@@ -41,29 +40,26 @@ namespace Zony_Lrc_Download_2._0
             {
                 MessageBox.Show(null,"请选择正确的文件夹路径！","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 #region 日志点
-                Log.WriteLog("文件夹选择错误。\r\n");
+                Log.WriteLog("文件夹选择错误。");
                 #endregion
             }
             else
             {
                 toolStripStatusLabel1.Text = "正在扫描......";
                 Button_SelectDirectory.Enabled = false;
-                #region 日志点
-                Log.WriteLog("开始扫描MP3文件。\r\n");
-                #endregion
 
                 Thread Search = new Thread(SearchFile);
                 Search.Start();
+
                 #region 日志点
-                Log.WriteLog("扫描线程启动，线程ID："+Search.ManagedThreadId.ToString()+"\r\n");
+                Log.WriteLog("扫描线程启动，线程ID："+Search.ManagedThreadId.ToString());
                 #endregion
             }
 
         }
-        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+       private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
        {
-                About s1 = new About();
-                s1.Show();
+           new About().Show();
        }
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
        {
@@ -95,10 +91,11 @@ namespace Zony_Lrc_Download_2._0
         {
 
             toolStripStatusLabel1.Text = "下载歌词......";
-            Thread Down = new Thread(DownLoadLrc);
+            var Down = new Thread(DownLoadLrc);
             Down.Start();
+
             #region 日志点
-            Log.WriteLog("歌词下载线程启动，线程ID：" + Down.ManagedThreadId.ToString() + "\r\n");
+            Log.WriteLog("歌词下载线程启动，线程ID：" + Down.ManagedThreadId.ToString());
             #endregion
         }
 
@@ -119,6 +116,11 @@ namespace Zony_Lrc_Download_2._0
                 {
                     label2.Text = "歌曲名称:" + "none";
                     label1.Text = "歌手:" + "none";
+                }catch(Exception exp)
+                {
+                    #region 日志点
+                    Log.WriteLog(exp.ToString());
+                    #endregion
                 }
             }
         }

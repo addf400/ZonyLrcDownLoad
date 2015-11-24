@@ -72,7 +72,7 @@ namespace Zony_Lrc_Download_2._0
                     Button_SelectDirectory.Enabled = true;
                 }
                 #region 日志点
-                Log.WriteLog("扫描线程完成。\r\n");
+                Log.WriteLog("扫描线程完成。");
                 #endregion
             }
         }
@@ -100,7 +100,7 @@ namespace Zony_Lrc_Download_2._0
                 {
                     LrcListItem.Items[i].SubItems[1].Text = "失败";
                     #region 日志点
-                    Log.WriteLog(LrcListItem.Items[i].SubItems[1].Text+"  下载失败..." + "\r\n");
+                    Log.WriteLog(LrcListItem.Items[i].SubItems[1].Text+"  下载失败..." );
                     #endregion
                     break;
                 }
@@ -114,7 +114,7 @@ namespace Zony_Lrc_Download_2._0
                     {
                         LrcListItem.Items[i].SubItems[1].Text = "失败";
                         #region 日志点
-                        Log.WriteLog(LrcListItem.Items[i].SubItems[1].Text + "  下载失败..." + "\r\n");
+                        Log.WriteLog(LrcListItem.Items[i].SubItems[1].Text + "  下载失败..." );
                         #endregion
                         continue;
                     }
@@ -163,7 +163,7 @@ namespace Zony_Lrc_Download_2._0
                 catch (Exception ex)
                 {
                     #region 日志点
-                    Log.WriteLog("发生异常：" + ex.ToString()+ "\r\n");
+                    Log.WriteLog("发生异常：" + ex.ToString());
                     #endregion
                     MessageBox.Show(ex.ToString());
                     break;
@@ -180,13 +180,6 @@ namespace Zony_Lrc_Download_2._0
 
             button1.Enabled = true;
             Button_SelectDirectory.Enabled = true;
-        }
-        /// <summary>
-        /// 检测更新
-        /// </summary>
-        private void UpDataProgram()
-        {
-            
         }
     }
 

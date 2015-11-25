@@ -13,6 +13,7 @@ using ID3;
 using System.Net;
 using System.Text.RegularExpressions;
 
+
 namespace Zony_Lrc_Download_2._0
 {
     public partial class Lrc_Main
@@ -81,103 +82,44 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         private void DownLoadLrc()
         {
+            int increment = 0;
+            // 设定进度条
             toolStripProgressBar1.Maximum = m_lrcPath.Count;
             // 禁用控件
             Button_SelectDirectory.Enabled = false;
             button1.Enabled = false;
 
-            for (int i = 0; i < m_lrcPath.Count;i++ )
+            // 下载对象
+            LrcDownLoad lrcDown = new LrcDownLoad();
+
+            // 开始下载
+            foreach(string mp3Path in m_lrcPath)
             {
-                toolStripProgressBar1.Value += 1;
-
-                string searchLrcPath = BAIDULRC + Path.GetFileNameWithoutExtension((string)m_lrcPath[i]);
-                WebClient myWebClient = new WebClient();
-                byte[] myDataBuffer = myWebClient.DownloadData(searchLrcPath);
-
-                // 以UTF-8 编码获取网页内容
-                string HTMLString = Encoding.UTF8.GetString(myDataBuffer);
-                if(HTMLString == "")
+                toolStripProgressBar1.Value++; increment++;
+                byte [] lrcData=null;
+                // 下载歌词并返回
+                if(lrcDown.DownLoad(mp3Path,ref lrcData)!=DownLoadReturn.NORMAL)
                 {
-                    LrcListItem.Items[i].SubItems[1].Text = "失败";
-                    #region 日志点
-                    Log.WriteLog(LrcListItem.Items[i].SubItems[1].Text+"  下载失败..." );
-                    #endregion
-                    break;
+                    continue;
                 }
-                
-                // 正则匹配
-                Regex reg = new Regex(@"/data2.*.lrc");
-                try
+                // 写入到文件
+                if(lrcDown.WriteFile(ref lrcData, mp3Path, comboBox1.SelectedIndex)!=DownLoadReturn.NORMAL)
                 {
-                    string result = reg.Match(HTMLString).ToString();
-                    if(result=="")
-                    {
-                        LrcListItem.Items[i].SubItems[1].Text = "失败";
-                        #region 日志点
-                        Log.WriteLog(LrcListItem.Items[i].SubItems[1].Text + "  下载失败..." );
-                        #endregion
-                        continue;
-                    }
-                    byte[] myDataBuffer2 = myWebClient.DownloadData(BAIDUMUSCI + result);
-                    // 写到文件
+                    continue;
+                }
 
-                    FileStream f1 = new FileStream(Path.GetDirectoryName((string)m_lrcPath[i]) + "\\" + Path.GetFileNameWithoutExtension((string)m_lrcPath[i]) + ".lrc", FileMode.Create);
-                    
-                    // 编码转换
-                    switch (comboBox1.SelectedIndex)
-                    {
-                        case 0:
-                            {
-                                myDataBuffer2 = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gb2312"), myDataBuffer2);
-                                break;
-                            }
-                        case 1:
-                            {
-                                myDataBuffer2 = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("GBK"), myDataBuffer2);
-                                break;
-                            }
-                        case 2:
-                            {
-                                // UTF-8
-                                break;
-                            }
-                        case 3:
-                            {
-                                myDataBuffer2 = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("BIG5"), myDataBuffer2);
-                                break;
-                            }
-                        case 4:
-                            {
-                                myDataBuffer2 = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("shift_jis"), myDataBuffer2);
-                                break;
-                            }
-                        default:
-                            {
-                                break;
-                            }
-                    }
-                    f1.Write(myDataBuffer2, 0, myDataBuffer2.Length);
-                    f1.Close();
-                    LrcListItem.Items[i].SubItems[1].Text = "成功";
-                }
-                catch (Exception ex)
-                {
-                    #region 日志点
-                    Log.WriteLog("发生异常：" + ex.ToString());
-                    #endregion
-                    MessageBox.Show(ex.ToString());
-                    break;
-                }
-                
+
+                LrcListItem.Items[increment].SubItems[1].Text = "成功";
             }
 
             toolStripStatusLabel1.Text = "下载完成！";
             notifyIcon1.ShowBalloonTip(5000, "提示", "所有歌词已经下载完成！", ToolTipIcon.Info);
 
-            // 控件初始化操作
+            // 初始化进度条
             toolStripProgressBar1.Maximum = 0;
             toolStripProgressBar1.Value = 0;
 
+            // 启用控件
             button1.Enabled = true;
             Button_SelectDirectory.Enabled = true;
         }

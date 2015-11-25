@@ -85,6 +85,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program\Log.cs" />
+    <Compile Include="Program\LrcDownLoad.cs" />
     <Compile Include="Program\LrcMain_Main.cs">
       <SubType>Form</SubType>
     </Compile>

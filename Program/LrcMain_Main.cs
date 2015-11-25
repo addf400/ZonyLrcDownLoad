@@ -12,6 +12,7 @@ using System.Collections;
 using ID3;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 
 namespace Zony_Lrc_Download_2._0
@@ -87,12 +88,12 @@ namespace Zony_Lrc_Download_2._0
             // 下载对象
             LrcDownLoad lrcDown = new LrcDownLoad();
 
-            // 开始下载
+            // 单线程下载
             foreach(string mp3Path in m_mp3Path)
             {
-                byte [] lrcData=null;
+                byte[] lrcData = null;
                 // 下载歌词并返回
-                if(lrcDown.DownLoad(mp3Path,ref lrcData)==DownLoadReturn.NORMAL)
+                if (lrcDown.DownLoad(mp3Path, ref lrcData) == DownLoadReturn.NORMAL)
                 {
                     LrcListItem.Items[increment].SubItems[1].Text = "成功";
                     // 写入到文件
@@ -108,6 +109,28 @@ namespace Zony_Lrc_Download_2._0
 
                 toolStripProgressBar1.Value++; increment++;
             }
+
+            // 多线程下载歌词
+//             Parallel.ForEach(m_mp3Path, (item) =>
+//             {
+//                 byte[] lrcData = null;
+//                 // 下载歌词并返回
+//                 if (lrcDown.DownLoad(item, ref lrcData) == DownLoadReturn.NORMAL)
+//                 {
+//                     LrcListItem.Items[increment].SubItems[1].Text = "成功";
+//                     // 写入到文件
+//                     if (lrcDown.WriteFile(ref lrcData, item, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+//                     {
+//                         LrcListItem.Items[increment].SubItems[1].Text = "失败";
+//                     }
+//                 }
+//                 else
+//                 {
+//                     LrcListItem.Items[increment].SubItems[1].Text = "失败";
+//                 }
+// 
+//                 toolStripProgressBar1.Value++; increment++;
+//             });
 
             toolStripStatusLabel1.Text = "下载完成！";
             notifyIcon1.ShowBalloonTip(5000, "提示", "所有歌词已经下载完成！", ToolTipIcon.Info);

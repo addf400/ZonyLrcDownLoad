@@ -53,9 +53,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(438, 376);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 12);
+            this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Ver 3.0.0.0";
+            this.label1.Text = "Ver 2.1";
             // 
             // groupBox1
             // 
@@ -77,8 +77,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(485, 81);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1、增加日志记录，每次下载完成后用户可以在日志记录中查看下载的详细情况。\r\n2、增加歌词搜索功能，可以更详细地搜索歌词信息。\r\n3、主界面以及其他界面微调。\r\n4" +
-    "、加入自动更新检测功能。\r\n5、增加多种格式的音乐扫描。\r\n6、修正以前部分隐藏的BUG与性能问题。";
+            this.textBox1.Text = "1、增加日志记录，每次下载完成后用户可以在日志记录中查看下载的详细情况。\r\n2、修正以前部分隐藏的BUG与性能问题。";
             // 
             // checkBox1
             // 

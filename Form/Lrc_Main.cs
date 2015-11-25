@@ -81,6 +81,8 @@ namespace Zony_Lrc_Download_2._0
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
             // 设置最大并行链接数
             System.Net.ServicePointManager.DefaultConnectionLimit = 512;
+            // 初始化LOG类
+            Log.init_Log();
         }
         private void Lrc_Main_FormClosed(object sender, FormClosedEventArgs e)
         {

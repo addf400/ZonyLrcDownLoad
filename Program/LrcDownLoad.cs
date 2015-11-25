@@ -86,10 +86,16 @@ namespace Zony_Lrc_Download_2._0
                 string result = reg.Match(lrcHtmlString).ToString();
                 if(result==""||"".Equals(result))
                 {
+                    #region 日志点
+                    Log.WriteLog(t_songName, "在DownLoad函数中发生：百度乐库没有结果。");
+                    #endregion
                     return DownLoadReturn.REGEX_ERROR;
                 }
                 if("".Equals(lrcHtmlString)||lrcHtmlString=="")
                 {
+                    #region 日志点
+                    Log.WriteLog(t_songName, "在DownLoad函数中发生：网络连接失败。");
+                    #endregion
                     return DownLoadReturn.INET_ERROR;
                 }
 
@@ -106,6 +112,10 @@ namespace Zony_Lrc_Download_2._0
                 return DownLoadReturn.EXCEPTION;
             }
         }
+//         public DownLoadReturn DownLoad_Ex(string filepath,ref byte[] filedata)
+//         {
+//              
+//         }
 
         /// <summary>
         /// 将数据写入文件
@@ -134,7 +144,7 @@ namespace Zony_Lrc_Download_2._0
                         filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gb2312"), filedata);
                         break;
                     case 1:
-                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gb2312"), filedata);
+                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gbk"), filedata);
                         break;
                     case 2:
                         // 默认UTF-8

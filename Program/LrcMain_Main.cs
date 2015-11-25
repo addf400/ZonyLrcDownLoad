@@ -81,6 +81,7 @@ namespace Zony_Lrc_Download_2._0
             int increment = 0;
             // 设定进度条
             toolStripProgressBar1.Maximum = m_mp3Path.Count;
+            toolStripProgressBar1.Value = 0;
             // 禁用控件
             Button_SelectDirectory.Enabled = false;
             button1.Enabled = false;

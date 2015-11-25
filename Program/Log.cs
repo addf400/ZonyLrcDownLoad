@@ -8,22 +8,42 @@ namespace Zony_Lrc_Download_2._0
 {
     static class Log
     {
-        static string CurrentDir = Environment.CurrentDirectory;
-        static FileStream logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Append);
-        static StreamWriter write = new StreamWriter(logFileStream, Encoding.GetEncoding("utf-8")); //统一使用UTF-8编码
+        static string CurrentDir;
+        public static void init_Log()
+        {
+            CurrentDir= Environment.CurrentDirectory;
+        }
         public static void WriteLog(string information)
         {
-            write.WriteLine(DateTime.Now.ToString() + "-" + information+"\n");
-        }
-        public static void WriteLog(string name,string info)
-        {
-            write.WriteLine(DateTime.Now.ToString() + "-" + "歌曲："+ name + " " + info  + "\n");
-        }
-
-        public static void Close()
-        {
+            FileStream logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Append);
+            StreamWriter write = new StreamWriter(logFileStream, Encoding.GetEncoding("utf-8"));
+            write.WriteLine(DateTime.Now.ToString() + "-" + information);
             write.Close();
             logFileStream.Close();
         }
+        public static void WriteLog(string name,string info)
+        {
+            FileStream logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Append);
+            StreamWriter write = new StreamWriter(logFileStream, Encoding.GetEncoding("utf-8"));
+            write.WriteLine(DateTime.Now.ToString() + "-" + "歌曲："+ name + " " + info);
+            write.Close();
+            logFileStream.Close();
+        }
+
+        public static string LoadLog()
+        {
+            FileStream logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Open);
+            StreamReader read = new StreamReader(logFileStream, Encoding.UTF8);
+            StringBuilder strBuilder = new StringBuilder();
+            string str;
+            while ((str = read.ReadLine()) != null)
+            {
+                strBuilder.Append(str+"\r\n");
+            }
+            read.Close();
+            logFileStream.Close();
+            return strBuilder.ToString();
+        }
+
     }
 }

@@ -51,7 +51,7 @@
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.LrcListItem = new ListViewNF();
+            this.LrcListItem = new Zony_Lrc_Download_2._0.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatusStrip1.SuspendLayout();
@@ -176,16 +176,16 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
+            "UTF-8",
             "GB2312",
             "GBK",
-            "UTF-8",
             "BIG5(繁体)",
             "日语 (Shift-JIS)"});
             this.comboBox1.Location = new System.Drawing.Point(95, 20);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(159, 20);
             this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "GB2312";
+            this.comboBox1.Text = "UTF-8";
             // 
             // label4
             // 

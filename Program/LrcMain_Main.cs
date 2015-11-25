@@ -94,11 +94,11 @@ namespace Zony_Lrc_Download_2._0
             {
                 byte[] lrcData = null;
                 // 下载歌词并返回
-                if (lrcDown.DownLoad(mp3Path, ref lrcData) == DownLoadReturn.NORMAL)
+                if (lrcDown.DownLoad_Ex(mp3Path, ref lrcData) == DownLoadReturn.NORMAL)
                 {
                     LrcListItem.Items[increment].SubItems[1].Text = "成功";
                     // 写入到文件
-                    if (lrcDown.WriteFile(ref lrcData, mp3Path, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+                    if (lrcDown.WriteFile(ref lrcData, mp3Path, 2) != DownLoadReturn.NORMAL)
                     {
                         LrcListItem.Items[increment].SubItems[1].Text = "失败";
                     }

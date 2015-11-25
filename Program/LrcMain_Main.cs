@@ -90,20 +90,23 @@ namespace Zony_Lrc_Download_2._0
             // 开始下载
             foreach(string mp3Path in m_mp3Path)
             {
-                toolStripProgressBar1.Value++; increment++;
                 byte [] lrcData=null;
                 // 下载歌词并返回
-                if(lrcDown.DownLoad(mp3Path,ref lrcData)!=DownLoadReturn.NORMAL)
+                if(lrcDown.DownLoad(mp3Path,ref lrcData)==DownLoadReturn.NORMAL)
                 {
-                    continue;
+                    LrcListItem.Items[increment].SubItems[1].Text = "成功";
+                    // 写入到文件
+                    if (lrcDown.WriteFile(ref lrcData, mp3Path, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+                    {
+                        LrcListItem.Items[increment].SubItems[1].Text = "失败";
+                    }
                 }
-                // 写入到文件
-                if(lrcDown.WriteFile(ref lrcData, mp3Path, comboBox1.SelectedIndex)!=DownLoadReturn.NORMAL)
+                else
                 {
-                    continue;
+                    LrcListItem.Items[increment].SubItems[1].Text = "失败";
                 }
 
-                LrcListItem.Items[increment].SubItems[1].Text = "成功";
+                toolStripProgressBar1.Value++; increment++;
             }
 
             toolStripStatusLabel1.Text = "下载完成！";

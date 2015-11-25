@@ -29,7 +29,14 @@ namespace Zony_Lrc_Download_2._0
         /// 搜寻下载链接失败
         /// </summary>
         REGEX_ERROR=-3,
-        FILE_CREAT_ERROR=-4
+        /// <summary>
+        /// 文件创建失败
+        /// </summary>
+        FILE_CREAT_ERROR=-4,
+        /// <summary>
+        /// 网络错误
+        /// </summary>
+        INET_ERROR=-5
     }
 
     /// <summary>
@@ -77,9 +84,13 @@ namespace Zony_Lrc_Download_2._0
             try
             {
                 string result = reg.Match(lrcHtmlString).ToString();
-                if("".Equals(lrcHtmlString)||lrcHtmlString=="")
+                if(result==""||"".Equals(result))
                 {
                     return DownLoadReturn.REGEX_ERROR;
+                }
+                if("".Equals(lrcHtmlString)||lrcHtmlString=="")
+                {
+                    return DownLoadReturn.INET_ERROR;
                 }
 
                 // 获得LRC文件数据

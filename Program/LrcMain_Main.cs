@@ -22,60 +22,55 @@ namespace Zony_Lrc_Download_2._0
         /// <summary>
         /// 歌词保存路径列表
         /// </summary>
-        private ArrayList m_lrcPath = new ArrayList();
-        private const string BAIDULRC = "http://music.baidu.com/search/lrc?key=";
-        private const string BAIDUMUSCI = "http://music.baidu.com";
+        private List<string> m_mp3Path = new List<string>();
 
         /// <summary>
         /// 文件搜索线程
         /// </summary>
         private void SearchFile()
         {
-            LrcPath = LrcPath.Trim();
-            if (LrcPath != "")
+            // 清空数组与列表框
+            m_mp3Path.Clear();
+            LrcListItem.Items.Clear();
+
+            // 搜索对象
+            FileSearch search = new FileSearch();
+            // 函数返回值
+            FileSearchReturn FuncReturn;
+            FuncReturn = search.SearchFile(ref m_mp3Path, LrcPath, "*.mp3");
+            if(FuncReturn==FileSearchReturn.NORMAL)
             {
-                string[] files = Directory.GetFiles(LrcPath, "*.mp3", System.IO.SearchOption.AllDirectories);// 扫描目录下所有mp3文件
-                
-                // 非安全跨线程调用控件
-                if (files.Length != 0)
+                // 设定进度条
+                toolStripProgressBar1.Maximum = m_mp3Path.Count;
+                foreach (string str in m_mp3Path)
                 {
-                    // 清空数组与列表框
-                    m_lrcPath.Clear();
-                    LrcListItem.Items.Clear();
+                    toolStripStatusLabel1.Text = str;
+                    toolStripProgressBar1.Value++;
 
-                    toolStripProgressBar1.Maximum = files.Length;
-                    
-                    for (int i = 0; i < files.Length; i++)
-                    {
-                        toolStripStatusLabel1.Text = files[i];
-                        toolStripProgressBar1.Value +=1;
+                    // listview条目
+                    string[] str_listitem = { Path.GetFileNameWithoutExtension(str), "" };
+                    LrcListItem.Items.Insert(LrcListItem.Items.Count, new ListViewItem(str_listitem));
 
-                        // 加入容器
-                        m_lrcPath.Add(files[i]);
-                        string []str={Path.GetFileNameWithoutExtension(files[i]),""};
-                        LrcListItem.Items.Insert(LrcListItem.Items.Count, new ListViewItem(str));
-                        
-                    }
-                    
-                    MessageBox.Show(null, "扫描完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    toolStripStatusLabel1.Text = "一共扫描到：" + LrcListItem.Items.Count.ToString() + " 个文件。";
-
-                    // 控件初始化操作
-                    toolStripProgressBar1.Maximum = 0;
-                    toolStripProgressBar1.Value = 0;
-
-                    button1.Enabled = true;
-                    Button_SelectDirectory.Enabled = true;
                 }
-                else
-                {
-                    MessageBox.Show(null,"没有扫描到音乐文件！","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    Button_SelectDirectory.Enabled = true;
-                }
-                #region 日志点
-                Log.WriteLog("扫描线程完成。");
-                #endregion
+                MessageBox.Show("扫描完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                toolStripStatusLabel1.Text = "一共扫描到：" + LrcListItem.Items.Count.ToString() + " 个文件。";
             }
+            else if(FuncReturn==FileSearchReturn.NO_SEARCH_FILE)
+            {
+                MessageBox.Show("没有扫描到音乐文件！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Button_SelectDirectory.Enabled = true;
+            }else if(FuncReturn==FileSearchReturn.EXCEPTION)
+            {
+                MessageBox.Show("程序发生异常！","错误",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+
+            // 进度条重置
+            toolStripProgressBar1.Maximum = 0;
+            toolStripProgressBar1.Value = 0;
+
+            // 控件解锁
+            button1.Enabled = true;
+            Button_SelectDirectory.Enabled = true;
         }
         /// <summary>
         /// LRC歌词下载线程
@@ -84,7 +79,7 @@ namespace Zony_Lrc_Download_2._0
         {
             int increment = 0;
             // 设定进度条
-            toolStripProgressBar1.Maximum = m_lrcPath.Count;
+            toolStripProgressBar1.Maximum = m_mp3Path.Count;
             // 禁用控件
             Button_SelectDirectory.Enabled = false;
             button1.Enabled = false;
@@ -93,7 +88,7 @@ namespace Zony_Lrc_Download_2._0
             LrcDownLoad lrcDown = new LrcDownLoad();
 
             // 开始下载
-            foreach(string mp3Path in m_lrcPath)
+            foreach(string mp3Path in m_mp3Path)
             {
                 toolStripProgressBar1.Value++; increment++;
                 byte [] lrcData=null;
@@ -107,7 +102,6 @@ namespace Zony_Lrc_Download_2._0
                 {
                     continue;
                 }
-
 
                 LrcListItem.Items[increment].SubItems[1].Text = "成功";
             }

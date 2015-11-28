@@ -193,9 +193,9 @@ namespace Zony_Lrc_Download_2._0
                 {
                     case 0:
                         // 默认UTF-8
+                        filedata = Encoding.Convert(Encoding.GetEncoding("gb2312"), Encoding.UTF8, filedata);
                         break;
                     case 1:
-                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gb2312"), filedata);
                         break;
                     case 2:
                         filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gbk"), filedata);

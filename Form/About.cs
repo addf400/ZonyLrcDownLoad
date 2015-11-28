@@ -25,6 +25,7 @@ namespace Zony_Lrc_Download_2._0
         {
             // 加载图标
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
+            // 加载日志
             textBox2.Text = Log.LoadLog();
         }
     }

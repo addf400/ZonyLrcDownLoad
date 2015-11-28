@@ -24,6 +24,10 @@ namespace Zony_Lrc_Download_2._0
         /// 歌词保存路径列表
         /// </summary>
         private List<string> m_mp3Path = new List<string>();
+        /// <summary>
+        /// 歌曲下载失败的路径
+        /// </summary>
+        private Dictionary<string, int> m_failedPath = new Dictionary<string, int>();
 
         /// <summary>
         /// 文件搜索线程
@@ -94,11 +98,11 @@ namespace Zony_Lrc_Download_2._0
             {
                 byte[] lrcData = null;
                 // 下载歌词并返回
-                if (lrcDown.DownLoad_Ex(mp3Path, ref lrcData) == DownLoadReturn.NORMAL)
+                if (lrcDown.DownLoad(mp3Path, ref lrcData) == DownLoadReturn.NORMAL)
                 {
                     LrcListItem.Items[increment].SubItems[1].Text = "成功";
                     // 写入到文件
-                    if (lrcDown.WriteFile(ref lrcData, mp3Path, 2) != DownLoadReturn.NORMAL)
+                    if (lrcDown.WriteFile(ref lrcData, mp3Path, comboBox2.SelectedIndex) == DownLoadReturn.FILE_CREAT_ERROR)
                     {
                         LrcListItem.Items[increment].SubItems[1].Text = "失败";
                     }
@@ -106,12 +110,41 @@ namespace Zony_Lrc_Download_2._0
                 else
                 {
                     LrcListItem.Items[increment].SubItems[1].Text = "失败";
+                    // 加入失败路径列表
+                    m_failedPath.Add(mp3Path,increment);
                 }
 
                 toolStripProgressBar1.Value++; increment++;
             }
 
-            // 多线程下载歌词
+            // 开始使用备用歌词源
+            toolStripStatusLabel1.Text = "正在开始尝试从CnLyric下载失败的歌词...";
+            toolStripProgressBar1.Maximum = m_failedPath.Count;
+            toolStripProgressBar1.Value = 0;
+
+            foreach(KeyValuePair<string,int> mp3Path in m_failedPath)
+            {
+                byte[] lrcData = null;
+
+                if(lrcDown.DownLoad_Ex(mp3Path.Key,ref lrcData)==DownLoadReturn.NORMAL)
+                {
+                    LrcListItem.Items[mp3Path.Value].SubItems[1].Text = "成功";
+                    if(lrcDown.WriteFile(ref lrcData,mp3Path.Key,comboBox2.SelectedIndex)==DownLoadReturn.FILE_CREAT_ERROR)
+                    {
+                        LrcListItem.Items[mp3Path.Value].SubItems[1].Text = "失败";
+                    }
+                }
+                else
+                {
+                    LrcListItem.Items[mp3Path.Value].SubItems[1].Text = "失败";
+                }
+
+                Thread.Sleep(5000);
+                toolStripProgressBar1.Value++;
+            }
+
+            #region 多线程并行迭代下载
+            // 多线程 并行迭代 下载歌词
 //             Parallel.ForEach(m_mp3Path, (item) =>
 //             {
 //                 byte[] lrcData = null;
@@ -131,7 +164,8 @@ namespace Zony_Lrc_Download_2._0
 //                 }
 // 
 //                 toolStripProgressBar1.Value++; increment++;
-//             });
+            //             });
+            #endregion
 
             toolStripStatusLabel1.Text = "下载完成！";
             notifyIcon1.ShowBalloonTip(5000, "提示", "所有歌词已经下载完成！", ToolTipIcon.Info);

@@ -243,21 +243,31 @@ namespace Zony_Lrc_Download_2._0
         /// <returns>返回结果</returns>
         private string Http_Get(string url)
         {
-            HttpWebRequest myReq = (HttpWebRequest)HttpWebRequest.Create(url);
-            myReq.Method = "get";
-
-            HttpWebResponse res = (HttpWebResponse)myReq.GetResponse();
-            Stream s = res.GetResponseStream();
-
-            StreamReader reader = new StreamReader(s, Encoding.GetEncoding("gb2312"));
-            StringBuilder responseData = new StringBuilder();
-            String line;
-            while ((line = reader.ReadLine()) != null)
+            try
             {
-                responseData.Append(line);
-            }
+                HttpWebRequest myReq = (HttpWebRequest)HttpWebRequest.Create(url);
+                myReq.Method = "get";
 
-            return responseData.ToString();
+                HttpWebResponse res = (HttpWebResponse)myReq.GetResponse();
+                Stream s = res.GetResponseStream();
+
+                StreamReader reader = new StreamReader(s, Encoding.GetEncoding("gb2312"));
+                StringBuilder responseData = new StringBuilder();
+                String line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    responseData.Append(line);
+                }
+
+                return responseData.ToString();
+            }catch(Exception e)
+            {
+                #region 日志点
+                Log.WriteLog("在函数Http_Get()当中发生异常：" + e.ToString());
+                #endregion
+                return "";
+            }
+            
         }
     }
 }

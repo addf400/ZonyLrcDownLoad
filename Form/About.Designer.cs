@@ -55,7 +55,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Ver 2.1";
+            this.label1.Text = "Ver 2.2";
             // 
             // groupBox1
             // 
@@ -77,7 +77,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(485, 81);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1、增加日志记录，每次下载完成后用户可以在日志记录中查看下载的详细情况。\r\n2、修正以前部分隐藏的BUG与性能问题。";
+            this.textBox1.Text = "1. 增加备用Cnlryic歌词库，歌词命中率达90%以上。\r\n2. 修复日志查看功能的Bug。\r\n3. 修复进度条进度不准确。";
             // 
             // checkBox1
             // 

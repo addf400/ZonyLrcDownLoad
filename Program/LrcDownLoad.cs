@@ -66,8 +66,7 @@ namespace Zony_Lrc_Download_2._0
         {
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
             string m_strSearchURL = BAIDULRC + t_songName;
-            byte[] lrcHtmlData = m_client.DownloadData(m_strSearchURL);
-            string lrcHtmlString = Encoding.UTF8.GetString(lrcHtmlData);
+            string lrcHtmlString = Http_Get(m_strSearchURL);
 
             if("".Equals(lrcHtmlString)||lrcHtmlString=="")
             {

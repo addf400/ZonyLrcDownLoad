@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;
+using System.Net.Sockets;
+
 namespace Zony_Lrc_Download_2._0
 {
     public partial class About : Form
@@ -27,6 +30,21 @@ namespace Zony_Lrc_Download_2._0
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
             // 加载日志
             textBox2.Text = Log.LoadLog();
+
+//             IPAddress ip = IPAddress.Parse("139.129.119.134");
+//             IPEndPoint ipe = new IPEndPoint(ip, 7500);
+//             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+//             try
+//             {
+//                 socket.Connect(ipe);
+//                 Package pack = PackageDeal.Package_New((byte)PackageDeal.PType.UPDATE, 0, null);
+//                 PackageDeal.Package_Write(socket, pack);
+//                 pack = PackageDeal.Package_Read(socket);
+//                 MessageBox.Show(Encoding.UTF8.GetString(pack.data));
+//             }catch(SocketException exp)
+//             {
+//                 MessageBox.Show(exp.ToString());
+//                        
         }
     }
 }

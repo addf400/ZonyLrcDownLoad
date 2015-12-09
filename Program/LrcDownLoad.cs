@@ -66,8 +66,8 @@ namespace Zony_Lrc_Download_2._0
         {
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
             string m_strSearchURL = BAIDULRC + t_songName;
-            string lrcHtmlString = Http_Get(m_strSearchURL);
 
+            string lrcHtmlString = Http_Get(m_strSearchURL, Encoding.UTF8);
             if("".Equals(lrcHtmlString)||lrcHtmlString=="")
             {
                 #region 日志点
@@ -77,7 +77,7 @@ namespace Zony_Lrc_Download_2._0
             }
 
             //正则搜寻下载链接
-            Regex reg = new Regex(@"/data2.*.lrc");
+            Regex reg = new Regex(@"/data2/lrc/\d*/\d*.lrc");
             try
             {
                 string result = reg.Match(lrcHtmlString).ToString();
@@ -120,7 +120,7 @@ namespace Zony_Lrc_Download_2._0
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
             string m_strSearchURL = CNLYRIC + URL_GB2312_ENCODING(t_songName) + "&t=s";
 
-            string lrcHtmlString = Http_Get(m_strSearchURL);
+            string lrcHtmlString = Http_Get(m_strSearchURL, Encoding.GetEncoding("gb2312"));
 
             if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
             {
@@ -192,9 +192,10 @@ namespace Zony_Lrc_Download_2._0
                 {
                     case 0:
                         // 默认UTF-8
-                        filedata = Encoding.Convert(Encoding.GetEncoding("gb2312"), Encoding.UTF8, filedata);
                         break;
                     case 1:
+                        // gb2312
+                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gb2312"), filedata);
                         break;
                     case 2:
                         filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gbk"), filedata);
@@ -240,7 +241,7 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         /// <param name="url">要提交的URL地址</param>
         /// <returns>返回结果</returns>
-        private string Http_Get(string url)
+        private string Http_Get(string url,Encoding encode)
         {
             try
             {
@@ -250,7 +251,7 @@ namespace Zony_Lrc_Download_2._0
                 HttpWebResponse res = (HttpWebResponse)myReq.GetResponse();
                 Stream s = res.GetResponseStream();
 
-                StreamReader reader = new StreamReader(s, Encoding.GetEncoding("gb2312"));
+                StreamReader reader = new StreamReader(s, encode);
                 StringBuilder responseData = new StringBuilder();
                 String line;
                 while ((line = reader.ReadLine()) != null)

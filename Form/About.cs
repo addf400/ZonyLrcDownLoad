@@ -41,8 +41,7 @@ namespace Zony_Lrc_Download_2._0
         private void update()
         {
 
-            /*IPAddress ip = IPAddress.Parse("139.129.119.134");*/
-            IPAddress ip = IPAddress.Parse("192.168.239.134");
+            IPAddress ip = IPAddress.Parse("139.129.119.134");
             IPEndPoint ipe = new IPEndPoint(ip, 7500);
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try

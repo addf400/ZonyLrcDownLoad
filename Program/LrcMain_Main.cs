@@ -28,6 +28,10 @@ namespace Zony_Lrc_Download_2._0
         /// 并行下载列表
         /// </summary>
         private Dictionary<int, string> m_ThreadDownLoadList = new Dictionary<int, string>();
+        /// <summary>
+        /// 下载失败的歌曲
+        /// </summary>
+        private Dictionary<int, string> m_FailedList = new Dictionary<int, string>();
         #endregion
 
         /// <summary>
@@ -37,6 +41,7 @@ namespace Zony_Lrc_Download_2._0
         {
             // 清空容器与列表框
             m_ThreadDownLoadList.Clear();
+            m_FailedList.Clear();
             LrcListItem.Items.Clear();
 
             // 搜索对象
@@ -44,7 +49,7 @@ namespace Zony_Lrc_Download_2._0
             // 函数返回值
             FileSearchReturn FuncReturn;
             FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.mp3");
-            if(FuncReturn==FileSearchReturn.NORMAL)
+            if (FuncReturn == FileSearchReturn.NORMAL)
             {
                 // 设定进度条
                 toolStripProgressBar1.Maximum = m_ThreadDownLoadList.Count;
@@ -61,13 +66,14 @@ namespace Zony_Lrc_Download_2._0
                 MessageBox.Show("扫描完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 toolStripStatusLabel1.Text = "一共扫描到：" + LrcListItem.Items.Count.ToString() + " 个文件。";
             }
-            else if(FuncReturn==FileSearchReturn.NO_SEARCH_FILE)
+            else if (FuncReturn == FileSearchReturn.NO_SEARCH_FILE)
             {
                 MessageBox.Show("没有扫描到音乐文件！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Button_SelectDirectory.Enabled = true;
-            }else if(FuncReturn==FileSearchReturn.EXCEPTION)
+            }
+            else if (FuncReturn == FileSearchReturn.EXCEPTION)
             {
-                MessageBox.Show("程序发生异常！","错误",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("程序发生异常！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             // 进度条重置
@@ -97,25 +103,53 @@ namespace Zony_Lrc_Download_2._0
             #region 多线程并行迭代下载
             // 多线程 并行迭代 下载歌词
             Parallel.ForEach(m_ThreadDownLoadList, (item) =>
-                        {
-                            byte[] lrcData = null;
-                            // 下载歌词并返回
-                            if (lrcDown.DownLoad_Ex(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
-                            {
-                                LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
-                                // 写入到文件
-                                if (lrcDown.WriteFile(ref lrcData, item.Value, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
-                                {
-                                    LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                                }
-                            }
-                            else
-                            {
-                                LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                            }
-            
-                            toolStripProgressBar1.Value++;
-                         });
+            {
+                byte[] lrcData = null;
+                // 下载歌词并返回
+                if (lrcDown.DownLoad_Ex(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
+                {
+                    LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
+                    // 写入到文件
+                    if (lrcDown.WriteFile(ref lrcData, item.Value, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+                    {
+                        LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                    }
+                }
+                else
+                {
+                    LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                    m_FailedList.Add(item.Key, item.Value);
+                }
+
+                toolStripProgressBar1.Value++;
+            });
+            #endregion
+
+            #region 下载失败了的歌词
+            toolStripStatusLabel1.Text = "正在从百度乐库下载失败了的歌词...";
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Maximum = m_FailedList.Count;
+            Parallel.ForEach(m_FailedList, (item) =>
+            {
+                byte[] lrcData = null;
+                // 下载歌词并返回
+                if (lrcDown.DownLoad(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
+                {
+                    LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
+                    // 写入到文件
+                    if (lrcDown.WriteFile(ref lrcData, item.Value, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+                    {
+                        LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                    }
+                }
+                else
+                {
+                    LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                    m_FailedList.Add(item.Key, item.Value);
+                }
+
+                toolStripProgressBar1.Value++;
+            });
             #endregion
 
             toolStripStatusLabel1.Text = "下载完成！";

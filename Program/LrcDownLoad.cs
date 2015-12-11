@@ -44,17 +44,12 @@ namespace Zony_Lrc_Download_2._0
     /// </summary>
     public class LrcDownLoad
     {
-        private WebClient m_client;
         private const string BAIDULRC = "http://music.baidu.com/search/lrc?key=";
         private const string BAIDUMUSCI = "http://music.baidu.com";
 
         private const string CNLYRIC = "http://www.cnlyric.com/search.php?k=";
         private const string CnLyricDown = "http://www.cnlyric.com/";
         
-        public LrcDownLoad()
-        {
-            m_client = new WebClient();
-        }
         
         /// <summary>
         /// 歌词下载函数
@@ -97,7 +92,7 @@ namespace Zony_Lrc_Download_2._0
                 }
 
                 // 获得LRC文件数据
-                filedata = m_client.DownloadData(BAIDUMUSCI + result);
+                filedata = new WebClient().DownloadData(BAIDUMUSCI + result);
 
                 return DownLoadReturn.NORMAL;
             }catch(Exception exp)
@@ -151,7 +146,7 @@ namespace Zony_Lrc_Download_2._0
                 }
 
                 // 获得LRC文件数据
-                byte[] gb2312Bytes = m_client.DownloadData(CnLyricDown + result);
+                byte[] gb2312Bytes = new WebClient().DownloadData(CnLyricDown + result);
                 // 编码统一转换为UTF-8
                 filedata = Encoding.Convert(Encoding.GetEncoding("gb2312"), Encoding.UTF8, gb2312Bytes);
 

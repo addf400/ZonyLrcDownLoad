@@ -41,7 +41,11 @@ namespace Zony_Lrc_Download_2._0
             /// <summary>
             /// 更新标识
             /// </summary>
-            UPDATE=10
+            UPDATE=10,
+            /// <summary>
+            /// 请求更新地址
+            /// </summary>
+            Result = 11
         }
         /// <summary>
         /// 将字节流转换为结构体

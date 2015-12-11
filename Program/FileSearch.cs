@@ -33,7 +33,7 @@ namespace Zony_Lrc_Download_2._0
         /// <param name="filepath"></param>
         /// <param name="ext"></param>
         /// <returns></returns>
-        public FileSearchReturn SearchFile(ref List<string> list,string filepath,string ext)
+        public FileSearchReturn SearchFile(ref Dictionary<int, string> list, string filepath, string ext)
         {
             filepath.Trim();
 
@@ -50,7 +50,7 @@ namespace Zony_Lrc_Download_2._0
                     // 添加到List<string>容器
                     for (int i = 0; i < files.Length; i++)
                     {
-                        list.Add(files[i]);
+                        list.Add(i, files[i]);
                     }
 
                     return FileSearchReturn.NORMAL;

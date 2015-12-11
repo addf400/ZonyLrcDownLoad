@@ -54,6 +54,10 @@ namespace Zony_Lrc_Download_2._0
                 {
                     MessageBox.Show("有新版本！\n");
                 }
+                else
+                {
+                    socket.Close();
+                }
             }
             catch (SocketException exp)
             {

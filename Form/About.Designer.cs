@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
@@ -77,17 +76,8 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(485, 81);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1. 增加备用Cnlryic歌词库，歌词命中率达90%以上。\r\n2. 修复日志查看功能的Bug。\r\n3. 修复进度条进度不准确。";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 126);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "自动检测";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.textBox1.Text = "1. 默认关闭百度词库，统一使用Cnlryic\r\n2. 使用并行多线程下载，充分利用网络带宽。\r\n3. 修复某些细微的BUG。\r\n4. 修正UTF-8编码与GB2" +
+    "312编码相反的BUG。\r\n5. 增加更新检测。";
             // 
             // label2
             // 
@@ -114,7 +104,6 @@
             this.ClientSize = new System.Drawing.Size(517, 397);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -139,7 +128,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
     }

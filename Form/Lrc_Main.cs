@@ -109,8 +109,9 @@ namespace Zony_Lrc_Download_2._0
             {
                 try
                 {
-                    label5.Text = "歌曲路径:" + m_mp3Path[LrcListItem.SelectedItems[0].Index];
-                    ID3Info id3 = new ID3Info(m_mp3Path[LrcListItem.SelectedItems[0].Index], true);
+                    label5.Text = "歌曲路径:" + m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index];
+
+                    ID3Info id3 = new ID3Info(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index], true);
 
                     label2.Text = id3.ID3v1Info.Title != "" ? "歌曲名称:" + id3.ID3v1Info.Title : "歌曲名称:" + id3.ID3v2Info.GetTextFrame("TIT2");
                     label1.Text = id3.ID3v1Info.Artist != "" ? "歌手:" + id3.ID3v1Info.Artist : "歌手:" + id3.ID3v2Info.GetTextFrame("TPE1");

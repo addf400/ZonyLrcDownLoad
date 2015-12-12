@@ -79,8 +79,6 @@ namespace Zony_Lrc_Download_2._0
             Control.CheckForIllegalCrossThreadCalls = false;
             // 加载图标
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
-            // 设置最大并行链接数
-            System.Net.ServicePointManager.DefaultConnectionLimit = 512;
             if(!File.Exists(Environment.CurrentDirectory+@"\log.txt"))
             {
                 var temp = File.Open(Environment.CurrentDirectory + @"\log.txt", FileMode.Create);
@@ -98,7 +96,8 @@ namespace Zony_Lrc_Download_2._0
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            // 设置最大并行链接数
+            System.Net.ServicePointManager.DefaultConnectionLimit = int.Parse(textBox1.Text);
             toolStripStatusLabel1.Text = "下载歌词......";
             var Down = new Thread(DownLoadLrc);
             Down.Start();
@@ -162,6 +161,14 @@ namespace Zony_Lrc_Download_2._0
                 this.Activate();
                 //任务栏区显示图标 
                 this.ShowInTaskbar = true;
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!Char.IsNumber(e.KeyChar) && e.KeyChar !=(char)8)
+            {
+                e.Handled = true;
             }
         }
     }

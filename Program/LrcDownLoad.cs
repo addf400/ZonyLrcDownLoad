@@ -120,7 +120,7 @@ namespace Zony_Lrc_Download_2._0
             if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
             {
                 #region 日志点
-                Log.WriteLog(t_songName, "在DownLoad函数中发生：HTML页面数据为空。");
+                Log.WriteLog(t_songName, "在DownLoadEx函数中发生：HTML页面数据为空。");
                 #endregion
                 return DownLoadReturn.HTML_INVALID;
             }
@@ -133,14 +133,14 @@ namespace Zony_Lrc_Download_2._0
                 if (result == "" || "".Equals(result))
                 {
                     #region 日志点
-                    Log.WriteLog(t_songName, "在DownLoad函数中发生：百度乐库没有结果。");
+                    Log.WriteLog(t_songName, "在DownLoadEx函数中发生：Cnlryic没有结果。");
                     #endregion
                     return DownLoadReturn.REGEX_ERROR;
                 }
                 if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
                 {
                     #region 日志点
-                    Log.WriteLog(t_songName, "在DownLoad函数中发生：网络连接失败。");
+                    Log.WriteLog(t_songName, "在DownLoadEx函数中发生：网络连接失败。");
                     #endregion
                     return DownLoadReturn.INET_ERROR;
                 }

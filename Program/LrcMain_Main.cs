@@ -106,6 +106,7 @@ namespace Zony_Lrc_Download_2._0
             {
                 byte[] lrcData = null;
                 // 下载歌词并返回
+                Thread.Sleep(500);
                 if (lrcDown.DownLoad_Ex(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
                 {
                     LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
@@ -145,7 +146,6 @@ namespace Zony_Lrc_Download_2._0
                 else
                 {
                     LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                    m_FailedList.Add(item.Key, item.Value);
                 }
 
                 toolStripProgressBar1.Value++;

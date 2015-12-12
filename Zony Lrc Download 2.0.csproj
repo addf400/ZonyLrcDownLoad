@@ -93,12 +93,6 @@
     </Compile>
     <Compile Include="Program\PackageDeal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Form\Update.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Update.Designer.cs">
-      <DependentUpon>Update.cs</DependentUpon>
-    </Compile>
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -120,9 +114,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Form\Update.resx">
-      <DependentUpon>Update.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>

@@ -35,7 +35,7 @@ namespace Zony_Lrc_Download_2._0
         /// <summary>
         /// 当前程序版本
         /// </summary>
-        public const int CurrentVersion = 2300;
+        public const int CurrentVersion = 2400;
         public enum PType
         {
             /// <summary>

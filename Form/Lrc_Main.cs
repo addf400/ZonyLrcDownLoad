@@ -164,6 +164,7 @@ namespace Zony_Lrc_Download_2._0
             }
         }
 
+        // 对文本框进行限定，只能输入数字
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(!Char.IsNumber(e.KeyChar) && e.KeyChar !=(char)8)

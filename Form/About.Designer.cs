@@ -76,8 +76,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(485, 81);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1. 默认关闭百度词库，统一使用Cnlryic\r\n2. 使用并行多线程下载，充分利用网络带宽。\r\n3. 修复某些细微的BUG。\r\n4. 修正UTF-8编码与GB2" +
-    "312编码相反的BUG。\r\n5. 增加更新检测。";
+            this.textBox1.Text = "1.重新启用百度词库。\r\n2.允许自定义线程数量。";
             // 
             // label2
             // 

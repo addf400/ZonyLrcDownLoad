@@ -74,7 +74,7 @@
             this.label1.Size = new System.Drawing.Size(311, 72);
             this.label1.TabIndex = 1;
             this.label1.Text = "您好：\r\n       谢谢您使用本软件，如果您觉得本软件帮助了您。\r\n您可以选择捐助作者，以便作者更加完善本软件。不管\r\n您捐助多少金额，作者都十分感谢您的慷慨" +
-    "解囊。\r\n\r\n                           Zony 于 2015.10.20  ";
+    "解囊。\r\n\r\n                           Zony 于 2015.12.17  ";
             // 
             // HelpMe
             // 

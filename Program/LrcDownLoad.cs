@@ -83,13 +83,6 @@ namespace Zony_Lrc_Download_2._0
                     #endregion
                     return DownLoadReturn.REGEX_ERROR;
                 }
-                if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
-                {
-                    #region 日志点
-                    Log.WriteLog(t_songName, "在DownLoad函数中发生：网络连接失败。");
-                    #endregion
-                    return DownLoadReturn.INET_ERROR;
-                }
 
                 // 获得LRC文件数据
                 filedata = new WebClient().DownloadData(BAIDUMUSCI + result);
@@ -137,13 +130,6 @@ namespace Zony_Lrc_Download_2._0
                     Log.WriteLog(t_songName, "在DownLoadEx函数中发生：Cnlryic没有结果。");
                     #endregion
                     return DownLoadReturn.REGEX_ERROR;
-                }
-                if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
-                {
-                    #region 日志点
-                    Log.WriteLog(t_songName, "在DownLoadEx函数中发生：网络连接失败。");
-                    #endregion
-                    return DownLoadReturn.INET_ERROR;
                 }
 
                 // 获得LRC文件数据

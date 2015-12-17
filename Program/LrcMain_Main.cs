@@ -98,6 +98,7 @@ namespace Zony_Lrc_Download_2._0
             button1.Enabled = false;
 
             // 下载对象
+            LrcDownLoad lrcDown = new LrcDownLoad();
 
             #region 多线程并行迭代下载
             // 多线程 并行迭代 下载歌词

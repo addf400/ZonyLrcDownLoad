@@ -16,37 +16,45 @@ namespace Zony_Lrc_Download_2._0
         /// <summary>
         /// 正常返回
         /// </summary>
-        NORMAL=0,
+        NORMAL = 0,
         /// <summary>
         /// HTML页面无数据
         /// </summary>
-        HTML_INVALID=-1,
+        HTML_INVALID = -1,
         /// <summary>
         /// 发生异常
         /// </summary>
-        EXCEPTION=-2,
+        EXCEPTION = -2,
         /// <summary>
         /// 搜寻下载链接失败
         /// </summary>
-        REGEX_ERROR=-3,
+        REGEX_ERROR = -3,
         /// <summary>
         /// 文件创建失败
         /// </summary>
-        FILE_CREAT_ERROR=-4
+        FILE_CREAT_ERROR = -4,
+        /// <summary>
+        /// 网络错误
+        /// </summary>
+        INET_ERROR = -5
     }
 
     /// <summary>
     /// 百度歌词下载类
     /// </summary>
-    public class BaiDuLrcDownLoad 
+    public class LrcDownLoad
     {
         private const string BAIDULRC = "http://music.baidu.com/search/lrc?key=";
         private const string BAIDUMUSCI = "http://music.baidu.com";
 
+        private const string CNLYRIC = "http://www.cnlyric.com/search.php?k=";
+        private const string CnLyricDown = "http://www.cnlyric.com/";
+
+
         /// <summary>
         /// 歌词下载函数
         /// </summary>
-        /// <param name="filepath">歌曲完整路径</param>
+        /// <param name="filename">歌曲完整路径</param>
         /// <param name="filedata">下载回来的数据</param>
         /// <returns>状态</returns>
         public DownLoadReturn DownLoad(string filepath, ref byte[] filedata)
@@ -54,8 +62,8 @@ namespace Zony_Lrc_Download_2._0
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
             string m_strSearchURL = BAIDULRC + t_songName;
 
-            string lrcHtmlString = Utils.Http_Get(filepath, Encoding.UTF8);
-            if("".Equals(lrcHtmlString) || lrcHtmlString == "")
+            string lrcHtmlString = Http_Get(m_strSearchURL, Encoding.UTF8);
+            if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
             {
                 #region 日志点
                 Log.WriteLog(t_songName, "在DownLoad函数中发生：HTML页面数据为空。");
@@ -63,79 +71,201 @@ namespace Zony_Lrc_Download_2._0
                 return DownLoadReturn.HTML_INVALID;
             }
 
-            // 正则表达式搜寻下载链接
+            //正则搜寻下载链接
             Regex reg = new Regex(@"/data2/lrc/\d*/\d*.lrc");
             try
             {
-                string reslut = reg.Match(lrcHtmlString).ToString();
-                if("".Equals(lrcHtmlString) || lrcHtmlString == "")
+                string result = reg.Match(lrcHtmlString).ToString();
+                if (result == "" || "".Equals(result))
                 {
                     #region 日志点
-                    Log.WriteLog(t_songName,"在DownLoad函数中发生：百度乐库没有结果。");
+                    Log.WriteLog(t_songName, "在DownLoad函数中发生：百度乐库没有结果。");
                     #endregion
                     return DownLoadReturn.REGEX_ERROR;
                 }
+                if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
+                {
+                    #region 日志点
+                    Log.WriteLog(t_songName, "在DownLoad函数中发生：网络连接失败。");
+                    #endregion
+                    return DownLoadReturn.INET_ERROR;
+                }
+
                 // 获得LRC文件数据
-                filedata = new WebClient().DownloadData(BAIDUMUSCI + reslut);
+                filedata = new WebClient().DownloadData(BAIDUMUSCI + result);
+
                 return DownLoadReturn.NORMAL;
-            }catch(Exception exp)
+            }
+            catch (Exception exp)
             {
                 #region 日志点
                 Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
                 #endregion
+                /*throw (exp); 并不抛出，直接返回异常*/
                 return DownLoadReturn.EXCEPTION;
             }
         }
-    }
-
-    public class CnLryicDownLoad
-    {
-        private const string CNLYRIC = "http://www.cnlyric.com/search.php?k=";
-        private const string CnLyricDown = "http://www.cnlyric.com/";
-
         /// <summary>
-        /// 歌词下载函数
+        /// 歌词下载函数_Ex，本函数支持并行IO操作。
         /// </summary>
-        /// <param name="filepath">歌曲完整路径</param>
+        /// <param name="filename">歌曲完整路径</param>
         /// <param name="filedata">下载回来的数据</param>
         /// <returns>状态</returns>
-        public DownLoadReturn DownLoad(string filepath,ref byte[] filedata)
+        public DownLoadReturn DownLoad_Ex(string filepath, ref byte[] filedata)
         {
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
-            string m_strSearchURL = CNLYRIC + Utils.URL_GB2312_ENCODING(t_songName) + "&t=s";
+            string m_strSearchURL = CNLYRIC + URL_GB2312_ENCODING(t_songName) + "&t=s";
 
-            string lrcHtmlString = Utils.Http_Get(m_strSearchURL, Encoding.GetEncoding("gb2312"));
-            if("".Equals(lrcHtmlString) || lrcHtmlString == "")
+            string lrcHtmlString = Http_Get(m_strSearchURL, Encoding.GetEncoding("gb2312"));
+
+            if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
             {
                 #region 日志点
                 Log.WriteLog(t_songName, "在DownLoadEx函数中发生：HTML页面数据为空。");
                 #endregion
                 return DownLoadReturn.HTML_INVALID;
             }
-            // 正则搜寻下载链接
+
+            //正则搜寻下载链接
             Regex reg = new Regex(@"LrcDown/\d*/\d*.lrc");
             try
             {
                 string result = reg.Match(lrcHtmlString).ToString();
-                if("".Equals(result) || result == "")
+                if (result == "" || "".Equals(result))
                 {
                     #region 日志点
                     Log.WriteLog(t_songName, "在DownLoadEx函数中发生：Cnlryic没有结果。");
                     #endregion
                     return DownLoadReturn.REGEX_ERROR;
                 }
+                if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
+                {
+                    #region 日志点
+                    Log.WriteLog(t_songName, "在DownLoadEx函数中发生：网络连接失败。");
+                    #endregion
+                    return DownLoadReturn.INET_ERROR;
+                }
+
                 // 获得LRC文件数据
                 byte[] gb2312Bytes = new WebClient().DownloadData(CnLyricDown + result);
                 // 编码统一转换为UTF-8
                 filedata = Encoding.Convert(Encoding.GetEncoding("gb2312"), Encoding.UTF8, gb2312Bytes);
+
                 return DownLoadReturn.NORMAL;
-            }catch(Exception exp)
+            }
+            catch (Exception exp)
             {
                 #region 日志点
                 Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
                 #endregion
+                /*throw (exp); 并不抛出，直接返回异常*/
                 return DownLoadReturn.EXCEPTION;
             }
+        }
+
+        /// <summary>
+        /// 将数据写入文件
+        /// </summary>
+        /// <param name="filedata">lrc文件数据</param>
+        /// <param name="filepath">歌曲路径</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>状态</returns>
+        public DownLoadReturn WriteFile(ref byte[] filedata, string filepath, int encoding)
+        {
+            string t_songName = Path.GetFileNameWithoutExtension(filepath);
+            try
+            {
+                string lrcPath = Path.GetDirectoryName(filepath) + "\\" + t_songName + ".lrc";
+                FileStream lrcFileStream = new FileStream(lrcPath, FileMode.Create);
+
+                if (!File.Exists(lrcPath))
+                {
+                    Log.WriteLog(t_songName, "歌词文件创建失败。");
+                    return DownLoadReturn.FILE_CREAT_ERROR;
+                }
+                // 输出编码选择
+                switch (encoding)
+                {
+                    case 0:
+                        // 默认UTF-8
+                        break;
+                    case 1:
+                        // gb2312
+                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gb2312"), filedata);
+                        break;
+                    case 2:
+                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("gbk"), filedata);
+                        break;
+                    case 3:
+                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("BIG5"), filedata);
+                        break;
+                    case 4:
+                        filedata = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("shift_jis"), filedata);
+                        break;
+                }
+
+                lrcFileStream.Write(filedata, 0, filedata.Length);
+                lrcFileStream.Close();
+                return DownLoadReturn.NORMAL;
+            }
+            catch (Exception e)
+            {
+                #region 日志点
+                Log.WriteLog(t_songName, "发生异常：" + e.ToString());
+                #endregion
+                /*throw (exp); 并不抛出，直接返回异常*/
+                return DownLoadReturn.EXCEPTION;
+            }
+        }
+        /// <summary>
+        /// URL 2312编码
+        /// </summary>
+        /// <param name="str">要编码的字符串</param>
+        /// <returns>编码结果</returns>
+        private string URL_GB2312_ENCODING(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            byte[] byStr = Encoding.GetEncoding("gb2312").GetBytes(str);
+
+            for (int i = 0; i < byStr.Length; i++)
+            {
+                sb.Append(@"%" + Convert.ToString(byStr[i], 16));
+            }
+            return sb.ToString();
+        }
+        /// <summary>
+        /// Get操作
+        /// </summary>
+        /// <param name="url">要提交的URL地址</param>
+        /// <returns>返回结果</returns>
+        private string Http_Get(string url, Encoding encode)
+        {
+            try
+            {
+                HttpWebRequest myReq = (HttpWebRequest)HttpWebRequest.Create(url);
+                myReq.Method = "get";
+
+                HttpWebResponse res = (HttpWebResponse)myReq.GetResponse();
+                Stream s = res.GetResponseStream();
+
+                StreamReader reader = new StreamReader(s, encode);
+                StringBuilder responseData = new StringBuilder();
+                String line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    responseData.Append(line);
+                }
+
+                return responseData.ToString();
+            }
+            catch (Exception e)
+            {
+                #region 日志点
+                Log.WriteLog("在函数Http_Get()当中发生异常：" + e.ToString());
+                #endregion
+                return "";
+            }
+
         }
     }
 }

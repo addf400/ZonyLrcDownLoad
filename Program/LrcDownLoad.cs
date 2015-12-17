@@ -36,17 +36,9 @@ namespace Zony_Lrc_Download_2._0
     }
 
     /// <summary>
-    /// 歌词下载接口
-    /// </summary>
-    public interface IDownLoad
-    {
-        DownLoadReturn DownLoad(string filepath,ref byte[] filedata);
-    }
-
-    /// <summary>
     /// 百度歌词下载类
     /// </summary>
-    public class BaiDuLrcDownLoad : IDownLoad
+    public class BaiDuLrcDownLoad 
     {
         private const string BAIDULRC = "http://music.baidu.com/search/lrc?key=";
         private const string BAIDUMUSCI = "http://music.baidu.com";
@@ -96,11 +88,17 @@ namespace Zony_Lrc_Download_2._0
         }
     }
 
-    public class CnLryicDownLoad : IDownLoad
+    public class CnLryicDownLoad
     {
         private const string CNLYRIC = "http://www.cnlyric.com/search.php?k=";
         private const string CnLyricDown = "http://www.cnlyric.com/";
 
+        /// <summary>
+        /// 歌词下载函数
+        /// </summary>
+        /// <param name="filepath">歌曲完整路径</param>
+        /// <param name="filedata">下载回来的数据</param>
+        /// <returns>状态</returns>
         public DownLoadReturn DownLoad(string filepath,ref byte[] filedata)
         {
             string t_songName = Path.GetFileNameWithoutExtension(filepath);

@@ -76,5 +76,10 @@ namespace Zony_Lrc_Download_2._0
         {
             socket.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new HelpMe().ShowDialog();
+        }
     }
 }

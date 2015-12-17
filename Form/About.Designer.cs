@@ -34,12 +34,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(201, 355);
+            this.button1.Location = new System.Drawing.Point(104, 355);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(132, 34);
             this.button1.TabIndex = 1;
@@ -54,7 +55,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Ver 2.4";
+            this.label1.Text = "Ver 2.5";
             // 
             // groupBox1
             // 
@@ -64,7 +65,7 @@
             this.groupBox1.Size = new System.Drawing.Size(497, 108);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "更新内容";
+            this.groupBox1.Text = "本次更新内容";
             // 
             // textBox1
             // 
@@ -76,7 +77,6 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(485, 81);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1.重新启用百度词库。\r\n2.允许自定义线程数量。";
             // 
             // label2
             // 
@@ -96,6 +96,16 @@
             this.textBox2.Size = new System.Drawing.Size(491, 189);
             this.textBox2.TabIndex = 7;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(257, 355);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(132, 34);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "捐赠";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -105,6 +115,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -129,5 +140,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button2;
     }
 }

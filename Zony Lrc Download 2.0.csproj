@@ -81,6 +81,12 @@
     <Compile Include="Form\Lrc_Main.Designer.cs">
       <DependentUpon>Lrc_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\HelpMe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\HelpMe.Designer.cs">
+      <DependentUpon>HelpMe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="Form\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\HelpMe.resx">
+      <DependentUpon>HelpMe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Lrc_Main.resx">
       <DependentUpon>Lrc_Main.cs</DependentUpon>

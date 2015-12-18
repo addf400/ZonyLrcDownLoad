@@ -99,8 +99,8 @@ namespace Zony_Lrc_Download_2._0
             CnLyricDownLoad cnlyric = new CnLyricDownLoad();
             WYLrcDownLoad wy = new WYLrcDownLoad();
             ParallelDownLoad(m_ThreadDownLoadList, "开始从CnLryic乐库下载...", cnlyric,false);
-
             ParallelDownLoad(m_FailedList, "开始从百度乐库下载...", baidu);
+            ParallelDownLoad(m_FailedList, "开始从网易云乐库下载...", baidu);
 
             toolStripStatusLabel1.Text = "下载完成！";
             notifyIcon1.ShowBalloonTip(5000, "提示", "所有歌词已经下载完成！", ToolTipIcon.Info);

@@ -77,6 +77,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(485, 81);
             this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "1.支持网易云音乐歌词下载，歌词命中率达95%以上。\r\n2.修正某些冗余代码造成的进度条不准。";
             // 
             // label2
             // 

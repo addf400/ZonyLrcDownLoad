@@ -6,6 +6,9 @@ using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace Zony_Lrc_Download_2._0
 {
     /// <summary>
@@ -50,6 +53,40 @@ namespace Zony_Lrc_Download_2._0
         private const string CNLYRIC = "http://www.cnlyric.com/search.php?k=";
         private const string CnLyricDown = "http://www.cnlyric.com/";
 
+        private const string WangYiGetID = "http://music.163.com/api/search/get/web?csrf_token=";
+        private const string WangYiLrcURL = "http://music.163.com/api/song/lyric?os=osx&id=";
+        
+        public DownLoadReturn DownLoad_WY(string filepath,ref byte[] filedata)
+        {
+            string t_songName = Path.GetFileNameWithoutExtension(filepath);
+            try
+            {
+                string m_PostStr = "&s=" + URL_ENCODING(t_songName, Encoding.UTF8) + "&type=1&offset=0&total=true&limit=5";
+                string returnJson = Http_Post(WangYiGetID, m_PostStr);
+                JObject JsonSID = JObject.Parse(returnJson);
+                JArray JsonArraySID = (JArray)JsonSID["result"]["songs"];
+                string sid = JsonArraySID[0]["id"].ToString();
+
+                string m_DownLrcURL = WangYiLrcURL + sid + "&lv=-1&kv=-1&tv=-1";
+                string lrcString = Http_Get(m_DownLrcURL, Encoding.UTF8, true);
+                JObject lrcObjet = JObject.Parse(lrcString);
+                string result = lrcObjet["lrc"]["lyric"].ToString();
+                if ("".Equals(result) || result == "")
+                {
+                    return DownLoadReturn.HTML_INVALID;
+                }
+
+                filedata = Encoding.UTF8.GetBytes(result);
+                return DownLoadReturn.NORMAL;
+            }catch(Exception exp)
+            {
+                #region 日志点
+                Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
+                #endregion
+                /*throw (exp); 并不抛出，直接返回异常*/
+                return DownLoadReturn.EXCEPTION;
+            }
+        }
 
         /// <summary>
         /// 歌词下载函数
@@ -107,7 +144,7 @@ namespace Zony_Lrc_Download_2._0
         public DownLoadReturn DownLoad_Ex(string filepath, ref byte[] filedata)
         {
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
-            string m_strSearchURL = CNLYRIC + URL_GB2312_ENCODING(t_songName) + "&t=s";
+            string m_strSearchURL = CNLYRIC + URL_ENCODING(t_songName,Encoding.GetEncoding("gb2312")) + "&t=s";
 
             string lrcHtmlString = Http_Get(m_strSearchURL, Encoding.GetEncoding("gb2312"));
 
@@ -208,10 +245,10 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         /// <param name="str">要编码的字符串</param>
         /// <returns>编码结果</returns>
-        private string URL_GB2312_ENCODING(string str)
+        private string URL_ENCODING(string str,Encoding encoding)
         {
             StringBuilder sb = new StringBuilder();
-            byte[] byStr = Encoding.GetEncoding("gb2312").GetBytes(str);
+            byte[] byStr = encoding.GetBytes(str);
 
             for (int i = 0; i < byStr.Length; i++)
             {
@@ -224,13 +261,19 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         /// <param name="url">要提交的URL地址</param>
         /// <returns>返回结果</returns>
-        private string Http_Get(string url, Encoding encode)
+        private string Http_Get(string url, Encoding encode,bool Is163=false)
         {
             try
             {
                 HttpWebRequest myReq = (HttpWebRequest)HttpWebRequest.Create(url);
                 myReq.Method = "get";
-
+                // 如果是网易云音乐
+                if(Is163)
+                {
+                    myReq.Referer = "http://music.163.com/";
+                    myReq.ContentType = "application/x-www-form-urlencoded";
+                }
+                
                 HttpWebResponse res = (HttpWebResponse)myReq.GetResponse();
                 Stream s = res.GetResponseStream();
 
@@ -252,6 +295,27 @@ namespace Zony_Lrc_Download_2._0
                 return "";
             }
 
+        }
+        private string Http_Post(string url, string postStr)
+        {
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
+            byte[] postData = Encoding.UTF8.GetBytes(postStr);
+
+            req.Method = "post";
+            req.Referer = "http://music.163.com/";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.ContentLength = postData.Length;
+
+            Stream writeStream = req.GetRequestStream();
+            writeStream.Write(postData, 0, postData.Length);
+            writeStream.Close();
+
+            // 发送请求
+            HttpWebResponse res = (HttpWebResponse)req.GetResponse();
+            StreamReader sr = new StreamReader(res.GetResponseStream(), Encoding.UTF8);
+            // 返回结果
+            string result = sr.ReadToEnd();
+            return result;
         }
     }
 }

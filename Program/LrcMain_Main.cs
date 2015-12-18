@@ -100,7 +100,7 @@ namespace Zony_Lrc_Download_2._0
             // 下载对象
             LrcDownLoad lrcDown = new LrcDownLoad();
 
-            #region 多线程并行迭代下载
+            #region CnLyric歌词下载
             // 多线程 并行迭代 下载歌词
             Parallel.ForEach(m_ThreadDownLoadList, (item) =>
             {
@@ -126,7 +126,7 @@ namespace Zony_Lrc_Download_2._0
             });
             #endregion
 
-            #region 下载失败了的歌词
+            #region 百度歌词下载
             toolStripStatusLabel1.Text = "正在从百度乐库下载失败了的歌词...";
             toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Maximum = m_FailedList.Count;
@@ -142,12 +142,48 @@ namespace Zony_Lrc_Download_2._0
                     {
                         LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
                     }
+                    else
+                    {
+                        m_FailedList.Remove(item.Key);
+                    }
+
                 }
                 else
                 {
                     LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
                 }
 
+                toolStripProgressBar1.Value++;
+            });
+            #endregion
+
+            #region 网易云歌词下载
+            toolStripStatusLabel1.Text = "正在从网易云音乐下载失败了的歌词...";
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Maximum = m_FailedList.Count;
+            Parallel.ForEach(m_FailedList, (item) =>
+            {
+                byte[] lrcData = null;
+                // 下载歌词并返回
+                if (lrcDown.DownLoad_WY(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
+                {
+                    LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
+                    // 写入到文件
+                    if (lrcDown.WriteFile(ref lrcData, item.Value, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+                    {
+                        LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                    }
+                    else
+                    {
+                        m_FailedList.Remove(item.Key);
+                    }
+                }
+                else
+                {
+                    LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                }
+
+                m_FailedList.Remove(item.Key);
                 toolStripProgressBar1.Value++;
             });
             #endregion

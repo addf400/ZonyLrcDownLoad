@@ -224,10 +224,10 @@
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Location = new System.Drawing.Point(358, 353);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel2.Size = new System.Drawing.Size(59, 12);
             this.linkLabel2.TabIndex = 10;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "关于信息";
+            this.linkLabel2.Text = "帮助/关于";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // contextMenuStrip1

@@ -52,8 +52,8 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.LrcListItem = new Zony_Lrc_Download_2._0.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -167,7 +167,6 @@
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "写入文件",
             "写到同目录",
             "自定义目录"});
             this.comboBox2.Location = new System.Drawing.Point(71, 50);
@@ -281,15 +280,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "下载选项";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 12);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "线程数目:";
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(71, 24);
@@ -298,6 +288,15 @@
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "8";
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 12);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "线程数目:";
             // 
             // LrcListItem
             // 

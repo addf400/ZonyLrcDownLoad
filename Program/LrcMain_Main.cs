@@ -96,7 +96,11 @@ namespace Zony_Lrc_Download_2._0
 
             // 下载对象
             BaiDuLrcDownLoad baidu = new BaiDuLrcDownLoad();
-            ParallelDownLoad(m_ThreadDownLoadList, "开始从百度乐库下载...", baidu,false);
+            CnLyricDownLoad cnlyric = new CnLyricDownLoad();
+            WYLrcDownLoad wy = new WYLrcDownLoad();
+            ParallelDownLoad(m_ThreadDownLoadList, "开始从CnLryic乐库下载...", cnlyric,false);
+
+            ParallelDownLoad(m_FailedList, "开始从百度乐库下载...", baidu);
 
             toolStripStatusLabel1.Text = "下载完成！";
             notifyIcon1.ShowBalloonTip(5000, "提示", "所有歌词已经下载完成！", ToolTipIcon.Info);
@@ -137,7 +141,7 @@ namespace Zony_Lrc_Download_2._0
                 else
                 {
                     LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                    if (isFailed) m_FailedList.Add(item.Key, item.Value);
+                    m_FailedList.Add(item.Key, item.Value);
                 }
 
                 toolStripProgressBar1.Value++;

@@ -47,10 +47,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception exp)
             {
-                #region 日志点
                 Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
-                #endregion
-                /*throw (exp); 并不抛出，直接返回异常*/
                 return DownLoadReturn.EXCEPTION;
             }
         }

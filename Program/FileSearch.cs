@@ -22,6 +22,9 @@ namespace Zony_Lrc_Download_2._0
         /// 没有搜索到文件
         /// </summary>
         NO_SEARCH_FILE=-2,
+        /// <summary>
+        /// 搜索发生异常
+        /// </summary>
         EXCEPTION=-3
     }
     public class FileSearch
@@ -57,14 +60,13 @@ namespace Zony_Lrc_Download_2._0
                 }
                 else
                 {
+                    Log.WriteLog("没有搜索到任何文件。");
                     return FileSearchReturn.NO_SEARCH_FILE;
                 }
             }
             catch (Exception exp)
             {
-                #region 日志点
                 Log.WriteLog("在类FileSearch中发生异常：" + exp.ToString());
-                #endregion
                 return FileSearchReturn.EXCEPTION;
             }
             

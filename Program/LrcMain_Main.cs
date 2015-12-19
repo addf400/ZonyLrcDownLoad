@@ -46,13 +46,14 @@ namespace Zony_Lrc_Download_2._0
 
             // 搜索对象
             FileSearch search = new FileSearch();
-            // 函数返回值
-            FileSearchReturn FuncReturn;
-            FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.mp3");
+            
+            FileSearchReturn FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.mp3");
+
             if (FuncReturn == FileSearchReturn.NORMAL)
             {
                 // 设定进度条
                 toolStripProgressBar1.Maximum = m_ThreadDownLoadList.Count;
+                // 添加到容器与列表框
                 foreach (KeyValuePair<int, string> str in m_ThreadDownLoadList)
                 {
                     toolStripStatusLabel1.Text = str.Value;
@@ -63,6 +64,7 @@ namespace Zony_Lrc_Download_2._0
                     LrcListItem.Items.Insert(LrcListItem.Items.Count, new ListViewItem(str_listitem));
 
                 }
+
                 MessageBox.Show("扫描完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 toolStripStatusLabel1.Text = "一共扫描到：" + LrcListItem.Items.Count.ToString() + " 个文件。";
             }
@@ -114,6 +116,13 @@ namespace Zony_Lrc_Download_2._0
             Button_SelectDirectory.Enabled = true;
         }
 
+        /// <summary>
+        /// 并行歌词下载
+        /// </summary>
+        /// <param name="container">要下载的歌词路径与ID对应的键值对</param>
+        /// <param name="info">每次下载时提示的信息</param>
+        /// <param name="lrcDown">歌词下载对象</param>
+        /// <param name="isFailed">是否从失败列表中开始下载</param>
         private void ParallelDownLoad(Dictionary<int, string> container, string info, ILrcDownLoad lrcDown, bool isFailed = true)
         {
             toolStripStatusLabel1.Text = info;

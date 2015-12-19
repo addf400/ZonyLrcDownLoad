@@ -62,9 +62,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception e)
             {
-                #region 日志点
                 Log.WriteLog("在函数Http_Get()当中发生异常：" + e.ToString());
-                #endregion
                 return "";
             }
 
@@ -138,10 +136,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception e)
             {
-                #region 日志点
                 Log.WriteLog(t_songName, "发生异常：" + e.ToString());
-                #endregion
-                /*throw (exp); 并不抛出，直接返回异常*/
                 return DownLoadReturn.EXCEPTION;
             }
         }

@@ -30,9 +30,7 @@ namespace Zony_Lrc_Download_2._0
             string lrcHtmlString = m_Tool.Http_Get(m_strSearchURL, Encoding.UTF8);
             if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
             {
-                #region 日志点
                 Log.WriteLog(t_songName, "在DownLoad函数中发生：HTML页面数据为空。");
-                #endregion
                 return DownLoadReturn.HTML_INVALID;
             }
             //正则搜寻下载链接
@@ -42,9 +40,7 @@ namespace Zony_Lrc_Download_2._0
                 string result = reg.Match(lrcHtmlString).ToString();
                 if (result == "" || "".Equals(result))
                 {
-                    #region 日志点
                     Log.WriteLog(t_songName, "在DownLoad函数中发生：百度乐库没有结果。");
-                    #endregion
                     return DownLoadReturn.REGEX_ERROR;
                 }
 
@@ -55,10 +51,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception exp)
             {
-                #region 日志点
                 Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
-                #endregion
-                /*throw (exp); 并不抛出，直接返回异常*/
                 return DownLoadReturn.EXCEPTION;
             }
         }

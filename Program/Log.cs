@@ -6,24 +6,39 @@ using System.IO;
 
 namespace Zony_Lrc_Download_2._0
 {
+    /// <summary>
+    /// 日志操作类
+    /// </summary>
     static class Log
     {
         static string CurrentDir;
         static FileStream logFileStream;
         static StreamWriter write;
+
+        /// <summary>
+        /// 日志级别
+        /// </summary>
+        public enum Class
+        {
+            INFO="信息：",
+            WARNING="警告：",
+            EXCEPTION="异常：",
+            ERROR="错误："
+        }
+
         public static void init_Log()
         {
             CurrentDir = Environment.CurrentDirectory;
             logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Append);
             write = new StreamWriter(logFileStream, Encoding.GetEncoding("utf-8"));
         }
-        public static void WriteLog(string information)
+        public static void WriteLog(Class cls, string information)
         {
-            write.WriteLine(DateTime.Now.ToString() + "-" + information);
+            write.WriteLine(cls + DateTime.Now.ToString() + "-" + information);
         }
-        public static void WriteLog(string name, string info)
+        public static void WriteLog(Class cls,string name, string info)
         {
-            write.WriteLine(DateTime.Now.ToString() + "-" + "歌曲：" + name + " " + info);
+            write.WriteLine(cls + DateTime.Now.ToString() + "-" + "歌曲：" + name + " " + info);
         }
 
         public static string LoadLog()

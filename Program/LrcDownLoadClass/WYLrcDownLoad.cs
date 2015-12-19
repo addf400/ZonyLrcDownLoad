@@ -29,6 +29,11 @@ namespace Zony_Lrc_Download_2._0
             {
                 string m_PostStr = "&s=" + m_Tool.URL_ENCODING(t_songName, Encoding.UTF8) + "&type=1&offset=0&total=true&limit=5";
                 string returnJson = m_Tool.Http_Post(WangYiGetID, m_PostStr);
+                if("".Equals(returnJson) || returnJson == "")
+                {
+                    Log.WriteLog(Log.Class.ERROR, t_songName, "无法从网易云音乐获取json反馈信息。");
+                    return DownLoadReturn.HTML_INVALID;
+                }
                 JObject JsonSID = JObject.Parse(returnJson);
                 JArray JsonArraySID = (JArray)JsonSID["result"]["songs"];
                 string sid = JsonArraySID[0]["id"].ToString();
@@ -47,7 +52,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception exp)
             {
-                Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
+                Log.WriteLog(Log.Class.EXCEPTION,t_songName, "发生异常：" + exp.ToString());
                 return DownLoadReturn.EXCEPTION;
             }
         }

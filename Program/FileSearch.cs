@@ -60,13 +60,13 @@ namespace Zony_Lrc_Download_2._0
                 }
                 else
                 {
-                    Log.WriteLog("没有搜索到任何文件。");
+                    Log.WriteLog(Log.Class.INFO,"没有搜索到任何文件。");
                     return FileSearchReturn.NO_SEARCH_FILE;
                 }
             }
             catch (Exception exp)
             {
-                Log.WriteLog("在类FileSearch中发生异常：" + exp.ToString());
+                Log.WriteLog(Log.Class.EXCEPTION,"在类FileSearch中发生异常：" + exp.ToString());
                 return FileSearchReturn.EXCEPTION;
             }
             

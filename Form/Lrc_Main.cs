@@ -39,7 +39,7 @@ namespace Zony_Lrc_Download_2._0
             if(LrcPath == "")
             {
                 MessageBox.Show(null,"请选择正确的文件夹路径！","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                Log.WriteLog("文件夹选择错误。");
+                Log.WriteLog(Log.Class.INFO,"文件夹选择错误。");
             }
             else
             {
@@ -49,7 +49,7 @@ namespace Zony_Lrc_Download_2._0
                 Thread Search = new Thread(SearchFile);
                 Search.Start();
 
-                Log.WriteLog("扫描线程启动，线程ID："+Search.ManagedThreadId.ToString());
+                Log.WriteLog(Log.Class.INFO,"扫描线程启动，线程ID："+Search.ManagedThreadId.ToString());
             }
 
         }
@@ -98,7 +98,7 @@ namespace Zony_Lrc_Download_2._0
             var Down = new Thread(DownLoadLrc);
             Down.Start();
 
-            Log.WriteLog("歌词下载线程启动，线程ID：" + Down.ManagedThreadId.ToString());
+            Log.WriteLog(Log.Class.INFO,"歌词下载线程启动，线程ID：" + Down.ManagedThreadId.ToString());
         }
 
         private void LrcListItem_Click(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace Zony_Lrc_Download_2._0
                     label1.Text = "歌手:" + "none";
                 }catch(Exception exp)
                 {
-                    Log.WriteLog(exp.ToString());
+                    Log.WriteLog(Log.Class.INFO,exp.ToString());
                 }
             }
         }

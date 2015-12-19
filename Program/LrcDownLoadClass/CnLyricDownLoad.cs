@@ -31,7 +31,7 @@ namespace Zony_Lrc_Download_2._0
 
             if ("".Equals(lrcHtmlString) || lrcHtmlString == "")
             {
-                Log.WriteLog(t_songName, "在DownLoadEx函数中发生：HTML页面数据为空。");
+                Log.WriteLog(Log.Class.ERROR,t_songName, "在DownLoadEx函数中发生：HTML页面数据为空。");
                 return DownLoadReturn.HTML_INVALID;
             }
 
@@ -42,7 +42,7 @@ namespace Zony_Lrc_Download_2._0
                 string result = reg.Match(lrcHtmlString).ToString();
                 if (result == "" || "".Equals(result))
                 {
-                    Log.WriteLog(t_songName, "在DownLoadEx函数中发生：Cnlryic没有结果。");
+                    Log.WriteLog(Log.Class.INFO,t_songName, "在DownLoadEx函数中发生：Cnlryic没有结果。");
                     return DownLoadReturn.REGEX_ERROR;
                 }
 
@@ -55,7 +55,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception exp)
             {
-                Log.WriteLog(t_songName, "发生异常：" + exp.ToString());
+                Log.WriteLog(Log.Class.EXCEPTION,t_songName, "发生异常：" + exp.ToString());
                 return DownLoadReturn.EXCEPTION;
             }
         }

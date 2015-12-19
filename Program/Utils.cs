@@ -62,7 +62,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception e)
             {
-                Log.WriteLog("在函数Http_Get()当中发生异常：" + e.ToString());
+                Log.WriteLog(Log.Class.EXCEPTION,"在函数Http_Get()当中发生异常：" + e.ToString());
                 return "";
             }
 
@@ -106,7 +106,7 @@ namespace Zony_Lrc_Download_2._0
 
                 if (!File.Exists(lrcPath))
                 {
-                    Log.WriteLog(t_songName, "歌词文件创建失败。");
+                    Log.WriteLog(Log.Class.ERROR,t_songName, "歌词文件创建失败。");
                     return DownLoadReturn.FILE_CREAT_ERROR;
                 }
                 // 输出编码选择
@@ -136,7 +136,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (Exception e)
             {
-                Log.WriteLog(t_songName, "发生异常：" + e.ToString());
+                Log.WriteLog(Log.Class.EXCEPTION,t_songName, "发生异常：" + e.ToString());
                 return DownLoadReturn.EXCEPTION;
             }
         }

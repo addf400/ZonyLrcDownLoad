@@ -20,10 +20,10 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         public enum Class
         {
-            INFO="信息：",
-            WARNING="警告：",
-            EXCEPTION="异常：",
-            ERROR="错误："
+            INFO=0,
+            WARNING=1,
+            EXCEPTION=2,
+            ERROR=3
         }
 
         public static void init_Log()

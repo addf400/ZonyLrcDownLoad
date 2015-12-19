@@ -113,7 +113,6 @@ namespace Zony_Lrc_Download_2._0
 
                     label2.Text = id3.ID3v1Info.Title != "" ? "歌曲名称:" + id3.ID3v1Info.Title : "歌曲名称:" + id3.ID3v2Info.GetTextFrame("TIT2");
                     label1.Text = id3.ID3v1Info.Artist != "" ? "歌手:" + id3.ID3v1Info.Artist : "歌手:" + id3.ID3v2Info.GetTextFrame("TPE1");
-
                 }
                 catch(System.OverflowException)
                 {

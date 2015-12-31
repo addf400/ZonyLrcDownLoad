@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing; 
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -95,7 +95,7 @@ namespace Zony_Lrc_Download_2._0
             // 设置最大并行链接数
             System.Net.ServicePointManager.DefaultConnectionLimit = int.Parse(textBox1.Text);
             toolStripStatusLabel1.Text = "下载歌词......";
-            var Down = new Thread(DownLoadLrc);
+            Thread Down = new Thread(DownLoadLrc);
             Down.Start();
 
             Log.WriteLog(Log.Class.INFO,"歌词下载线程启动，线程ID：" + Down.ManagedThreadId.ToString());

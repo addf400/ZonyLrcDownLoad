@@ -117,4 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>Q:我在下载的时候是否可以关闭窗口？
+A:如果你想要让程序后台下载的话，可以点击最小化，程序将会最小化到右下角的托盘处。
+
+Q:我该如何升级到最新的版本？
+A:程序默认更新检测方式是当你点击关于信息的时候，会自动检测是否有新版本，如果有的话，就会提示你是否进行更新。当然你也可以点击“寻求技术支持”加入到讨论群当中，每当程序更新的时候，可在群文件找到最新版本。
+
+Q:我的歌词放在MP3的时候为什么是乱码？
+A:这个是由于编码方式不同引起的，一般国产老旧的MP3不支持UTF-8，这个时候你可以在下载歌词的时候尝试使用GB2312编码方式。
+
+Q:下载歌词的时候很久都没反应。
+A:你可以尝试将下载线程调整为2或者更低。
+
+Q:我想查看这个软件的源代码，学习一下，该到哪儿去找？
+A:本程序的源代码是托管到git.oschina.net上面的，具体地址如下：git.oschina.net/jokers/ZonyLrcDownload，欢迎你参与到本软件的开发当中。
+
+Q:软件是免费的么？
+A:正如你在使用的时候一样，本软件是完全免费且开放源代码的，当然如果你有心的话可以点击捐赠按钮支持本软件的后续开发。</value>
+  </data>
 </root>

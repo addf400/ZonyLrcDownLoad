@@ -87,7 +87,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HelpMe";
-            this.Text = "捐赠";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.HelpMe_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

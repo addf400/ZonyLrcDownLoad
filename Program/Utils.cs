@@ -96,12 +96,20 @@ namespace Zony_Lrc_Download_2._0
         /// <param name="filepath">歌曲路径</param>
         /// <param name="encoding">编码方式</param>
         /// <returns>状态</returns>
-        public DownLoadReturn WriteFile(ref byte[] filedata, string filepath, int encoding)
+        public DownLoadReturn WriteFile(ref byte[] filedata, string filepath, int encoding,string diyPath)
         {
             string t_songName = Path.GetFileNameWithoutExtension(filepath);
             try
             {
-                string lrcPath = Path.GetDirectoryName(filepath) + "\\" + t_songName + ".lrc";
+                string lrcPath=null;
+                // 自定义路径
+                if(diyPath!="None")
+                {
+                    lrcPath = diyPath + "\\" + t_songName + ".lrc";
+                }else{
+                    lrcPath = Path.GetDirectoryName(filepath) + "\\" + t_songName + ".lrc";
+                }
+                
                 FileStream lrcFileStream = new FileStream(lrcPath, FileMode.Create);
 
                 if (!File.Exists(lrcPath))

@@ -9,9 +9,6 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO;
 using System.Collections;
-using ID3;
-using System.Net;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
@@ -20,6 +17,10 @@ namespace Zony_Lrc_Download_2._0
     public partial class Lrc_Main
     {
         #region 全局对象
+        /// <summary>
+        /// 自定义歌词下载路径
+        /// </summary>
+        private string DownLoadLrcPath="None";
         /// <summary>
         /// 搜索文件的路径
         /// </summary>
@@ -83,7 +84,7 @@ namespace Zony_Lrc_Download_2._0
             toolStripProgressBar1.Value = 0;
 
             // 控件解锁
-            button1.Enabled = true;
+            Button_DownLrc.Enabled = true;
             Button_SelectDirectory.Enabled = true;
         }
 
@@ -94,16 +95,32 @@ namespace Zony_Lrc_Download_2._0
         {
             // 禁用控件
             Button_SelectDirectory.Enabled = false;
-            button1.Enabled = false;
+            Button_DownLrc.Enabled = false;
             
             // 下载对象
             BaiDuLrcDownLoad baidu = new BaiDuLrcDownLoad();
             CnLyricDownLoad cnlyric = new CnLyricDownLoad();
             WYLrcDownLoad wy = new WYLrcDownLoad();
-            ParallelDownLoad(m_ThreadDownLoadList, "开始从CnLryic乐库下载...", cnlyric, false);
-            ParallelDownLoad(m_FailedList, "开始从百度乐库下载...", baidu);
-            ParallelDownLoad(m_FailedList, "开始从网易云乐库下载...", baidu);
-            
+
+            // 下载引擎判定
+            switch(comboBox_DownLoadEngine.SelectedIndex)
+            {
+                case 0:
+                    ParallelDownLoad(m_ThreadDownLoadList, "开始从CnLryic乐库下载...", cnlyric);
+                    ParallelDownLoad(m_FailedList, "开始从百度乐库下载...", baidu);
+                    ParallelDownLoad(m_FailedList, "开始从网易云乐库下载...", baidu);
+                    break;
+                case 1:
+                    ParallelDownLoad(m_ThreadDownLoadList, "开始从CnLryic乐库下载...", cnlyric);
+                    break;
+                case 2:
+                    ParallelDownLoad(m_ThreadDownLoadList, "开始从百度乐库下载...", baidu);
+                    break;
+                case 3:
+                    ParallelDownLoad(m_ThreadDownLoadList, "开始从网易云乐库下载...", baidu);
+                    break;
+            }
+
             toolStripStatusLabel1.Text = "下载完成！";
             notifyIcon1.ShowBalloonTip(5000, "提示", "所有歌词已经下载完成！", ToolTipIcon.Info);
 
@@ -112,7 +129,7 @@ namespace Zony_Lrc_Download_2._0
             toolStripProgressBar1.Value = 0;
 
             // 启用控件
-            button1.Enabled = true;
+            Button_DownLrc.Enabled = true;
             Button_SelectDirectory.Enabled = true;
         }
 
@@ -122,39 +139,45 @@ namespace Zony_Lrc_Download_2._0
         /// <param name="container">要下载的歌词路径与ID对应的键值对</param>
         /// <param name="info">每次下载时提示的信息</param>
         /// <param name="lrcDown">歌词下载对象</param>
-        /// <param name="isFailed">是否从失败列表中开始下载</param>
-        private void ParallelDownLoad(Dictionary<int, string> container, string info, ILrcDownLoad lrcDown, bool isFailed = true)
+        private void ParallelDownLoad(Dictionary<int, string> container, string info, ILrcDownLoad lrcDown)
         {
-            toolStripStatusLabel1.Text = info;
-            toolStripProgressBar1.Value = 0;
-            toolStripProgressBar1.Maximum = container.Count;
+            try
+            {
+                toolStripStatusLabel1.Text = info;
+                toolStripProgressBar1.Value = 0;
+                toolStripProgressBar1.Maximum = container.Count;
 
-            Utils tool=new Utils();
+                Utils tool = new Utils();
 
-            Parallel.ForEach(container, (item) => {
-                byte[] lrcData = null;
-                // 下载歌词并返回
-                if (lrcDown.DownLoad(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
+                Parallel.ForEach(container, (item) =>
                 {
-                    LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
-                    // 写入到文件
-                    if (tool.WriteFile(ref lrcData, item.Value, comboBox1.SelectedIndex) != DownLoadReturn.NORMAL)
+                    byte[] lrcData = null;
+                    // 下载歌词并返回
+                    if (lrcDown.DownLoad(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
                     {
-                        LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                        LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
+                        // 写入到文件
+                        if (tool.WriteFile(ref lrcData, item.Value, comboBox_Encoding.SelectedIndex,DownLoadLrcPath) != DownLoadReturn.NORMAL)
+                        {
+                            LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                        }
+                        else
+                        {
+                            m_FailedList.Remove(item.Key);
+                        }
                     }
                     else
                     {
-                        if (isFailed) m_FailedList.Remove(item.Key);
+                        LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                        m_FailedList.Add(item.Key, item.Value);
                     }
-                }
-                else
-                {
-                    LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                    m_FailedList.Add(item.Key, item.Value);
-                }
 
-                toolStripProgressBar1.Value++;
-            });
+                    toolStripProgressBar1.Value++;
+                });
+            }catch(Exception)
+            {
+                Log.WriteLog(Log.Class.INFO, "重复添加了内容。");
+            }
         }
     }
 

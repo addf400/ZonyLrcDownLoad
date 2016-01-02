@@ -17,12 +17,24 @@ namespace Zony_Lrc_Download_2._0
 
         /// <summary>
         /// 日志级别
-        /// </summary>
+        /// </summary> 
         public enum Class
         {
+            /// <summary>
+            /// 信息
+            /// </summary>
             INFO=0,
+            /// <summary>
+            /// 警告
+            /// </summary>
             WARNING=1,
+            /// <summary>
+            /// 异常
+            /// </summary>
             EXCEPTION=2,
+            /// <summary>
+            /// 错误
+            /// </summary>
             ERROR=3
         }
 

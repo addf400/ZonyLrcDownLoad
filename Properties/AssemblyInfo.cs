@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("Zony Lrc Download")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("致力于打造最精简、高效、快速的歌词搜索与下载工具。 ZonyLrc是你最佳的选择，采用多种搜索与下载引擎，能够快速地下载你所需要的歌词。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zony")]
 [assembly: AssemblyProduct("Zony Lrc Download")]

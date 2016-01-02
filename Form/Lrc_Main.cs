@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO;
 using System.Collections;
-using ID3;
 
 namespace Zony_Lrc_Download_2._0
 {
@@ -38,7 +37,7 @@ namespace Zony_Lrc_Download_2._0
             
             if(LrcPath == "")
             {
-                MessageBox.Show(null,"请选择正确的文件夹路径！","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("请选择正确的文件夹路径！","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 Log.WriteLog(Log.Class.INFO,"文件夹选择错误。");
             }
             else
@@ -73,15 +72,14 @@ namespace Zony_Lrc_Download_2._0
         {
             // 允许非安全线程代码
             Control.CheckForIllegalCrossThreadCalls = false;
-            // 加载图标
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
-            // 检测Log文件是否存在
+            
             if(!File.Exists(Environment.CurrentDirectory+@"\log.txt"))
             {
                 var temp = File.Open(Environment.CurrentDirectory + @"\log.txt", FileMode.Create);
                 temp.Close();
             }
-            // 初始化LOG类
+
             Log.init_Log();
         }
         private void Lrc_Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -94,8 +92,9 @@ namespace Zony_Lrc_Download_2._0
         private void button1_Click(object sender, EventArgs e)
         {
             // 设置最大并行链接数
-            System.Net.ServicePointManager.DefaultConnectionLimit = int.Parse(textBox1.Text);
+            System.Net.ServicePointManager.DefaultConnectionLimit = int.Parse(textBox_DL_ThreadNum.Text);
             toolStripStatusLabel1.Text = "下载歌词......";
+
             Thread Down = new Thread(DownLoadLrc);
             Down.Start();
 
@@ -106,23 +105,12 @@ namespace Zony_Lrc_Download_2._0
         {
             if(LrcListItem.SelectedItems.Count>0)
             {
-                try
-                {
-                    label5.Text = "歌曲路径:" + m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index];
+                SongInfo info = new SongInfo();
+                info.GetSongInfo(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index]);
 
-                    ID3Info id3 = new ID3Info(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index], true);
-
-                    label2.Text = id3.ID3v1Info.Title != "" ? "歌曲名称:" + id3.ID3v1Info.Title : "歌曲名称:" + id3.ID3v2Info.GetTextFrame("TIT2");
-                    label1.Text = id3.ID3v1Info.Artist != "" ? "歌手:" + id3.ID3v1Info.Artist : "歌手:" + id3.ID3v2Info.GetTextFrame("TPE1");
-                }
-                catch(System.OverflowException)
-                {
-                    label2.Text = "歌曲名称:" + "none";
-                    label1.Text = "歌手:" + "none";
-                }catch(Exception exp)
-                {
-                    Log.WriteLog(Log.Class.INFO,exp.ToString());
-                }
+                Label_FilePath.Text = "歌曲路径:" + info.m_SongFilePath;
+                Label_SongName.Text = "歌曲名称："+ info.m_SongName;
+                Label_SongSinger.Text = "歌手：" + info.m_SongSinger;
             }
         }
 
@@ -162,6 +150,23 @@ namespace Zony_Lrc_Download_2._0
             if(!Char.IsNumber(e.KeyChar) && e.KeyChar !=(char)8)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBox_DownLoadPath.SelectedIndex == 1)
+            {
+                FolderBrowserDialog fb = new FolderBrowserDialog();
+
+                fb.Description = "请选择歌词要下载到的目录：";
+                fb.ShowDialog();
+
+                if(fb.SelectedPath != "")
+                {
+                    DownLoadLrcPath = fb.SelectedPath;
+                    toolStripStatusLabel1.Text = DownLoadLrcPath;
+                }
             }
         }
     }

@@ -46,11 +46,11 @@ namespace Zony_Lrc_Download_2._0
         }
         public static void WriteLog(Class cls, string information)
         {
-            write.WriteLine(cls + DateTime.Now.ToString() + "-" + information);
+            write.WriteLine(cls + "-" + DateTime.Now.ToString() + "-" + information);
         }
         public static void WriteLog(Class cls,string name, string info)
         {
-            write.WriteLine(cls + DateTime.Now.ToString() + "-" + "歌曲：" + name + " " + info);
+            write.WriteLine(cls + "-" + DateTime.Now.ToString() + "-" + "歌曲：" + name + " " + info);
         }
 
         public static string LoadLog()

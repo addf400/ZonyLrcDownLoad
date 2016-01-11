@@ -15,6 +15,7 @@ namespace Zony_Lrc_Download_2._0
         private const string CnLyricDown = "http://www.cnlyric.com/";
 
         private Utils m_Tool = new Utils();
+        private SongInfo m_Info = new SongInfo();
 
         /// <summary>
         /// 歌词下载函数
@@ -24,7 +25,8 @@ namespace Zony_Lrc_Download_2._0
         /// <returns>状态</returns>
         public DownLoadReturn DownLoad(string filepath,ref byte[] filedata)
         {
-            string t_songName = Path.GetFileNameWithoutExtension(filepath);
+            m_Info.GetSongInfo(filepath, Config.m_SearchFileNameOption);
+            string t_songName = m_Info.m_SongName;
             string m_strSearchURL = CNLYRIC + m_Tool.URL_ENCODING(t_songName, Encoding.GetEncoding("gb2312")) + "&t=s";
 
             string lrcHtmlString = m_Tool.Http_Get(m_strSearchURL, Encoding.GetEncoding("gb2312"));

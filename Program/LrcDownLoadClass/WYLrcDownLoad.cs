@@ -25,7 +25,7 @@ namespace Zony_Lrc_Download_2._0
         /// <returns>状态</returns>
         public DownLoadReturn DownLoad(string filepath, ref byte[] filedata)
         {
-            m_Info.GetSongInfo(filepath);
+            m_Info.GetSongInfo(filepath,Config.m_SearchFileNameOption);
             string t_songName = m_Info.m_SongName;
 
             try

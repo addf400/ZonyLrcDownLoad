@@ -33,37 +33,20 @@
             this.StatusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.Button_DownLrc = new System.Windows.Forms.Button();
-            this.Button_SelectDirectory = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Label_FilePath = new System.Windows.Forms.Label();
-            this.Label_SongName = new System.Windows.Forms.Label();
-            this.Label_SongSinger = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox_DownLoadPath = new System.Windows.Forms.ComboBox();
-            this.comboBox_Encoding = new System.Windows.Forms.ComboBox();
-            this.label_Title_B = new System.Windows.Forms.Label();
-            this.label_Title_A = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.button_DownLrc = new System.Windows.Forms.Button();
+            this.button_SelectDirectory = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.显示主窗口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboBox_DownLoadEngine = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox_DL_ThreadNum = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.button_SetButton = new System.Windows.Forms.Button();
             this.LrcListItem = new Zony_Lrc_Download_2._0.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button_Help = new System.Windows.Forms.Button();
             this.StatusStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusStrip1
@@ -71,9 +54,9 @@
             this.StatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.StatusStrip1.Location = new System.Drawing.Point(0, 376);
+            this.StatusStrip1.Location = new System.Drawing.Point(0, 408);
             this.StatusStrip1.Name = "StatusStrip1";
-            this.StatusStrip1.Size = new System.Drawing.Size(627, 22);
+            this.StatusStrip1.Size = new System.Drawing.Size(361, 22);
             this.StatusStrip1.SizingGrip = false;
             this.StatusStrip1.TabIndex = 4;
             // 
@@ -81,7 +64,7 @@
             // 
             this.toolStripStatusLabel1.AutoSize = false;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(420, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(250, 17);
             this.toolStripStatusLabel1.Text = "状态:";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -89,148 +72,28 @@
             // 
             this.toolStripProgressBar1.AutoSize = false;
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
-            // Button_DownLrc
+            // button_DownLrc
             // 
-            this.Button_DownLrc.Enabled = false;
-            this.Button_DownLrc.Location = new System.Drawing.Point(493, 225);
-            this.Button_DownLrc.Name = "Button_DownLrc";
-            this.Button_DownLrc.Size = new System.Drawing.Size(127, 42);
-            this.Button_DownLrc.TabIndex = 6;
-            this.Button_DownLrc.Text = "下载";
-            this.Button_DownLrc.UseVisualStyleBackColor = true;
-            this.Button_DownLrc.Click += new System.EventHandler(this.button1_Click);
+            this.button_DownLrc.Enabled = false;
+            this.button_DownLrc.Location = new System.Drawing.Point(194, 336);
+            this.button_DownLrc.Name = "button_DownLrc";
+            this.button_DownLrc.Size = new System.Drawing.Size(160, 30);
+            this.button_DownLrc.TabIndex = 6;
+            this.button_DownLrc.Text = "下载";
+            this.button_DownLrc.UseVisualStyleBackColor = true;
+            this.button_DownLrc.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Button_SelectDirectory
+            // button_SelectDirectory
             // 
-            this.Button_SelectDirectory.Location = new System.Drawing.Point(360, 225);
-            this.Button_SelectDirectory.Name = "Button_SelectDirectory";
-            this.Button_SelectDirectory.Size = new System.Drawing.Size(127, 42);
-            this.Button_SelectDirectory.TabIndex = 5;
-            this.Button_SelectDirectory.Text = "选择并扫描目录";
-            this.Button_SelectDirectory.UseVisualStyleBackColor = true;
-            this.Button_SelectDirectory.Click += new System.EventHandler(this.Button_SelectDirectory_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.Label_FilePath);
-            this.groupBox1.Controls.Add(this.Label_SongName);
-            this.groupBox1.Controls.Add(this.Label_SongSinger);
-            this.groupBox1.Location = new System.Drawing.Point(360, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 62);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "歌曲信息";
-            // 
-            // Label_FilePath
-            // 
-            this.Label_FilePath.BackColor = System.Drawing.SystemColors.Control;
-            this.Label_FilePath.Location = new System.Drawing.Point(7, 44);
-            this.Label_FilePath.Name = "Label_FilePath";
-            this.Label_FilePath.Size = new System.Drawing.Size(248, 13);
-            this.Label_FilePath.TabIndex = 0;
-            this.Label_FilePath.Text = "歌曲路径:";
-            // 
-            // Label_SongName
-            // 
-            this.Label_SongName.BackColor = System.Drawing.SystemColors.Control;
-            this.Label_SongName.Location = new System.Drawing.Point(6, 17);
-            this.Label_SongName.Name = "Label_SongName";
-            this.Label_SongName.Size = new System.Drawing.Size(248, 14);
-            this.Label_SongName.TabIndex = 0;
-            this.Label_SongName.Text = "歌曲名称:";
-            // 
-            // Label_SongSinger
-            // 
-            this.Label_SongSinger.BackColor = System.Drawing.SystemColors.Control;
-            this.Label_SongSinger.Location = new System.Drawing.Point(6, 31);
-            this.Label_SongSinger.Name = "Label_SongSinger";
-            this.Label_SongSinger.Size = new System.Drawing.Size(248, 13);
-            this.Label_SongSinger.TabIndex = 0;
-            this.Label_SongSinger.Text = "歌手:";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.comboBox_DownLoadPath);
-            this.groupBox2.Controls.Add(this.comboBox_Encoding);
-            this.groupBox2.Controls.Add(this.label_Title_B);
-            this.groupBox2.Controls.Add(this.label_Title_A);
-            this.groupBox2.Location = new System.Drawing.Point(360, 80);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(260, 82);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "输出选项";
-            // 
-            // comboBox_DownLoadPath
-            // 
-            this.comboBox_DownLoadPath.FormattingEnabled = true;
-            this.comboBox_DownLoadPath.Items.AddRange(new object[] {
-            "写到同目录",
-            "自定义目录"});
-            this.comboBox_DownLoadPath.Location = new System.Drawing.Point(71, 50);
-            this.comboBox_DownLoadPath.Name = "comboBox_DownLoadPath";
-            this.comboBox_DownLoadPath.Size = new System.Drawing.Size(183, 20);
-            this.comboBox_DownLoadPath.TabIndex = 1;
-            this.comboBox_DownLoadPath.Text = "写到同目录";
-            this.comboBox_DownLoadPath.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // comboBox_Encoding
-            // 
-            this.comboBox_Encoding.FormattingEnabled = true;
-            this.comboBox_Encoding.Items.AddRange(new object[] {
-            "UTF-8",
-            "GB2312",
-            "GBK",
-            "BIG5(繁体)",
-            "日语 (Shift-JIS)"});
-            this.comboBox_Encoding.Location = new System.Drawing.Point(95, 20);
-            this.comboBox_Encoding.Name = "comboBox_Encoding";
-            this.comboBox_Encoding.Size = new System.Drawing.Size(159, 20);
-            this.comboBox_Encoding.TabIndex = 1;
-            this.comboBox_Encoding.Text = "UTF-8";
-            // 
-            // label_Title_B
-            // 
-            this.label_Title_B.AutoSize = true;
-            this.label_Title_B.Location = new System.Drawing.Point(6, 53);
-            this.label_Title_B.Name = "label_Title_B";
-            this.label_Title_B.Size = new System.Drawing.Size(59, 12);
-            this.label_Title_B.TabIndex = 0;
-            this.label_Title_B.Text = "输出方式:";
-            // 
-            // label_Title_A
-            // 
-            this.label_Title_A.AutoSize = true;
-            this.label_Title_A.Location = new System.Drawing.Point(6, 23);
-            this.label_Title_A.Name = "label_Title_A";
-            this.label_Title_A.Size = new System.Drawing.Size(83, 12);
-            this.label_Title_A.TabIndex = 0;
-            this.label_Title_A.Text = "输出编码格式:";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(543, 353);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(77, 12);
-            this.linkLabel1.TabIndex = 9;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "寻求技术支持";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(358, 353);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(59, 12);
-            this.linkLabel2.TabIndex = 10;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "帮助/关于";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.button_SelectDirectory.Location = new System.Drawing.Point(12, 336);
+            this.button_SelectDirectory.Name = "button_SelectDirectory";
+            this.button_SelectDirectory.Size = new System.Drawing.Size(160, 30);
+            this.button_SelectDirectory.TabIndex = 5;
+            this.button_SelectDirectory.Text = "选择并扫描目录";
+            this.button_SelectDirectory.UseVisualStyleBackColor = true;
+            this.button_SelectDirectory.Click += new System.EventHandler(this.Button_SelectDirectory_Click);
             // 
             // contextMenuStrip1
             // 
@@ -271,59 +134,15 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // groupBox3
+            // button_SetButton
             // 
-            this.groupBox3.Controls.Add(this.comboBox_DownLoadEngine);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.textBox_DL_ThreadNum);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(360, 168);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(260, 51);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "下载选项";
-            // 
-            // comboBox_DownLoadEngine
-            // 
-            this.comboBox_DownLoadEngine.FormattingEnabled = true;
-            this.comboBox_DownLoadEngine.Items.AddRange(new object[] {
-            "全引擎",
-            "仅Cnlryic",
-            "仅百度乐库",
-            "仅网易云音乐"});
-            this.comboBox_DownLoadEngine.Location = new System.Drawing.Point(152, 24);
-            this.comboBox_DownLoadEngine.Name = "comboBox_DownLoadEngine";
-            this.comboBox_DownLoadEngine.Size = new System.Drawing.Size(102, 20);
-            this.comboBox_DownLoadEngine.TabIndex = 3;
-            this.comboBox_DownLoadEngine.Text = "全引擎";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(105, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 12);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "歌词源:";
-            // 
-            // textBox_DL_ThreadNum
-            // 
-            this.textBox_DL_ThreadNum.Location = new System.Drawing.Point(71, 24);
-            this.textBox_DL_ThreadNum.Name = "textBox_DL_ThreadNum";
-            this.textBox_DL_ThreadNum.Size = new System.Drawing.Size(18, 21);
-            this.textBox_DL_ThreadNum.TabIndex = 1;
-            this.textBox_DL_ThreadNum.Text = "8";
-            this.textBox_DL_ThreadNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 12);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "线程数目:";
+            this.button_SetButton.Location = new System.Drawing.Point(12, 371);
+            this.button_SetButton.Name = "button_SetButton";
+            this.button_SetButton.Size = new System.Drawing.Size(160, 30);
+            this.button_SetButton.TabIndex = 6;
+            this.button_SetButton.Text = "设置";
+            this.button_SetButton.UseVisualStyleBackColor = true;
+            this.button_SetButton.Click += new System.EventHandler(this.button_SetButton_Click);
             // 
             // LrcListItem
             // 
@@ -332,7 +151,7 @@
             this.columnHeader3});
             this.LrcListItem.Location = new System.Drawing.Point(12, 12);
             this.LrcListItem.Name = "LrcListItem";
-            this.LrcListItem.Size = new System.Drawing.Size(342, 353);
+            this.LrcListItem.Size = new System.Drawing.Size(342, 318);
             this.LrcListItem.TabIndex = 0;
             this.LrcListItem.UseCompatibleStateImageBehavior = false;
             this.LrcListItem.View = System.Windows.Forms.View.Details;
@@ -348,18 +167,25 @@
             this.columnHeader3.Text = "状态";
             this.columnHeader3.Width = 75;
             // 
+            // button_Help
+            // 
+            this.button_Help.Location = new System.Drawing.Point(194, 371);
+            this.button_Help.Name = "button_Help";
+            this.button_Help.Size = new System.Drawing.Size(160, 30);
+            this.button_Help.TabIndex = 6;
+            this.button_Help.Text = "帮助/关于";
+            this.button_Help.UseVisualStyleBackColor = true;
+            this.button_Help.Click += new System.EventHandler(this.button_Help_Click);
+            // 
             // Lrc_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 398);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Button_DownLrc);
-            this.Controls.Add(this.Button_SelectDirectory);
+            this.ClientSize = new System.Drawing.Size(361, 430);
+            this.Controls.Add(this.button_Help);
+            this.Controls.Add(this.button_SetButton);
+            this.Controls.Add(this.button_DownLrc);
+            this.Controls.Add(this.button_SelectDirectory);
             this.Controls.Add(this.StatusStrip1);
             this.Controls.Add(this.LrcListItem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -372,12 +198,7 @@
             this.SizeChanged += new System.EventHandler(this.Lrc_Main_SizeChanged);
             this.StatusStrip1.ResumeLayout(false);
             this.StatusStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,21 +208,10 @@
         
         private ListViewNF LrcListItem;
         private System.Windows.Forms.StatusStrip StatusStrip1;
-        private System.Windows.Forms.Button Button_DownLrc;
-        private System.Windows.Forms.Button Button_SelectDirectory;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label Label_SongSinger;
-        private System.Windows.Forms.Label Label_SongName;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label_Title_A;
-        private System.Windows.Forms.ComboBox comboBox_DownLoadPath;
-        private System.Windows.Forms.ComboBox comboBox_Encoding;
-        private System.Windows.Forms.Label label_Title_B;
+        private System.Windows.Forms.Button button_DownLrc;
+        private System.Windows.Forms.Button button_SelectDirectory;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Label Label_FilePath;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -409,11 +219,8 @@
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox_DL_ThreadNum;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox_DownLoadEngine;
+        private System.Windows.Forms.Button button_SetButton;
+        private System.Windows.Forms.Button button_Help;
 
     }
 }

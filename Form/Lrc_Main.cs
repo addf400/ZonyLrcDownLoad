@@ -18,14 +18,6 @@ namespace Zony_Lrc_Download_2._0
         {
             InitializeComponent();
         }
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://jq.qq.com/?_wv=1027&k=Zrl68q");   
-        }
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            new About().ShowDialog();
-        }
 
         private void Button_SelectDirectory_Click(object sender, EventArgs e)
         {
@@ -43,31 +35,16 @@ namespace Zony_Lrc_Download_2._0
             else
             {
                 toolStripStatusLabel1.Text = "正在扫描......";
-                Button_SelectDirectory.Enabled = false;
+                button_SelectDirectory.Enabled = false;
 
                 Thread Search = new Thread(SearchFile);
                 Search.Start();
 
                 Log.WriteLog(Log.Class.INFO,"扫描线程启动，线程ID："+Search.ManagedThreadId.ToString());
             }
-
         }
-       private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
-       {
-           new About().Show();
-       }
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-       {
-           if (WindowState == FormWindowState.Minimized)
-           {
-               //还原窗体显示 
-               WindowState = FormWindowState.Normal;
-               //激活窗体并给予它焦点 
-               this.Activate();
-               //任务栏区显示图标 
-               this.ShowInTaskbar = true;
-           }
-       }
+      
+
         private void Lrc_Main_Load(object sender, EventArgs e)
         {
             // 允许非安全线程代码
@@ -80,19 +57,15 @@ namespace Zony_Lrc_Download_2._0
                 temp.Close();
             }
 
+            Config.Check_And_New();
             Log.init_Log();
         }
-        private void Lrc_Main_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // 销毁托盘图标
-            notifyIcon1.Dispose();
-            Environment.Exit(0);
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
             // 设置最大并行链接数
-            System.Net.ServicePointManager.DefaultConnectionLimit = int.Parse(textBox_DL_ThreadNum.Text);
+            System.Net.ServicePointManager.DefaultConnectionLimit = Config.m_DownLoadThreadNum;
             toolStripStatusLabel1.Text = "下载歌词......";
 
             Thread Down = new Thread(DownLoadLrc);
@@ -103,24 +76,30 @@ namespace Zony_Lrc_Download_2._0
 
         private void LrcListItem_Click(object sender, EventArgs e)
         {
-            if(LrcListItem.SelectedItems.Count>0)
-            {
-                SongInfo info = new SongInfo();
-                info.GetSongInfo(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index]);
+//             if(LrcListItem.SelectedItems.Count>0)
+//             {
+//                 SongInfo info = new SongInfo();
+//                 info.GetSongInfo(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index]);
+// 
+//                 Label_FilePath.Text = "歌曲路径:" + info.m_SongFilePath;
+//                 Label_SongName.Text = "歌曲名称："+ info.m_SongName;
+//                 Label_SongSinger.Text = "歌手：" + info.m_SongSinger;
+//             }
+        }
 
-                Label_FilePath.Text = "歌曲路径:" + info.m_SongFilePath;
-                Label_SongName.Text = "歌曲名称："+ info.m_SongName;
-                Label_SongSinger.Text = "歌手：" + info.m_SongSinger;
+        #region 界面处理事件
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体显示 
+                WindowState = FormWindowState.Normal;
+                //激活窗体并给予它焦点 
+                this.Activate();
+                //任务栏区显示图标 
+                this.ShowInTaskbar = true;
             }
         }
-
-        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // 销毁托盘图标
-            notifyIcon1.Dispose();
-            Environment.Exit(0);
-        }
-
         private void Lrc_Main_SizeChanged(object sender, EventArgs e)
         {
             //判断是否选择的是最小化按钮 
@@ -147,27 +126,40 @@ namespace Zony_Lrc_Download_2._0
         // 对文本框进行限定，只能输入数字
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!Char.IsNumber(e.KeyChar) && e.KeyChar !=(char)8)
+            if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
             }
         }
+        #endregion
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        #region 单纯点击事件
+
+        private void button_SetButton_Click(object sender, EventArgs e)
         {
-            if(comboBox_DownLoadPath.SelectedIndex == 1)
-            {
-                FolderBrowserDialog fb = new FolderBrowserDialog();
-
-                fb.Description = "请选择歌词要下载到的目录：";
-                fb.ShowDialog();
-
-                if(fb.SelectedPath != "")
-                {
-                    DownLoadLrcPath = fb.SelectedPath;
-                    toolStripStatusLabel1.Text = DownLoadLrcPath;
-                }
-            }
+            new Seting().ShowDialog();
         }
+
+        private void button_Help_Click(object sender, EventArgs e)
+        {
+            new About().ShowDialog();
+        }
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new About().Show();
+        }
+        private void Lrc_Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // 销毁托盘图标
+            notifyIcon1.Dispose();
+            Environment.Exit(0);
+        }
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 销毁托盘图标
+            notifyIcon1.Dispose();
+            Environment.Exit(0);
+        }
+        #endregion
     }
 }

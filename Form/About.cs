@@ -68,7 +68,7 @@ namespace Zony_Lrc_Download_2._0
             }
             catch (SocketException exp)
             {
-                MessageBox.Show(exp.ToString());
+                MessageBox.Show("网络连接失败,无法获得最新版本!","错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -80,6 +80,11 @@ namespace Zony_Lrc_Download_2._0
         private void button2_Click(object sender, EventArgs e)
         {
             new HelpMe().ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://jq.qq.com/?_wv=1027&k=Zrl68q");
         }
     }
 }

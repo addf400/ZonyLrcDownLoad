@@ -72,7 +72,7 @@ namespace Zony_Lrc_Download_2._0
             else if (FuncReturn == FileSearchReturn.NO_SEARCH_FILE)
             {
                 MessageBox.Show("没有扫描到音乐文件！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Button_SelectDirectory.Enabled = true;
+                button_SelectDirectory.Enabled = true;
             }
             else if (FuncReturn == FileSearchReturn.EXCEPTION)
             {
@@ -84,8 +84,8 @@ namespace Zony_Lrc_Download_2._0
             toolStripProgressBar1.Value = 0;
 
             // 控件解锁
-            Button_DownLrc.Enabled = true;
-            Button_SelectDirectory.Enabled = true;
+            button_DownLrc.Enabled = true;
+            button_SelectDirectory.Enabled = true;
         }
 
         /// <summary>
@@ -94,8 +94,8 @@ namespace Zony_Lrc_Download_2._0
         private void DownLoadLrc()
         {
             // 禁用控件
-            Button_SelectDirectory.Enabled = false;
-            Button_DownLrc.Enabled = false;
+            button_SelectDirectory.Enabled = false;
+            button_DownLrc.Enabled = false;
             
             // 下载对象
             BaiDuLrcDownLoad baidu = new BaiDuLrcDownLoad();
@@ -103,7 +103,7 @@ namespace Zony_Lrc_Download_2._0
             WYLrcDownLoad wy = new WYLrcDownLoad();
 
             // 下载引擎判定
-            switch(comboBox_DownLoadEngine.SelectedIndex)
+            switch(Config.m_LrcDownSource)
             {
                 case 0:
                     ParallelDownLoad(m_ThreadDownLoadList, "开始从CnLryic乐库下载...", cnlyric);
@@ -129,8 +129,8 @@ namespace Zony_Lrc_Download_2._0
             toolStripProgressBar1.Value = 0;
 
             // 启用控件
-            Button_DownLrc.Enabled = true;
-            Button_SelectDirectory.Enabled = true;
+            button_DownLrc.Enabled = true;
+            button_SelectDirectory.Enabled = true;
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Zony_Lrc_Download_2._0
                     {
                         LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
                         // 写入到文件
-                        if (tool.WriteFile(ref lrcData, item.Value, comboBox_Encoding.SelectedIndex,DownLoadLrcPath) != DownLoadReturn.NORMAL)
+                        if (tool.WriteFile(ref lrcData, item.Value,Config.m_EncodingOption,DownLoadLrcPath) != DownLoadReturn.NORMAL)
                         {
                             LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
                         }

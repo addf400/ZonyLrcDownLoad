@@ -36,23 +36,24 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(104, 355);
+            this.button1.Location = new System.Drawing.Point(12, 355);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(132, 34);
             this.button1.TabIndex = 1;
-            this.button1.Text = "确定";
+            this.button1.Text = "关闭窗口";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(456, 376);
+            this.label1.Location = new System.Drawing.Point(456, 377);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 3;
@@ -100,13 +101,23 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(257, 355);
+            this.button2.Location = new System.Drawing.Point(150, 355);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(132, 34);
             this.button2.TabIndex = 1;
             this.button2.Text = "捐赠";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(288, 355);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(132, 34);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "寻求技术支持";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // About
             // 
@@ -117,6 +128,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -143,5 +155,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

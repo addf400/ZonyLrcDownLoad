@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using ID3;
+using System.Text.RegularExpressions;
 
 namespace Zony_Lrc_Download_2._0
 {
@@ -26,7 +27,8 @@ namespace Zony_Lrc_Download_2._0
         /// 获得歌曲相关信息
         /// </summary>
         /// <param name="filepath">歌曲文件路径</param>
-        public void GetSongInfo(string filepath)
+        /// <param name="flag">文件名搜索方式</param>
+        public void GetSongInfo(string filepath,int flag)
         {
             try
             {
@@ -43,14 +45,33 @@ namespace Zony_Lrc_Download_2._0
                 Log.WriteLog(Log.Class.EXCEPTION, exp.ToString());
             }
 
-            if(m_SongName == null || m_SongName == "")
+            // 分割文件名获取歌曲信息
+            string fileName = Path.GetFileNameWithoutExtension(filepath);
+            string[] result = fileName.Split('-');
+
+            if((m_SongName == null || m_SongName == ""))
             {
-                m_SongName = Path.GetFileNameWithoutExtension(filepath);
+                if(flag==0)
+                {
+                    m_SongName = Path.GetFileNameWithoutExtension(filepath);
+                }
+                else
+                {
+                    m_SongName = result[1];
+                }
             }
 
             if (m_SongSinger == null || m_SongSinger == "")
             {
-                m_SongSinger = Path.GetFileNameWithoutExtension(filepath);
+                m_SongSinger = result[0];
+                if(flag == 0)
+                {
+                    m_SongSinger = Path.GetFileNameWithoutExtension(filepath);
+                }
+                else
+                {
+                    m_SongSinger = result[1];
+                }
             }
         }
     }

@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
-using System.Text.RegularExpressions;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Zony_Lrc_Download_2._0
 {
@@ -22,7 +18,7 @@ namespace Zony_Lrc_Download_2._0
         NORMAL = 0,
         /// <summary>
         /// HTML页面无数据
-        /// </summary>
+        /// </summary> 
         HTML_INVALID = -1,
         /// <summary>
         /// 发生异常
@@ -42,6 +38,9 @@ namespace Zony_Lrc_Download_2._0
         INET_ERROR = -5
     }
 
+    /// <summary>
+    /// 公用Lrc接口
+    /// </summary>
     public interface ILrcDownLoad
     {
         DownLoadReturn DownLoad(string filepath, ref byte[] filedata);

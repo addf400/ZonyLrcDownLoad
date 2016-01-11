@@ -50,8 +50,8 @@ namespace Zony_Lrc_Download_2._0
             // 允许非安全线程代码
             Control.CheckForIllegalCrossThreadCalls = false;
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
-            
-            if(!File.Exists(Environment.CurrentDirectory+@"\log.txt"))
+
+            if(!File.Exists(Environment.CurrentDirectory + @"\log.txt"))
             {
                 var temp = File.Open(Environment.CurrentDirectory + @"\log.txt", FileMode.Create);
                 temp.Close();
@@ -76,15 +76,16 @@ namespace Zony_Lrc_Download_2._0
 
         private void LrcListItem_Click(object sender, EventArgs e)
         {
-//             if(LrcListItem.SelectedItems.Count>0)
-//             {
-//                 SongInfo info = new SongInfo();
-//                 info.GetSongInfo(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index]);
-// 
-//                 Label_FilePath.Text = "歌曲路径:" + info.m_SongFilePath;
-//                 Label_SongName.Text = "歌曲名称："+ info.m_SongName;
-//                 Label_SongSinger.Text = "歌手：" + info.m_SongSinger;
-//             }
+            if(LrcListItem.SelectedItems.Count>0)
+            { 
+                SongInfo info = new SongInfo();
+                info.GetSongInfo(m_ThreadDownLoadList[LrcListItem.SelectedItems[0].Index],0);
+
+                var t1 = new ToolTip();
+                t1.SetToolTip(LrcListItem, "歌曲路径:" + info.m_SongFilePath + "\n" +
+                                           "歌曲名：" + info.m_SongName + "\n" +
+                                           "歌手：" + info.m_SongSinger);
+            }
         }
 
         #region 界面处理事件

@@ -58,6 +58,7 @@ namespace Zony_Lrc_Download_2._0
             }
 
             Config.Check_And_New();
+            Config.Load();
             Log.init_Log();
         }
         

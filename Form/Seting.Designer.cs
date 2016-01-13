@@ -124,6 +124,7 @@
             this.comboBox_DownLoadPath.Size = new System.Drawing.Size(183, 20);
             this.comboBox_DownLoadPath.TabIndex = 1;
             this.comboBox_DownLoadPath.Text = "写到同目录";
+            this.comboBox_DownLoadPath.SelectionChangeCommitted += new System.EventHandler(this.comboBox_DownLoadPath_SelectionChangeCommitted);
             // 
             // comboBox_Encoding
             // 
@@ -147,7 +148,7 @@
             this.label_Title_B.Name = "label_Title_B";
             this.label_Title_B.Size = new System.Drawing.Size(59, 12);
             this.label_Title_B.TabIndex = 0;
-            this.label_Title_B.Text = "输出方式:";
+            this.label_Title_B.Text = "输出目录:";
             // 
             // label_Title_A
             // 

@@ -18,10 +18,6 @@ namespace Zony_Lrc_Download_2._0
     {
         #region 全局对象
         /// <summary>
-        /// 自定义歌词下载路径
-        /// </summary>
-        private string DownLoadLrcPath="None";
-        /// <summary>
         /// 搜索文件的路径
         /// </summary>
         private string LrcPath;
@@ -47,8 +43,12 @@ namespace Zony_Lrc_Download_2._0
 
             // 搜索对象
             FileSearch search = new FileSearch();
-            
+
             FileSearchReturn FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.mp3");
+            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.ape");
+            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.wav");
+            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.wma");
+            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.flac");
 
             if (FuncReturn == FileSearchReturn.NORMAL)
             {
@@ -77,6 +77,7 @@ namespace Zony_Lrc_Download_2._0
             else if (FuncReturn == FileSearchReturn.EXCEPTION)
             {
                 MessageBox.Show("程序发生异常！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Log.WriteLog(Log.Class.EXCEPTION, "在SearchFile线程当中发生异常。");
             }
 
             // 进度条重置
@@ -157,7 +158,7 @@ namespace Zony_Lrc_Download_2._0
                     {
                         LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
                         // 写入到文件
-                        if (tool.WriteFile(ref lrcData, item.Value,Config.m_EncodingOption,DownLoadLrcPath) != DownLoadReturn.NORMAL)
+                        if (tool.WriteFile(ref lrcData, item.Value,Config.m_EncodingOption,Config.m_LrcDownDirectory) != DownLoadReturn.NORMAL)
                         {
                             LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
                         }

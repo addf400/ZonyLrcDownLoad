@@ -46,7 +46,7 @@ namespace Zony_Lrc_Download_2._0
                 StreamWriter sw = new StreamWriter(fs);
                 sw.WriteLine("[Set]");
                 sw.WriteLine("EncodingOption=0");
-                sw.WriteLine("LrcDownDirectory=\"null\"");
+                sw.WriteLine("LrcDownDirectory=\"None\"");
                 sw.WriteLine("DownLoadThreadNum=8");
                 sw.WriteLine("LrcDownSource=0");
                 sw.WriteLine("SearchFileNameOption=0");

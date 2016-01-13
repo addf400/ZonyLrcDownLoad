@@ -66,7 +66,7 @@ namespace Zony_Lrc_Download_2._0
                     socket.Close();
                 }
             }
-            catch (SocketException exp)
+            catch (SocketException)
             {
                 MessageBox.Show("网络连接失败,无法获得最新版本!","错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }

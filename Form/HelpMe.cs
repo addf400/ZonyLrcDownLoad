@@ -24,6 +24,9 @@ namespace Zony_Lrc_Download_2._0
         private void HelpMe_Load(object sender, EventArgs e)
         {
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
+
         }
+
+
     }
 }

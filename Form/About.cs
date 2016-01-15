@@ -15,7 +15,9 @@ namespace Zony_Lrc_Download_2._0
 {
     public partial class About : Form
     {
+        // 更新服务查询套接字
         Socket socket;
+        
         public About()
         {
             InitializeComponent();

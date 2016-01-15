@@ -8,8 +8,12 @@ using System.Text.RegularExpressions;
 
 namespace Zony_Lrc_Download_2._0
 {
+    /// <summary>
+    /// 歌曲文件信息类
+    /// </summary>
     public class SongInfo
     {
+        #region 歌曲信息字段
         /// <summary>
         /// 歌曲名
         /// </summary>
@@ -22,6 +26,7 @@ namespace Zony_Lrc_Download_2._0
         /// 歌曲文件路径
         /// </summary>
         public string m_SongFilePath { get; set; }
+        #endregion
 
         /// <summary>
         /// 获得歌曲相关信息

@@ -103,6 +103,7 @@ namespace Zony_Lrc_Download_2._0
         public static void Package_Write(Socket fd,Package p)
         {
             fd.Send(StructToBytes(p.head));
+            // 切记不要发送空数据
             if(p.data!=null)
             {
                 fd.Send(p.data);

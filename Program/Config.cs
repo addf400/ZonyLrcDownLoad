@@ -12,6 +12,7 @@ namespace Zony_Lrc_Download_2._0
     /// </summary>
     public static class Config
     {
+        #region 具体设置项
         /// <summary>
         /// 编码选项
         /// </summary>
@@ -32,13 +33,15 @@ namespace Zony_Lrc_Download_2._0
         /// 歌词文件名搜索选项
         /// </summary>
         public static int m_SearchFileNameOption { get; set; }
+        #endregion
 
+        // 本地ini文件路径
         private static string iniFilePath = Environment.CurrentDirectory + @"\set.ini";
 
         /// <summary>
         /// 检测配置文件是否存在，如果不存在，创建一个新的配置文件。
         /// </summary>
-        public static void Check_And_New()
+        public static void New()
         {
             if(!File.Exists(iniFilePath))
             {
@@ -71,7 +74,8 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         public static void Load()
         {
-            Check_And_New();
+            // 检测文件是否存在
+            New();
 
             m_EncodingOption = int.Parse(Read("Set", "EncodingOption", iniFilePath));
             m_LrcDownDirectory = Read("Set", "LrcDownDirectory", iniFilePath);
@@ -80,6 +84,7 @@ namespace Zony_Lrc_Download_2._0
             m_SearchFileNameOption = int.Parse(Read("Set", "SearchFileNameOption", iniFilePath));
         }
 
+        #region 对于INI文件操作的封装
         [DllImport("kernel32")]
         private static extern bool WritePrivateProfileString(string section, string key, string val, string filePath);
         [DllImport("kernel32")]
@@ -94,5 +99,6 @@ namespace Zony_Lrc_Download_2._0
         {
             WritePrivateProfileString(section, key, value, path);
         }
+        #endregion
     }
 }

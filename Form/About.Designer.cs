@@ -101,6 +101,8 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.Color.Red;
             this.button2.Location = new System.Drawing.Point(150, 355);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(132, 34);

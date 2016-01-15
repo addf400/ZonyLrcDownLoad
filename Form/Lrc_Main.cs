@@ -51,13 +51,7 @@ namespace Zony_Lrc_Download_2._0
             Control.CheckForIllegalCrossThreadCalls = false;
             this.Icon = Zony_Lrc_Download_2._0.Resource1._6;
 
-            if(!File.Exists(Environment.CurrentDirectory + @"\log.txt"))
-            {
-                var temp = File.Open(Environment.CurrentDirectory + @"\log.txt", FileMode.Create);
-                temp.Close();
-            }
-
-            Config.Check_And_New();
+            // 初始化静态类
             Config.Load();
             Log.init_Log();
         }

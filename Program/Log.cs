@@ -40,6 +40,13 @@ namespace Zony_Lrc_Download_2._0
 
         public static void init_Log()
         {
+            // 检测日志文件是否存在
+            if (!File.Exists(Environment.CurrentDirectory + @"\log.txt"))
+            {
+                var temp = File.Open(Environment.CurrentDirectory + @"\log.txt", FileMode.Create);
+                temp.Close();
+            }
+
             CurrentDir = Environment.CurrentDirectory;
             logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Append);
             write = new StreamWriter(logFileStream, Encoding.GetEncoding("utf-8"));

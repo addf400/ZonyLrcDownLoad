@@ -76,6 +76,7 @@ namespace Zony_Lrc_Download_2._0
             byte[] bytes = new byte[size];
             IntPtr structPtr = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(obj, structPtr, false);
+            
             Marshal.Copy(structPtr, bytes, 0, size);
             return bytes;
         }

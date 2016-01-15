@@ -71,6 +71,8 @@ namespace Zony_Lrc_Download_2._0
         /// </summary>
         public static void Load()
         {
+            Check_And_New();
+
             m_EncodingOption = int.Parse(Read("Set", "EncodingOption", iniFilePath));
             m_LrcDownDirectory = Read("Set", "LrcDownDirectory", iniFilePath);
             m_DownLoadThreadNum = int.Parse(Read("Set", "DownLoadThreadNum", iniFilePath));

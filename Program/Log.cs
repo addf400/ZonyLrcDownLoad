@@ -48,7 +48,7 @@ namespace Zony_Lrc_Download_2._0
             }
 
             CurrentDir = Environment.CurrentDirectory;
-            logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Append);
+            logFileStream = new FileStream(CurrentDir + @"\log.txt", FileMode.Append);
             write = new StreamWriter(logFileStream, Encoding.GetEncoding("utf-8"));
         }
         public static void WriteLog(Class cls, string information)
@@ -65,7 +65,7 @@ namespace Zony_Lrc_Download_2._0
             // 记得关闭流，否则会造成打开文件失败
             Close();
 
-            FileStream logFileStream = new FileStream(CurrentDir + "/log.txt", FileMode.Open);
+            FileStream logFileStream = new FileStream(CurrentDir + @"\log.txt", FileMode.Open);
             StreamReader read = new StreamReader(logFileStream, Encoding.UTF8);
             StringBuilder strBuilder = new StringBuilder();
             string str;

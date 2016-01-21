@@ -41,10 +41,10 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.button_SetButton = new System.Windows.Forms.Button();
+            this.button_Help = new System.Windows.Forms.Button();
             this.LrcListItem = new Zony_Lrc_Download_2._0.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button_Help = new System.Windows.Forms.Button();
             this.StatusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -144,6 +144,16 @@
             this.button_SetButton.UseVisualStyleBackColor = true;
             this.button_SetButton.Click += new System.EventHandler(this.button_SetButton_Click);
             // 
+            // button_Help
+            // 
+            this.button_Help.Location = new System.Drawing.Point(194, 371);
+            this.button_Help.Name = "button_Help";
+            this.button_Help.Size = new System.Drawing.Size(160, 30);
+            this.button_Help.TabIndex = 6;
+            this.button_Help.Text = "帮助/关于";
+            this.button_Help.UseVisualStyleBackColor = true;
+            this.button_Help.Click += new System.EventHandler(this.button_Help_Click);
+            // 
             // LrcListItem
             // 
             this.LrcListItem.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -167,16 +177,6 @@
             this.columnHeader3.Text = "状态";
             this.columnHeader3.Width = 75;
             // 
-            // button_Help
-            // 
-            this.button_Help.Location = new System.Drawing.Point(194, 371);
-            this.button_Help.Name = "button_Help";
-            this.button_Help.Size = new System.Drawing.Size(160, 30);
-            this.button_Help.TabIndex = 6;
-            this.button_Help.Text = "帮助/关于";
-            this.button_Help.UseVisualStyleBackColor = true;
-            this.button_Help.Click += new System.EventHandler(this.button_Help_Click);
-            // 
             // Lrc_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -192,7 +192,7 @@
             this.MaximizeBox = false;
             this.Name = "Lrc_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ZonyLrcDownLoad";
+            this.Text = "  Zony歌词下载器 2.8";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Lrc_Main_FormClosed);
             this.Load += new System.EventHandler(this.Lrc_Main_Load);
             this.SizeChanged += new System.EventHandler(this.Lrc_Main_SizeChanged);

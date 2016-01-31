@@ -51,7 +51,7 @@ namespace Zony_Lrc_Download_2._0
             FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.flac");
             FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.aac");
 
-            if (FuncReturn == FileSearchReturn.NORMAL)
+            if (FuncReturn == FileSearchReturn.NORMAL || (FuncReturn == FileSearchReturn.NO_SEARCH_FILE && m_ThreadDownLoadList.Count != 0))
             {
                 // 设定进度条
                 toolStripProgressBar1.Maximum = m_ThreadDownLoadList.Count;
@@ -70,7 +70,7 @@ namespace Zony_Lrc_Download_2._0
                 MessageBox.Show("扫描完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 toolStripStatusLabel1.Text = "一共扫描到：" + LrcListItem.Items.Count.ToString() + " 个文件。";
             }
-            else if (FuncReturn == FileSearchReturn.NO_SEARCH_FILE)
+            else if (FuncReturn == FileSearchReturn.NO_SEARCH_FILE && m_FailedList.Count == 0)
             {
                 MessageBox.Show("没有扫描到音乐文件！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 button_SelectDirectory.Enabled = true;

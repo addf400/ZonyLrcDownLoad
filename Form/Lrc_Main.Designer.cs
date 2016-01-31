@@ -150,7 +150,7 @@
             this.button_Help.Name = "button_Help";
             this.button_Help.Size = new System.Drawing.Size(160, 30);
             this.button_Help.TabIndex = 6;
-            this.button_Help.Text = "帮助/关于";
+            this.button_Help.Text = "帮助/关于/更新";
             this.button_Help.UseVisualStyleBackColor = true;
             this.button_Help.Click += new System.EventHandler(this.button_Help_Click);
             // 

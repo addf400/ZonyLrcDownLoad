@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox_SearchOption = new System.Windows.Forms.ComboBox();
             this.button_SaveSet = new System.Windows.Forms.Button();
+            this.checkBox_IgnoreFile = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -161,11 +162,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox_IgnoreFile);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox_SearchOption);
             this.groupBox1.Location = new System.Drawing.Point(12, 157);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 48);
+            this.groupBox1.Size = new System.Drawing.Size(260, 73);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "扫描选项";
@@ -193,7 +195,7 @@
             // 
             // button_SaveSet
             // 
-            this.button_SaveSet.Location = new System.Drawing.Point(83, 211);
+            this.button_SaveSet.Location = new System.Drawing.Point(83, 236);
             this.button_SaveSet.Name = "button_SaveSet";
             this.button_SaveSet.Size = new System.Drawing.Size(108, 44);
             this.button_SaveSet.TabIndex = 5;
@@ -201,11 +203,21 @@
             this.button_SaveSet.UseVisualStyleBackColor = true;
             this.button_SaveSet.Click += new System.EventHandler(this.button_SaveSet_Click);
             // 
+            // checkBox_IgnoreFile
+            // 
+            this.checkBox_IgnoreFile.AutoSize = true;
+            this.checkBox_IgnoreFile.Location = new System.Drawing.Point(8, 49);
+            this.checkBox_IgnoreFile.Name = "checkBox_IgnoreFile";
+            this.checkBox_IgnoreFile.Size = new System.Drawing.Size(156, 16);
+            this.checkBox_IgnoreFile.TabIndex = 16;
+            this.checkBox_IgnoreFile.Text = "略过已经下载的歌词文件";
+            this.checkBox_IgnoreFile.UseVisualStyleBackColor = true;
+            // 
             // Seting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 262);
+            this.ClientSize = new System.Drawing.Size(283, 285);
             this.Controls.Add(this.button_SaveSet);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
@@ -243,6 +255,7 @@
         private System.Windows.Forms.Button button_SaveSet;
         private System.Windows.Forms.ComboBox comboBox_SearchOption;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBox_IgnoreFile;
 
     }
 }

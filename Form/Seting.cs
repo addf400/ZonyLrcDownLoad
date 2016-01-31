@@ -31,6 +31,14 @@ namespace Zony_Lrc_Download_2._0
             textBox_DL_ThreadNum.Text = Config.m_DownLoadThreadNum.ToString();
             comboBox_DownLoadEngine.SelectedIndex = Config.m_LrcDownSource;
             comboBox_SearchOption.SelectedIndex = Config.m_SearchFileNameOption;
+            if(Config.m_IgnoreFile == 0)
+            {
+                checkBox_IgnoreFile.Checked = false;
+            }
+            else
+            {
+                checkBox_IgnoreFile.Checked = true;
+            }
         }
 
         private void button_SaveSet_Click(object sender, EventArgs e)
@@ -39,6 +47,14 @@ namespace Zony_Lrc_Download_2._0
             Config.m_DownLoadThreadNum = int.Parse(textBox_DL_ThreadNum.Text);
             Config.m_LrcDownSource = comboBox_DownLoadEngine.SelectedIndex;
             Config.m_SearchFileNameOption = comboBox_SearchOption.SelectedIndex;
+            if(checkBox_IgnoreFile.Checked == true)
+            {
+                Config.m_IgnoreFile = 1;
+            }
+            else
+            {
+                Config.m_IgnoreFile = 0;
+            }
 
             Config.Save();
             Close();

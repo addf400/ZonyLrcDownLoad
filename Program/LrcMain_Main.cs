@@ -45,10 +45,11 @@ namespace Zony_Lrc_Download_2._0
             FileSearch search = new FileSearch();
 
             FileSearchReturn FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.mp3");
-            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.ape");
-            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.wav");
-            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.wma");
-            search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.flac");
+            FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.ape");
+            FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.wav");
+            FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.wma");
+            FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.flac");
+            FuncReturn = search.SearchFile(ref m_ThreadDownLoadList, LrcPath, "*.aac");
 
             if (FuncReturn == FileSearchReturn.NORMAL)
             {

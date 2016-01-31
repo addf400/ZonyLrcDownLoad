@@ -33,6 +33,10 @@ namespace Zony_Lrc_Download_2._0
         /// 歌词文件名搜索选项
         /// </summary>
         public static int m_SearchFileNameOption { get; set; }
+        /// <summary>
+        /// 忽略已经下载的文件
+        /// </summary>
+        public static int m_IgnoreFile { get; set; }
         #endregion
 
         // 本地ini文件路径
@@ -41,7 +45,7 @@ namespace Zony_Lrc_Download_2._0
         /// <summary>
         /// 检测配置文件是否存在，如果不存在，创建一个新的配置文件。
         /// </summary>
-        public static void New()
+        public static void Check()
         {
             if(!File.Exists(iniFilePath))
             {
@@ -53,6 +57,7 @@ namespace Zony_Lrc_Download_2._0
                 sw.WriteLine("DownLoadThreadNum=8");
                 sw.WriteLine("LrcDownSource=0");
                 sw.WriteLine("SearchFileNameOption=0");
+                sw.WriteLine("IgnoreFile=0");
                 sw.Close();
                 fs.Close();
             }
@@ -67,6 +72,7 @@ namespace Zony_Lrc_Download_2._0
             Write("Set", "DownLoadThreadNum", m_DownLoadThreadNum.ToString(), iniFilePath);
             Write("Set", "LrcDownSource", m_LrcDownSource.ToString(), iniFilePath);
             Write("Set", "SearchFileNameOption", m_SearchFileNameOption.ToString(), iniFilePath);
+            Write("Set", "IgnoreFile", m_IgnoreFile.ToString(), iniFilePath);
         }
 
         /// <summary>
@@ -75,13 +81,14 @@ namespace Zony_Lrc_Download_2._0
         public static void Load()
         {
             // 检测文件是否存在
-            New();
+            Check();
 
             m_EncodingOption = int.Parse(Read("Set", "EncodingOption", iniFilePath));
             m_LrcDownDirectory = Read("Set", "LrcDownDirectory", iniFilePath);
             m_DownLoadThreadNum = int.Parse(Read("Set", "DownLoadThreadNum", iniFilePath));
             m_LrcDownSource = int.Parse(Read("Set", "LrcDownSource", iniFilePath));
             m_SearchFileNameOption = int.Parse(Read("Set", "SearchFileNameOption", iniFilePath));
+            m_IgnoreFile = int.Parse(Read("Set", "IgnoreFile", iniFilePath));
         }
 
         #region 对于INI文件操作的封装

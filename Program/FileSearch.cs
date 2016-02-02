@@ -54,7 +54,14 @@ namespace Zony_Lrc_Download_2._0
                     // 添加到List<string>容器
                     for (int i = 0; i < files.Length; i++,j++)
                     {
-                        if (Config.m_IgnoreFile != 1 && !File.Exists(Path.GetFileNameWithoutExtension(files[i]) + ".lrc"))
+                        if (Config.m_IgnoreFile == 1)
+                        {
+                            if (!File.Exists(Path.GetDirectoryName(files[i]) + "\\" + Path.GetFileNameWithoutExtension(files[i]) + ".lrc"))
+                            {
+                                list.Add(j, files[i]);
+                            }
+                        }
+                        else
                         {
                             list.Add(j, files[i]);
                         }

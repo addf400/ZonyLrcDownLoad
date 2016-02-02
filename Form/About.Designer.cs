@@ -53,11 +53,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(426, 377);
+            this.label1.Location = new System.Drawing.Point(444, 376);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Ver 2.8 Beta";
+            this.label1.Text = "Ver 2.8.1";
             // 
             // groupBox1
             // 

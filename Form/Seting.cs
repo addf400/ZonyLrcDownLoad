@@ -47,6 +47,7 @@ namespace Zony_Lrc_Download_2._0
             Config.m_DownLoadThreadNum = int.Parse(textBox_DL_ThreadNum.Text);
             Config.m_LrcDownSource = comboBox_DownLoadEngine.SelectedIndex;
             Config.m_SearchFileNameOption = comboBox_SearchOption.SelectedIndex;
+            // 忽略已下载文件
             if(checkBox_IgnoreFile.Checked == true)
             {
                 Config.m_IgnoreFile = 1;

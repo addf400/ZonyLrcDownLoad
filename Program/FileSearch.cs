@@ -54,7 +54,10 @@ namespace Zony_Lrc_Download_2._0
                     // 添加到List<string>容器
                     for (int i = 0; i < files.Length; i++,j++)
                     {
-                        list.Add(j, files[i]);
+                        if (Config.m_IgnoreFile != 1 && !File.Exists(Path.GetFileNameWithoutExtension(files[i]) + ".lrc"))
+                        {
+                            list.Add(j, files[i]);
+                        }
                     }
 
                     return FileSearchReturn.NORMAL;
@@ -70,8 +73,6 @@ namespace Zony_Lrc_Download_2._0
                 Log.WriteLog(Log.Class.EXCEPTION,"在类FileSearch中发生异常：" + exp.ToString());
                 return FileSearchReturn.EXCEPTION;
             }
-            
         }
-
     }
 }

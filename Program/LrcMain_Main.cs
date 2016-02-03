@@ -154,26 +154,33 @@ namespace Zony_Lrc_Download_2._0
                 Parallel.ForEach(container, (item) =>
                 {
                     byte[] lrcData = null;
-                    // 下载歌词并返回
-                    if (lrcDown.DownLoad(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
+                    if (Config.m_IgnoreFile == 1 && File.Exists(Path.GetDirectoryName(item.Value) + "\\" + Path.GetFileNameWithoutExtension(item.Value) + ".lrc"))
                     {
-                        LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
-                        // 写入到文件
-                        if (tool.WriteFile(ref lrcData, item.Value,Config.m_EncodingOption,Config.m_LrcDownDirectory) != DownLoadReturn.NORMAL)
-                        {
-                            LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                        }
-                        else
-                        {
-                            m_FailedList.Remove(item.Key);
-                        }
+                        LrcListItem.Items[item.Key].SubItems[1].Text = "略过";
                     }
                     else
                     {
-                        LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
-                        m_FailedList.Add(item.Key, item.Value);
+                        // 下载歌词并返回
+                        if (lrcDown.DownLoad(item.Value, ref lrcData) == DownLoadReturn.NORMAL)
+                        {
+                            LrcListItem.Items[item.Key].SubItems[1].Text = "成功";
+                            // 写入到文件
+                            if (tool.WriteFile(ref lrcData, item.Value, Config.m_EncodingOption, Config.m_LrcDownDirectory) != DownLoadReturn.NORMAL)
+                            {
+                                LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                            }
+                            else
+                            {
+                                m_FailedList.Remove(item.Key);
+                            }
+                        }
+                        else
+                        {
+                            LrcListItem.Items[item.Key].SubItems[1].Text = "失败";
+                            m_FailedList.Add(item.Key, item.Value);
+                        }
                     }
-
+                    
                     toolStripProgressBar1.Value++;
                 });
             }catch(Exception)

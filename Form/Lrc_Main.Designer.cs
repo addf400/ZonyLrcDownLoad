@@ -192,7 +192,7 @@
             this.MaximizeBox = false;
             this.Name = "Lrc_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "  Zony歌词下载器 2.8";
+            this.Text = "  Zony歌词下载器 2.8.1.0";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Lrc_Main_FormClosed);
             this.Load += new System.EventHandler(this.Lrc_Main_Load);
             this.SizeChanged += new System.EventHandler(this.Lrc_Main_SizeChanged);

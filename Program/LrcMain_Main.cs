@@ -16,19 +16,21 @@ namespace Zony_Lrc_Download_2._0
 {
     public partial class Lrc_Main
     {
-        #region 全局对象
+        #region 全局容器
+        /// <summary>
+        /// 要下载的歌曲容器
+        /// </summary>
+        private Dictionary<int, string> m_ThreadDownLoadList = new Dictionary<int, string>();
+        /// <summary>
+        /// 已经下载失败的歌曲容器
+        /// </summary>
+        private Dictionary<int, string> m_FailedList = new Dictionary<int, string>();
+        #endregion
+        #region 全局变量
         /// <summary>
         /// 搜索文件的路径
         /// </summary>
         private string LrcPath;
-        /// <summary>
-        /// 并行下载列表
-        /// </summary>
-        private Dictionary<int, string> m_ThreadDownLoadList = new Dictionary<int, string>();
-        /// <summary>
-        /// 下载失败的歌曲
-        /// </summary>
-        private Dictionary<int, string> m_FailedList = new Dictionary<int, string>();
         #endregion
 
         /// <summary>

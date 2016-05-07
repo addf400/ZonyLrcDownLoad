@@ -65,7 +65,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
                 sw.WriteLine("LrcSource=0");
                 sw.WriteLine("IgnoreFile=0");
                 sw.WriteLine("UserDirectory=null");
-                sw.WriteLine("Update=0");
+                sw.WriteLine("Update=1");
                 sw.WriteLine("FileSuffix=*.acc;*.mp3;*.ape;*.flac");
                 sw.Close();
                 iniFile.Close();

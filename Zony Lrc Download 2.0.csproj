@@ -74,61 +74,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form\About.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\About.Designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Lrc_Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Lrc_Main.Designer.cs">
-      <DependentUpon>Lrc_Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\HelpMe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\HelpMe.Designer.cs">
-      <DependentUpon>HelpMe.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Class\Configs\Config.cs" />
+    <Compile Include="Class\Configs\Ver.cs" />
+    <Compile Include="Class\Music\MusicInfo.cs" />
+    <Compile Include="Class\Utils\DownLoad\LrcDownLoad.cs" />
+    <Compile Include="Class\Utils\DownLoad\Tools.cs" />
+    <Compile Include="Class\Utils\FileOperate\FileSearch.cs" />
+    <Compile Include="Class\Utils\FileOperate\FileWrite.cs" />
+    <Compile Include="Class\Utils\LongLife.cs" />
     <Compile Include="Program.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Program\LrcDownLoadClass\BaiDuLrcDownLoad.cs" />
-    <Compile Include="Program\Config.cs" />
-    <Compile Include="Program\FileSearch.cs" />
-    <Compile Include="Program\Log.cs" />
-    <Compile Include="Program\LrcDownLoad.cs" />
-    <Compile Include="Program\LrcDownLoadClass\CnLyricDownLoad.cs" />
-    <Compile Include="Program\LrcDownLoadClass\WYLrcDownLoad.cs" />
-    <Compile Include="Program\LrcMain_Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Program\PackageDeal.cs" />
-    <Compile Include="Program\SongInfo.cs" />
-    <Compile Include="Program\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="Form\Seting.cs">
+    <Compile Include="Window\Window_Config.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Seting.Designer.cs">
-      <DependentUpon>Seting.cs</DependentUpon>
+    <Compile Include="Window\Window_Config.Designer.cs">
+      <DependentUpon>Window_Config.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form\About.resx">
-      <DependentUpon>About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\HelpMe.resx">
-      <DependentUpon>HelpMe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Lrc_Main.resx">
-      <DependentUpon>Lrc_Main.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Window\Window_Donate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Window_Donate.Designer.cs">
+      <DependentUpon>Window_Donate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\Window_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Window_Main.Designer.cs">
+      <DependentUpon>Window_Main.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -142,9 +122,16 @@
     <EmbeddedResource Include="Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Seting.resx">
-      <DependentUpon>Seting.cs</DependentUpon>
+    <EmbeddedResource Include="Window\Window_Config.resx">
+      <DependentUpon>Window_Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Window_Donate.resx">
+      <DependentUpon>Window_Donate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Window_Main.resx">
+      <DependentUpon>Window_Main.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -160,6 +147,10 @@
     <Content Include="DLL\ID3.dll" />
     <Content Include="DLL\Newtonsoft.Json.dll" />
     <Content Include="Icon\6.ico" />
+    <Content Include="Icon\discuz.ico" />
+    <Content Include="Icon\down.ico" />
+    <Content Include="Icon\search.ico" />
+    <Content Include="Icon\Set.ico" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Zony_Lrc_Download_2._0.Window;
 
 namespace Zony_Lrc_Download_2._0
 {
@@ -38,7 +39,7 @@ namespace Zony_Lrc_Download_2._0
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Lrc_Main());
+            Application.Run(new Window_Main());
         }
     }
 }

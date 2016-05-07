@@ -117,23 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBox1.Text" xml:space="preserve">
-    <value>Q:我在下载的时候是否可以关闭窗口？
-A:如果你想要让程序后台下载的话，可以点击最小化，程序将会最小化到右下角的托盘处。
-
-Q:我该如何升级到最新的版本？
-A:程序默认更新检测方式是当你点击关于信息的时候，会自动检测是否有新版本，如果有的话，就会提示你是否进行更新。当然你也可以点击“寻求技术支持”加入到讨论群当中，每当程序更新的时候，可在群文件找到最新版本。
-
-Q:我的歌词放在MP3的时候为什么是乱码？
-A:这个是由于编码方式不同引起的，一般国产老旧的MP3不支持UTF-8，这个时候你可以在下载歌词的时候尝试使用GB2312编码方式，或者尝试其他编码格式。
-
-Q:下载歌词的时候很久都没反应。
-A:你可以尝试将下载线程调整为2或者更低，如仍然无法解决问题，那么可能是你的网络问题。
-
-Q:我想查看这个软件的源代码，学习一下，该到哪儿去找？
-A:本程序的源代码是托管到git.oschina.net上面的，具体地址如下：git.oschina.net/jokers/ZonyLrcDownload，欢迎你参与到本软件的开发当中。
-
-Q:软件是免费的么？
-A:正如你在使用的时候一样，本软件是完全免费且开放源代码的，也希望你点击捐赠按钮支持本软件的发展。</value>
+  <metadata name="toolStrip_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButton_Search.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD5SURBVDhPjVNLDoIwEOV67ryBB9AbeAM3bl2ydmlYuDGK
+        CYgYEUKImEjiTca8Om2YtEVeMqEz7bz5ErhQvTo6ZAXtTilF8YX2yY0e7Zv42g84RnFG+LLJoOk+6i6v
+        WzdRWjYEYdULEBzzUr5DRJfztl5SWCwsO0hEJqiTjwKr84QgrAqgL+qA6K6agXUy9RIAKgt0m3UL/wjQ
+        VJE+aoaTFl1C3xbe5+Y9xiwIcKmdfLLJZ5LANMMBnQWrFlQJ2DAsCdsEdFRWLZjRKyYHhjIQmWMc1/pp
+        PURP+jVrOBdv7CrD2ds3ZDHUVNyNCaJKQl8wpt8vnXkcg+AL3mUcUn5wdXsAAAAASUVORK5CYII=
+</value>
   </data>
+  <data name="toolStripButton_DownLoad.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACZSURBVDhPY8AHFDZ9+Q/CUC5pAFmjwFo8hhw5d+X/hn1H
+        UTBInHklQhOMveXgcRR1e0+e+88A04AOsBmADsB6sRkAcj66AdjCAqsB+AINPSxINoB7DREGgID4BkxD
+        iPYCDCAbgstVeA0AAZCf0Z2NDAgaQAigGDDlzM//pGCsBoBoYgBOA0jBGAaQA8B6QRkCxCAH7zh6+j8A
+        fyky1oE2SOcAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButton_Set.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADESURBVDhPYwCBtNqO/yF5VUThpKrW/2BNMADSDGUSDWJK
+        GhB6QKZCmUSDiMJa7AZsOnDs/4Z9R//joqHKaOwCfBiqDLcBxAKKXYACyHFB7fnP/yXWf4How+cCqDAK
+        qLr48z/rqi//mVd8BtMkuaDh8g+4WpAB7vu/EW8AyGYoEwxijn+H8IkxANlmEEg6CbQZBogxIPMMwoCU
+        U6iGMWDkLjQAsg3kX5AXUGxGBqC0DUoc6Hjqxr3/jbd//u+wF4dGBgYGAFqq8fZ23+rxAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
+  <data name="toolStripButton_Discuz.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADASURBVDhPYxgcYNGG7f8TK1v+hxfU/I8orCVIR5fU/5+x
+        Yv1/uObq/hkQDgmgbebC/xMXrfzPALIZKkYyALmIISSvCm7A1kMnCBqGrAbkHRQDQGDvyXP/z1y9iWHQ
+        xZt3/+84ehpFHMMFMHDk3JX/IIOgXAw+DGB1AQiAnAlyBYgG2QpjQ6XhAKsL8IUDuhyGC/BphgFkNWAX
+        gBIFlE8yALsAlKJAiQIqRjQAJSK4PhAHZBoIg1xEDE2OpbQADAwA+DS/ZFPcUOUAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButton_Donate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACNSURBVDhPnZGxCoAwDET9LnFws4iDIJ38/y+wnasHBVOb
+        NKkPCq0kd2cySMRzT+FwKT/7oI3Rr30inKs5SatQFbG4iDXmiA9VLaadr2YKkR53SrGdvyJhm98+bd/4
+        1W9NWMayR0pC50RdKwHAJaHfLje1BQCXBM60GYgCQJsJaAoAbTuqAEB0FHIn+jXdGrt0TVPpMA0AAAAA
+        SUVORK5CYII=
+</value>
+  </data>
+  <metadata name="statusStrip_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>155, 17</value>
+  </metadata>
 </root>

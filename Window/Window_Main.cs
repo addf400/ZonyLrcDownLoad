@@ -7,8 +7,10 @@ using Zony_Lrc_Download_2._0.Class.Utils.FileOperate;
 using Zony_Lrc_Download_2._0.Class.Utils;
 using Zony_Lrc_Download_2._0.Class.Utils.DownLoad;
 using Zony_Lrc_Download_2._0.Class.Configs;
+using Zony_Lrc_Download_2._0.Class.Plugins;
 using System.IO;
 using System.Threading.Tasks;
+using LibIPlug;
 
 namespace Zony_Lrc_Download_2._0.Window
 {
@@ -21,10 +23,18 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Main_Load(object sender, EventArgs e)
         {
+            if (Untiy.LoadPlugins() == 0)
+            {
+                MessageBox.Show("插件加载失败，无法启动程序。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
             Config.Load();
+            // 允许跨线程操作控件
             CheckForIllegalCrossThreadCalls = false;
             System.Net.ServicePointManager.DefaultConnectionLimit = Config.option_ThreadNumber;
             Icon = Resource1._6;
+
+            #region 更新检测
             if(Config.option_Update == 1)
             {
                 new Thread(() =>
@@ -39,6 +49,7 @@ namespace Zony_Lrc_Download_2._0.Window
                     }
                 }).Start();
             }
+            #endregion
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)
@@ -71,21 +82,6 @@ namespace Zony_Lrc_Download_2._0.Window
             }
         }
 
-        private void toolStripButton_Set_Click(object sender, EventArgs e)
-        {
-            new Window_Config().ShowDialog();
-        }
-
-        private void toolStripButton_Donate_Click(object sender, EventArgs e)
-        {
-            new Window_Donate().ShowDialog();
-        }
-
-        private void toolStripButton_Discuz_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://jq.qq.com/?_wv=1027&k=Zrl68q");
-        }
-
         private void toolStripButton_DownLoad_Click(object sender, EventArgs e)
         {
             if (listView_Music.Items.Count != 0)
@@ -96,32 +92,26 @@ namespace Zony_Lrc_Download_2._0.Window
                     toolStripButton_DownLoad.Enabled = false;
                     toolStripButton_Search.Enabled = false;
 
-                    var baidu = new LrcDownLoad_Baidu();
-                    var netease = new LrcDownLoad_NetEase();
-
                     LongLife.MusicPathFailedList.Clear();
-
-                    // 下载引擎判定
-                    switch (Config.option_LrcSource)
+                    
+                    // 检测插件开关
+                    string[] state = Config.option_PlugState.Split(',');
+                    for(int i=0,j=0;i<Untiy.PluginsList.Count;i++)
                     {
-                        case 0:
-                            ParallelDownLoad(LongLife.MusicPathList, "开始从百度乐库下载...", baidu);
-                            var no2 = new Dictionary<int, string>();
-                            foreach (KeyValuePair<int, string> key in LongLife.MusicPathFailedList)
-                            {
-                                no2.Add(key.Key, key.Value);
-                            }
-                            ParallelDownLoad(no2, "开始从网易云音乐下载...", netease);
-                            break;
-                        case 1:
-                            ParallelDownLoad(LongLife.MusicPathList, "开始从百度乐库下载...", baidu);
-                            break;
-                        case 2:
-                            ParallelDownLoad(LongLife.MusicPathList, "开始从网易云音乐下载...", netease);
-                            break;
+                        if(Untiy.piProperties[i].Ptype == 0 && state[i] == "1" && j==0)
+                        {
+                            j++;
+                            ParallelDownLoad(LongLife.MusicPathList, Untiy.piProperties[i].Name + "正在下载...", Untiy.PluginsList[i]);
+                        }
+                        else if(Untiy.piProperties[i].Ptype ==0 && state[i] == "1" && j > 0)
+                        {
+                            // 拷贝失败字典
+                            var no = Functions.DictionaryCopy(ref LongLife.MusicPathFailedList);
+                            ParallelDownLoad(no, Untiy.piProperties[i].Name + "正在下载...", Untiy.PluginsList[i]);
+                        }
                     }
 
-                    toolStripStatusLabel_Information.Text = string.Format("下载完成，总文件：{0}成功：{1} 失败{2}...", LongLife.MusicPathList.Count, LongLife.MusicPathFailedList.Count);
+                    toolStripStatusLabel_Information.Text = string.Format("下载完成，总文件：{0}成功：{1} 失败{2}...", LongLife.MusicPathList.Count,LongLife.MusicPathList.Count - LongLife.MusicPathFailedList.Count, LongLife.MusicPathFailedList.Count);
 
                     //初始化进度条
                     toolStripProgressBar_DownLoad.Value = 0;
@@ -134,7 +124,7 @@ namespace Zony_Lrc_Download_2._0.Window
             }
         }
 
-        private void ParallelDownLoad(Dictionary<int,string> container,string info,LrcDownLoad lrcDown)
+        private void ParallelDownLoad(Dictionary<int,string> container,string info,IPlugin lrcDown)
         {
             toolStripStatusLabel_Information.Text = info;
             toolStripProgressBar_DownLoad.Value = 0;
@@ -153,7 +143,7 @@ namespace Zony_Lrc_Download_2._0.Window
                     else
                     {
                         // 下载歌词
-                        if (lrcDown.Down(item.Value, ref lrcData) == LrcDownLoad.DownLoadResult.NORMAL)
+                        if (lrcDown.Down(item.Value, ref lrcData,Config.option_ThreadNumber) == true)
                         {
                             listView_Music.Items[item.Key].SubItems[1].Text = "成功";
                             if (fs.Write(ref lrcData, item.Value, Config.option_Encoding, Config.option_UserDirectory))
@@ -187,9 +177,31 @@ namespace Zony_Lrc_Download_2._0.Window
 
         }
 
+        #region 界面互操作
         private void Window_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
         }
+
+        private void toolStripButton_Plugins_Click(object sender, EventArgs e)
+        {
+            new Window_Plugins().ShowDialog();
+        }
+
+        private void toolStripButton_Set_Click(object sender, EventArgs e)
+        {
+            new Window_Config().ShowDialog();
+        }
+
+        private void toolStripButton_Donate_Click(object sender, EventArgs e)
+        {
+            new Window_Donate().ShowDialog();
+        }
+
+        private void toolStripButton_Discuz_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://jq.qq.com/?_wv=1027&k=Zrl68q");
+        }
+        #endregion
     }
 }

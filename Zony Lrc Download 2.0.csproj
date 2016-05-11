@@ -53,13 +53,9 @@
     <ApplicationIcon>Icon\6.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ID3, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="LibIPlug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\ID3.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\Newtonsoft.Json.dll</HintPath>
+      <HintPath>DLL\LibIPlug.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,11 +72,11 @@
   <ItemGroup>
     <Compile Include="Class\Configs\Config.cs" />
     <Compile Include="Class\Configs\Ver.cs" />
-    <Compile Include="Class\Music\MusicInfo.cs" />
-    <Compile Include="Class\Utils\DownLoad\LrcDownLoad.cs" />
+    <Compile Include="Class\Plugins\Untiy.cs" />
     <Compile Include="Class\Utils\DownLoad\Tools.cs" />
     <Compile Include="Class\Utils\FileOperate\FileSearch.cs" />
     <Compile Include="Class\Utils\FileOperate\FileWrite.cs" />
+    <Compile Include="Class\Utils\Functions.cs" />
     <Compile Include="Class\Utils\LongLife.cs" />
     <Compile Include="Program.cs">
       <SubType>Component</SubType>
@@ -109,6 +105,12 @@
     <Compile Include="Window\Window_Main.Designer.cs">
       <DependentUpon>Window_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\Window_Plugins.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Window_Plugins.Designer.cs">
+      <DependentUpon>Window_Plugins.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -133,6 +135,9 @@
     <EmbeddedResource Include="Window\Window_Main.resx">
       <DependentUpon>Window_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Window\Window_Plugins.resx">
+      <DependentUpon>Window_Plugins.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -145,10 +150,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\ID3.dll" />
+    <Content Include="DLL\LibIPlug.dll" />
+    <Content Include="DLL\LibNet.dll" />
     <Content Include="DLL\Newtonsoft.Json.dll" />
     <Content Include="Icon\6.ico" />
     <Content Include="Icon\discuz.ico" />
     <Content Include="Icon\down.ico" />
+    <Content Include="Icon\plugins.ico" />
     <Content Include="Icon\search.ico" />
     <Content Include="Icon\Set.ico" />
   </ItemGroup>

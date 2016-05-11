@@ -86,7 +86,7 @@ namespace Zony_Lrc_Download_2._0.Class.Utils.FileOperate
                 {
                     return FileSearchResult.Normal;
                 }
-            }catch(Exception exp)
+            }catch(Exception)
             {
                 return FileSearchResult.Exception_Occurs;
             }

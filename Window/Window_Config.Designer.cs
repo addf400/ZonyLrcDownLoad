@@ -36,9 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBox_ThreadNumberOption = new System.Windows.Forms.TextBox();
-            this.comboBox_LrcSourceOption = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.checkBox_IgnoreFileOption = new System.Windows.Forms.CheckBox();
             this.textBox_FileSuffix = new System.Windows.Forms.TextBox();
@@ -89,6 +87,7 @@
             this.comboBox_UserDirectoryOption.Size = new System.Drawing.Size(120, 20);
             this.comboBox_UserDirectoryOption.TabIndex = 1;
             this.comboBox_UserDirectoryOption.Text = "写到同目录";
+            this.comboBox_UserDirectoryOption.SelectionChangeCommitted += new System.EventHandler(this.comboBox_UserDirectoryOption_SelectionChangeCommitted);
             // 
             // comboBox_EncodingOption
             // 
@@ -127,9 +126,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.textBox_ThreadNumberOption);
-            this.tabPage2.Controls.Add(this.comboBox_LrcSourceOption);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -140,7 +137,7 @@
             // 
             // textBox_ThreadNumberOption
             // 
-            this.textBox_ThreadNumberOption.Location = new System.Drawing.Point(71, 41);
+            this.textBox_ThreadNumberOption.Location = new System.Drawing.Point(115, 23);
             this.textBox_ThreadNumberOption.Name = "textBox_ThreadNumberOption";
             this.textBox_ThreadNumberOption.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBox_ThreadNumberOption.Size = new System.Drawing.Size(30, 21);
@@ -148,36 +145,14 @@
             this.textBox_ThreadNumberOption.Text = "4";
             this.textBox_ThreadNumberOption.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // comboBox_LrcSourceOption
-            // 
-            this.comboBox_LrcSourceOption.FormattingEnabled = true;
-            this.comboBox_LrcSourceOption.Items.AddRange(new object[] {
-            "全引擎",
-            "仅百度乐库",
-            "仅网易云音乐"});
-            this.comboBox_LrcSourceOption.Location = new System.Drawing.Point(59, 9);
-            this.comboBox_LrcSourceOption.Name = "comboBox_LrcSourceOption";
-            this.comboBox_LrcSourceOption.Size = new System.Drawing.Size(136, 20);
-            this.comboBox_LrcSourceOption.TabIndex = 3;
-            this.comboBox_LrcSourceOption.Text = "全引擎";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 44);
+            this.label4.Location = new System.Drawing.Point(50, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 2;
             this.label4.Text = "下载线程:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "歌词源:";
             // 
             // tabPage3
             // 
@@ -275,8 +250,6 @@
         private System.Windows.Forms.ComboBox comboBox_EncodingOption;
         private System.Windows.Forms.ComboBox comboBox_UserDirectoryOption;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox_LrcSourceOption;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_ThreadNumberOption;
         private System.Windows.Forms.TextBox textBox_FileSuffix;

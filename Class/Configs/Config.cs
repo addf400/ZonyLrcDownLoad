@@ -2,13 +2,14 @@
  * 描述：封装了对INI文件的操作，提供对程序设置项目保存与读取的接口。
  * 作者：Zony
  * 创建日期：2016/05/04
- * 最后修改日期：2016/05/04
- * 版本：1.0
+ * 最后修改日期：2016/05/10
+ * 版本：1.1
  */
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using Zony_Lrc_Download_2._0.Class.Plugins;
 
 namespace Zony_Lrc_Download_2._0.Class.Configs
 {
@@ -27,10 +28,6 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// </summary>
         public static int option_ThreadNumber { get; set; }
         /// <summary>
-        /// 歌词源头
-        /// </summary>
-        public static int option_LrcSource { get; set; }
-        /// <summary>
         /// 是否忽略已有歌词文件的歌曲
         /// </summary>
         public static int option_IgnoreFile { get; set; }
@@ -46,6 +43,10 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// 自定义搜索后缀
         /// </summary>
         public static string option_FileSuffix { get; set; }
+        /// <summary>
+        /// 插件状态
+        /// </summary>
+        public static string option_PlugState { get; set; }
         #endregion
 
         private static string iniPath = Environment.CurrentDirectory + "\\Set.ini";
@@ -62,11 +63,19 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
                 sw.WriteLine("[Set]");
                 sw.WriteLine("Encoding=0");
                 sw.WriteLine("ThreadNumber=4");
-                sw.WriteLine("LrcSource=0");
                 sw.WriteLine("IgnoreFile=0");
                 sw.WriteLine("UserDirectory=null");
                 sw.WriteLine("Update=1");
                 sw.WriteLine("FileSuffix=*.acc;*.mp3;*.ape;*.flac");
+                #region 写入默认插件状态
+                var str = new StringBuilder();
+                for (int i = 0; i < Untiy.PluginsList.Count;i++)
+                {
+                    str.Append("0,");
+                }
+                str.Remove(str.Length-1, 1);
+                sw.Write("PlugState=" + str.ToString());
+                #endregion
                 sw.Close();
                 iniFile.Close();
             }
@@ -81,11 +90,11 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
 
             option_Encoding = int.Parse(INIRead("Set", "Encoding", iniPath));
             option_IgnoreFile = int.Parse(INIRead("Set", "IgnoreFile", iniPath));
-            option_LrcSource = int.Parse(INIRead("Set", "LrcSource", iniPath));
             option_Update = int.Parse(INIRead("Set", "Update", iniPath));
             option_ThreadNumber = int.Parse(INIRead("Set", "ThreadNumber", iniPath));
             option_UserDirectory = INIRead("Set", "UserDirectory", iniPath);
             option_FileSuffix = INIRead("Set", "FileSuffix", iniPath);
+            option_PlugState = INIRead("Set", "PlugState", iniPath);
         }
 
         /// <summary>
@@ -95,11 +104,11 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         {
             INIWrite("Set", "Encoding", option_Encoding.ToString(), iniPath);
             INIWrite("Set", "IgnoreFile", option_IgnoreFile.ToString(), iniPath);
-            INIWrite("Set", "LrcSource", option_LrcSource.ToString(), iniPath);
             INIWrite("Set", "Update", option_Update.ToString(), iniPath);
             INIWrite("Set", "ThreadNumber", option_ThreadNumber.ToString(), iniPath);
             INIWrite("Set", "UserDirectory", option_UserDirectory, iniPath);
             INIWrite("Set", "FileSuffix", option_FileSuffix, iniPath);
+            INIWrite("Set", "PlugState", option_PlugState, iniPath);
         }
 
         #region ini文件读写封装

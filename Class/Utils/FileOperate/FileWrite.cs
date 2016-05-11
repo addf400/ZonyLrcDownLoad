@@ -66,7 +66,7 @@ namespace Zony_Lrc_Download_2._0.Class.Utils.FileOperate
                 fs.Write(data, 0, data.Length);
                 fs.Close();
                 return true;
-            }catch(Exception exp)
+            }catch(Exception)
             {
                 return false;
             }

@@ -42,6 +42,8 @@
             this.listView_Music = new Zony_Lrc_Download_2._0.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Plugins = new System.Windows.Forms.ToolStripButton();
             this.toolStrip_Main.SuspendLayout();
             this.statusStrip_Main.SuspendLayout();
             this.SuspendLayout();
@@ -54,10 +56,12 @@
             this.toolStripButton_Set,
             this.toolStripSeparator1,
             this.toolStripButton_Discuz,
-            this.toolStripButton_Donate});
+            this.toolStripButton_Donate,
+            this.toolStripSeparator2,
+            this.toolStripButton_Plugins});
             this.toolStrip_Main.Location = new System.Drawing.Point(0, 0);
             this.toolStrip_Main.Name = "toolStrip_Main";
-            this.toolStrip_Main.Size = new System.Drawing.Size(400, 25);
+            this.toolStrip_Main.Size = new System.Drawing.Size(401, 25);
             this.toolStrip_Main.TabIndex = 1;
             this.toolStrip_Main.Text = "扫描目录";
             // 
@@ -118,7 +122,7 @@
             this.toolStripProgressBar_DownLoad});
             this.statusStrip_Main.Location = new System.Drawing.Point(0, 373);
             this.statusStrip_Main.Name = "statusStrip_Main";
-            this.statusStrip_Main.Size = new System.Drawing.Size(400, 22);
+            this.statusStrip_Main.Size = new System.Drawing.Size(401, 22);
             this.statusStrip_Main.TabIndex = 2;
             this.statusStrip_Main.Text = "statusStrip1";
             // 
@@ -145,7 +149,7 @@
             this.columnHeader2});
             this.listView_Music.Location = new System.Drawing.Point(12, 28);
             this.listView_Music.Name = "listView_Music";
-            this.listView_Music.Size = new System.Drawing.Size(374, 333);
+            this.listView_Music.Size = new System.Drawing.Size(375, 333);
             this.listView_Music.TabIndex = 0;
             this.listView_Music.UseCompatibleStateImageBehavior = false;
             this.listView_Music.View = System.Windows.Forms.View.Details;
@@ -159,11 +163,25 @@
             // 
             this.columnHeader2.Text = "下载";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton_Plugins
+            // 
+            this.toolStripButton_Plugins.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Plugins.Image")));
+            this.toolStripButton_Plugins.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Plugins.Name = "toolStripButton_Plugins";
+            this.toolStripButton_Plugins.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButton_Plugins.Text = "插件";
+            this.toolStripButton_Plugins.Click += new System.EventHandler(this.toolStripButton_Plugins_Click);
+            // 
             // Window_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 395);
+            this.ClientSize = new System.Drawing.Size(401, 395);
             this.Controls.Add(this.statusStrip_Main);
             this.Controls.Add(this.toolStrip_Main);
             this.Controls.Add(this.listView_Music);
@@ -196,5 +214,7 @@
         private System.Windows.Forms.StatusStrip statusStrip_Main;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Information;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar_DownLoad;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Plugins;
     }
 }

@@ -29,14 +29,23 @@ namespace Zony_Lrc_Download_2._0.Window
                 {
                     info.Name,info.Descript,info.Version,info.Author,info.Ptype.ToString()
                 }));
-                if(stra[count]=="0")
+
+                try
+                {
+                    if (stra[count] == "0")
+                    {
+                        listView_Plugins.Items[count].Checked = false;
+                    }
+                    else
+                    {
+                        listView_Plugins.Items[count].Checked = true;
+                    }
+                }
+                catch (Exception)
                 {
                     listView_Plugins.Items[count].Checked = false;
                 }
-                else
-                {
-                    listView_Plugins.Items[count].Checked = true;
-                }
+
                 count++;
             }
         }

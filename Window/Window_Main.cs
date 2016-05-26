@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Threading.Tasks;
 using System.Threading;
 using Zony_Lrc_Download_2._0.Class.Utils.FileOperate;
 using Zony_Lrc_Download_2._0.Class.Utils;
 using Zony_Lrc_Download_2._0.Class.Utils.DownLoad;
 using Zony_Lrc_Download_2._0.Class.Configs;
 using Zony_Lrc_Download_2._0.Class.Plugins;
-using System.IO;
-using System.Threading.Tasks;
 using LibIPlug;
 
 namespace Zony_Lrc_Download_2._0.Window
@@ -23,14 +23,16 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Main_Load(object sender, EventArgs e)
         {
+            Config.Load();
             if (Untiy.LoadPlugins() == 0)
             {
-                MessageBox.Show("插件加载失败，无法启动程序。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("基础插件加载失败，无法启动程序。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
-            Config.Load();
+
             // 允许跨线程操作控件
             CheckForIllegalCrossThreadCalls = false;
+            // 设定网络最大并发链接数目
             System.Net.ServicePointManager.DefaultConnectionLimit = Config.option_ThreadNumber;
             Icon = Resource1._6;
 
@@ -94,9 +96,9 @@ namespace Zony_Lrc_Download_2._0.Window
 
                     LongLife.MusicPathFailedList.Clear();
                     
-                    // 检测插件开关
+                    // 检测各项插件开关
                     string[] state = Config.option_PlugState.Split(',');
-                    for(int i=0,j=0;i<Untiy.PluginsList.Count;i++)
+                    for(int i=0,j=0;i<Untiy.PluginsList.Count;i++) // j用于记录是否有多个插件
                     {
                         if(Untiy.piProperties[i].Ptype == 0 && state[i] == "1" && j==0)
                         {
@@ -105,7 +107,7 @@ namespace Zony_Lrc_Download_2._0.Window
                         }
                         else if(Untiy.piProperties[i].Ptype ==0 && state[i] == "1" && j > 0)
                         {
-                            // 拷贝失败字典
+                            /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
                             var no = Functions.DictionaryCopy(ref LongLife.MusicPathFailedList);
                             ParallelDownLoad(no, Untiy.piProperties[i].Name + "正在下载...", Untiy.PluginsList[i]);
                         }
@@ -113,11 +115,9 @@ namespace Zony_Lrc_Download_2._0.Window
 
                     toolStripStatusLabel_Information.Text = string.Format("下载完成，总文件：{0}成功：{1} 失败{2}...", LongLife.MusicPathList.Count,LongLife.MusicPathList.Count - LongLife.MusicPathFailedList.Count, LongLife.MusicPathFailedList.Count);
 
-                    //初始化进度条
                     toolStripProgressBar_DownLoad.Value = 0;
                     toolStripProgressBar_DownLoad.Maximum = 0;
 
-                    // 启用控件
                     toolStripButton_DownLoad.Enabled = true;
                     toolStripButton_Search.Enabled = true;
                 }).Start();

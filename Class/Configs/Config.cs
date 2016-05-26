@@ -2,7 +2,7 @@
  * 描述：封装了对INI文件的操作，提供对程序设置项目保存与读取的接口。
  * 作者：Zony
  * 创建日期：2016/05/04
- * 最后修改日期：2016/05/10
+ * 最后修改日期：2016/05/19
  * 版本：1.1
  */
 using System;
@@ -36,7 +36,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// </summary>
         public static string option_UserDirectory { get; set; }
         /// <summary>
-        /// 文件名搜索选项
+        /// 更新选项
         /// </summary>
         public static int option_Update { get; set; }
         /// <summary>

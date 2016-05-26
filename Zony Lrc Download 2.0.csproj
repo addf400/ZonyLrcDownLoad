@@ -160,7 +160,9 @@
     <Content Include="Icon\search.ico" />
     <Content Include="Icon\Set.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ScreenShot\" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>

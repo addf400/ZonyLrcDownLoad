@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Reflection;
 using Zony_Lrc_Download_2._0.Class.Plugins;
 using LibIPlug;
 using System.Text;
@@ -17,11 +16,13 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Plugins_Load(object sender, EventArgs e)
         {
+            // 重加载插件
+            Untiy.LoadPlugins();
             Icon = Resource1._6;
             // 加载插件状态
-            Config.Load();
             string[] stra = Config.option_PlugState.Split(',');
             int count=0;
+
             // 加载插件列表
             foreach (PluginInfoAttribute info in Untiy.piProperties)
             {

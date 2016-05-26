@@ -2,7 +2,7 @@
  * 描述：负责插件加载与管理的静态类
  * 作者：Zony
  * 创建日期：2016/05/10
- * 最后修改日期：2016/05/10
+ * 最后修改日期：2016/05/26
  * 版本：1.0
  */
 using LibIPlug;
@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Zony_Lrc_Download_2._0.Class.Configs;
+using System.Text;
 
 namespace Zony_Lrc_Download_2._0.Class.Plugins
 {
@@ -20,7 +22,6 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         /// </summary>
         public static List<IPlugin> PluginsList = new List<IPlugin>();
         public static List<PluginInfoAttribute> piProperties = new List<PluginInfoAttribute>();
-        public static List<bool> State = new List<bool>();
 
         /// <summary>
         /// 载入插件
@@ -28,6 +29,8 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         /// <returns>成功载入的插件数目，返回0则是出现错误</returns>
         public static int LoadPlugins()
         {
+            PluginsList.Clear();
+            piProperties.Clear();
             if (!Directory.Exists(Environment.CurrentDirectory + @"\Plugins")) return 0;
 
             string[] files = Directory.GetFiles(Environment.CurrentDirectory + @"\Plugins");
@@ -72,6 +75,27 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
                 {
                     return 0;
                 }
+            }
+
+            // 判断插件增删
+            if (Config.option_PlugState.Split(',').Length < PluginsList.Count)
+            {
+                int duartion = PluginsList.Count - Config.option_PlugState.Split(',').Length;
+                StringBuilder sb = new StringBuilder(Config.option_PlugState);
+                for(int i=0;i< duartion;i++)
+                {
+                    sb.Append(",0");
+                }
+                Config.option_PlugState = sb.ToString();
+                Config.Save();
+            }
+            else
+            {
+                int duartion = Config.option_PlugState.Split(',').Length - PluginsList.Count;
+                StringBuilder sb = new StringBuilder(Config.option_PlugState);
+                sb.Remove(sb.Length - duartion * 2, duartion*2);
+                Config.option_PlugState = sb.ToString();
+                Config.Save();
             }
 
             return PluginsList.Count;

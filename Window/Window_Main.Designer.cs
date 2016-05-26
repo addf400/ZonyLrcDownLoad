@@ -36,14 +36,14 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Discuz = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Donate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Plugins = new System.Windows.Forms.ToolStripButton();
             this.statusStrip_Main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Information = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar_DownLoad = new System.Windows.Forms.ToolStripProgressBar();
             this.listView_Music = new Zony_Lrc_Download_2._0.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton_Plugins = new System.Windows.Forms.ToolStripButton();
             this.toolStrip_Main.SuspendLayout();
             this.statusStrip_Main.SuspendLayout();
             this.SuspendLayout();
@@ -115,6 +115,20 @@
             this.toolStripButton_Donate.Text = "捐赠";
             this.toolStripButton_Donate.Click += new System.EventHandler(this.toolStripButton_Donate_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton_Plugins
+            // 
+            this.toolStripButton_Plugins.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Plugins.Image")));
+            this.toolStripButton_Plugins.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Plugins.Name = "toolStripButton_Plugins";
+            this.toolStripButton_Plugins.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButton_Plugins.Text = "插件";
+            this.toolStripButton_Plugins.Click += new System.EventHandler(this.toolStripButton_Plugins_Click);
+            // 
             // statusStrip_Main
             // 
             this.statusStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -163,20 +177,6 @@
             // 
             this.columnHeader2.Text = "下载";
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton_Plugins
-            // 
-            this.toolStripButton_Plugins.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Plugins.Image")));
-            this.toolStripButton_Plugins.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Plugins.Name = "toolStripButton_Plugins";
-            this.toolStripButton_Plugins.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton_Plugins.Text = "插件";
-            this.toolStripButton_Plugins.Click += new System.EventHandler(this.toolStripButton_Plugins_Click);
-            // 
             // Window_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -187,7 +187,7 @@
             this.Controls.Add(this.listView_Music);
             this.Name = "Window_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ZonyLrcDownLoad 3.0";
+            this.Text = "ZonyLrcDownLoad 3.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_Main_FormClosing);
             this.Load += new System.EventHandler(this.Window_Main_Load);
             this.toolStrip_Main.ResumeLayout(false);
@@ -201,7 +201,7 @@
 
         #endregion
 
-        private ListViewNF listView_Music;
+        private Zony_Lrc_Download_2._0.ListViewNF listView_Music;
         private System.Windows.Forms.ToolStrip toolStrip_Main;
         private System.Windows.Forms.ToolStripButton toolStripButton_Search;
         private System.Windows.Forms.ToolStripButton toolStripButton_DownLoad;

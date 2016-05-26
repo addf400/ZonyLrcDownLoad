@@ -87,7 +87,6 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         public static void Load()
         {
             Check();
-
             option_Encoding = int.Parse(INIRead("Set", "Encoding", iniPath));
             option_IgnoreFile = int.Parse(INIRead("Set", "IgnoreFile", iniPath));
             option_Update = int.Parse(INIRead("Set", "Update", iniPath));

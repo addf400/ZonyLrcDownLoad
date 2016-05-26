@@ -23,12 +23,12 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Main_Load(object sender, EventArgs e)
         {
-            Config.Load();
             if (Untiy.LoadPlugins() == 0)
             {
                 MessageBox.Show("基础插件加载失败，无法启动程序。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
+            Config.Load();
 
             // 允许跨线程操作控件
             CheckForIllegalCrossThreadCalls = false;

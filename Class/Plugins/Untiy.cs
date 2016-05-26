@@ -77,27 +77,33 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
                 }
             }
 
-            // 判断插件增删
-            if (Config.option_PlugState.Split(',').Length < PluginsList.Count)
+            try
             {
-                int duartion = PluginsList.Count - Config.option_PlugState.Split(',').Length;
-                StringBuilder sb = new StringBuilder(Config.option_PlugState);
-                for(int i=0;i< duartion;i++)
+                // 判断插件增删
+                if (Config.option_PlugState.Split(',').Length < PluginsList.Count)
                 {
-                    sb.Append(",0");
+                    int duartion = PluginsList.Count - Config.option_PlugState.Split(',').Length;
+                    StringBuilder sb = new StringBuilder(Config.option_PlugState);
+                    for (int i = 0; i < duartion; i++)
+                    {
+                        sb.Append(",0");
+                    }
+                    Config.option_PlugState = sb.ToString();
+                    Config.Save();
                 }
-                Config.option_PlugState = sb.ToString();
-                Config.Save();
+                else
+                {
+                    int duartion = Config.option_PlugState.Split(',').Length - PluginsList.Count;
+                    StringBuilder sb = new StringBuilder(Config.option_PlugState);
+                    sb.Remove(sb.Length - duartion * 2, duartion * 2);
+                    Config.option_PlugState = sb.ToString();
+                    Config.Save();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                int duartion = Config.option_PlugState.Split(',').Length - PluginsList.Count;
-                StringBuilder sb = new StringBuilder(Config.option_PlugState);
-                sb.Remove(sb.Length - duartion * 2, duartion*2);
-                Config.option_PlugState = sb.ToString();
-                Config.Save();
-            }
 
+            }
             return PluginsList.Count;
         }
     }

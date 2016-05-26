@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Zony_Lrc_Download_2._0.Window;
 
 namespace Zony_Lrc_Download_2._0
 {
-    public class ListViewNF : System.Windows.Forms.ListView
+    public class ListViewNF : ListView
     {
         public ListViewNF()
         {

@@ -10,3 +10,11 @@
 * 2016.05.17 虎 ￥ 5.00
 
 ### 十分感谢以上朋友的一份心意。
+## 截图
+![QQ截图20160526130251.png][5]
+![QQ截图20160526134430.png][6]
+![QQ截图20160526134445.png][7]
+
+  [5]: http://www.myzony.com/usr/uploads/2016/05/3960382838.png
+  [6]: http://www.myzony.com/usr/uploads/2016/05/2826214082.png
+  [7]: http://www.myzony.com/usr/uploads/2016/05/1988012466.png

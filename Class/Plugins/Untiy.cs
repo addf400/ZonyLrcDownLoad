@@ -100,7 +100,7 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
                     Config.Save();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

@@ -69,7 +69,7 @@ namespace Zony_Lrc_Download_2._0.Class.Utils.DownLoad
                 }
 
                 return sb.ToString();
-            }catch(Exception)
+            }catch(WebException)
             {
                 return null;
             }

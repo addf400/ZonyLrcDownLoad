@@ -25,8 +25,7 @@ namespace Zony_Lrc_Download_2._0.Window
         {
             if (Untiy.LoadPlugins() == 0)
             {
-                MessageBox.Show("基础插件加载失败，无法启动程序。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(0);
+                MessageBox.Show("基础插件加载失败，无法正常运行程序，请点击反馈按钮寻找技术支持。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Config.Load();
 
@@ -41,13 +40,21 @@ namespace Zony_Lrc_Download_2._0.Window
             {
                 new Thread(() =>
                 {
-                    var result = new Tools().Http_Get("http://myzony.com/update.txt", Encoding.UTF8).Split(',');
-                    if (int.Parse(result[0]) > Ver.CurrentVersion)
+                    var result = new Tools().Http_Get("http://myzony.com/update.txt", Encoding.UTF8);
+                    if(result!=null)
                     {
-                        if (MessageBox.Show("检测到新版本，是否下载新版本？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                        var resultAray = result.Split(',');
+                        if (int.Parse(resultAray[0]) > Ver.CurrentVersion)
                         {
-                            System.Diagnostics.Process.Start(result[1]);
+                            if (MessageBox.Show("检测到新版本，是否下载新版本？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                            {
+                                System.Diagnostics.Process.Start(resultAray[1]);
+                            }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("与更新服务器网络连接异常。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }).Start();
             }

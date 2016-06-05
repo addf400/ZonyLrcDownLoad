@@ -71,7 +71,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
                 var str = new StringBuilder();
                 for (int i = 0; i < Untiy.PluginsList.Count;i++)
                 {
-                    str.Append("0,");
+                    str.Append("1,");
                 }
                 str.Remove(str.Length-1, 1);
                 sw.Write("PlugState=" + str.ToString());

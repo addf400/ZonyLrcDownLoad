@@ -94,6 +94,32 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
             option_UserDirectory = INIRead("Set", "UserDirectory", iniPath);
             option_FileSuffix = INIRead("Set", "FileSuffix", iniPath);
             option_PlugState = INIRead("Set", "PlugState", iniPath);
+
+            #region 重加载插件状态
+            if (option_PlugState != null)
+            {
+                // 判断插件增删
+                if (option_PlugState.Split(',').Length < Untiy.PluginsList.Count)
+                {
+                    int duartion = Untiy.PluginsList.Count - option_PlugState.Split(',').Length;
+                    StringBuilder sb = new StringBuilder(option_PlugState);
+                    for (int i = 0; i < duartion; i++)
+                    {
+                        sb.Append(",0");
+                    }
+                    option_PlugState = sb.ToString();
+                    Save();
+                }
+                else
+                {
+                    int duartion = option_PlugState.Split(',').Length - Untiy.PluginsList.Count;
+                    StringBuilder sb = new StringBuilder(option_PlugState);
+                    sb.Remove(sb.Length - duartion * 2, duartion * 2);
+                    option_PlugState = sb.ToString();
+                    Save();
+                }
+            }
+            #endregion
         }
 
         /// <summary>

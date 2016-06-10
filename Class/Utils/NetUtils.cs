@@ -1,8 +1,8 @@
 ﻿/*
- * 描述：提供了歌词下载器所需要的Get/Post方法，以及编码方法。
+ * 描述：提供了一些网络常用方法。
  * 作者：Zony
  * 创建日期：2016/05/04
- * 最后修改日期：2016/05/04
+ * 最后修改日期：2016/06/10
  * 版本：1.0
  */
 using System;
@@ -16,7 +16,7 @@ namespace Zony_Lrc_Download_2._0.Class.Utils.DownLoad
     /// <summary>
     /// 歌词下载类绑定工具类
     /// </summary>
-    class Tools
+    class NetUtils
     {
         #region 网页操作相关
         /// <summary>
@@ -106,27 +106,6 @@ namespace Zony_Lrc_Download_2._0.Class.Utils.DownLoad
             {
                 return null;
             }
-        }
-        #endregion
-
-        #region 字符串操作相关
-        /// <summary>
-        /// 根据指定字符分割字符串，并按顺序保存在List
-        /// </summary>
-        /// <param name="context">要分割的内容</param>
-        /// <param name="splitChar">分割依据</param>
-        /// <returns>列表容器</returns>
-        public List<string> SplitString(string context, char splitChar)
-        {
-            string[] split = context.Split(splitChar);
-            List<string> list = new List<string>();
-
-            foreach (string str in split)
-            {
-                list.Add(str);
-            }
-
-            return list;
         }
         #endregion
     }

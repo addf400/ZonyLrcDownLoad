@@ -10,11 +10,12 @@ using Zony_Lrc_Download_2._0.Class.Utils;
 using Zony_Lrc_Download_2._0.Class.Utils.DownLoad;
 using Zony_Lrc_Download_2._0.Class.Configs;
 using Zony_Lrc_Download_2._0.Class.Plugins;
+using Zony_Lrc_Download_2._0.Class.UI;
 using LibIPlug;
 
 namespace Zony_Lrc_Download_2._0.Window
 {
-    public partial class Window_Main : Form
+    public partial class Window_Main : UI_From
     {
         public Window_Main()
         {
@@ -33,32 +34,8 @@ namespace Zony_Lrc_Download_2._0.Window
             CheckForIllegalCrossThreadCalls = false;
             // 设定网络最大并发链接数目
             System.Net.ServicePointManager.DefaultConnectionLimit = Config.option_ThreadNumber;
-            Icon = Resource1._6;
 
-            #region 更新检测
-            if(Config.option_Update == 1)
-            {
-                new Thread(() =>
-                {
-                    var result = new Tools().Http_Get("http://myzony.com/update.txt", Encoding.UTF8);
-                    if(result!=null)
-                    {
-                        var resultAray = result.Split(',');
-                        if (int.Parse(resultAray[0]) > Ver.CurrentVersion)
-                        {
-                            if (MessageBox.Show("检测到新版本，是否下载新版本？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
-                            {
-                                System.Diagnostics.Process.Start(resultAray[1]);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("与更新服务器网络连接异常。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }).Start();
-            }
-            #endregion
+            updateCheck();
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)
@@ -72,7 +49,8 @@ namespace Zony_Lrc_Download_2._0.Window
                 LongLife.MusicPathFailedList.Clear();
                 listView_Music.Items.Clear();
 
-                if (new FileSearch().Search(ref LongLife.MusicPathList,fb.SelectedPath,new Tools().SplitString(Config.option_FileSuffix,';')) == FileSearch.FileSearchResult.Normal)
+                // 搜寻文件
+                if (new FileSearch().Search(ref LongLife.MusicPathList,fb.SelectedPath,FuncUtils.SplitString(Config.option_FileSuffix,';')) == FileSearch.FileSearchResult.Normal)
                 {
                     foreach (KeyValuePair<int,string> key in LongLife.MusicPathList)
                     {
@@ -115,7 +93,7 @@ namespace Zony_Lrc_Download_2._0.Window
                         else if(Untiy.piProperties[i].Ptype ==0 && state[i] == "1" && j > 0)
                         {
                             /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
-                            var no = Functions.DictionaryCopy(ref LongLife.MusicPathFailedList);
+                            var no = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
                             ParallelDownLoad(no, Untiy.piProperties[i].Name + "正在下载...", Untiy.PluginsList[i]);
                         }
                     }
@@ -182,6 +160,32 @@ namespace Zony_Lrc_Download_2._0.Window
                 toolStripProgressBar_DownLoad.Value++;
             });
 
+        }
+
+        private void updateCheck()
+        {
+            if (Config.option_Update == 1)
+            {
+                new Thread(() =>
+                {
+                    var result = new NetUtils().Http_Get("http://myzony.com/update.txt", Encoding.UTF8);
+                    if (result != null)
+                    {
+                        var resultAray = result.Split(',');
+                        if (int.Parse(resultAray[0]) > Ver.CurrentVersion)
+                        {
+                            if (MessageBox.Show("检测到新版本，是否下载新版本？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                            {
+                                System.Diagnostics.Process.Start(resultAray[1]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("与更新服务器网络连接异常。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }).Start();
+            }
         }
 
         #region 界面互操作

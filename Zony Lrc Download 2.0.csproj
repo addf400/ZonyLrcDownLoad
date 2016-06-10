@@ -73,10 +73,13 @@
     <Compile Include="Class\Configs\Config.cs" />
     <Compile Include="Class\Configs\Ver.cs" />
     <Compile Include="Class\Plugins\Untiy.cs" />
-    <Compile Include="Class\Utils\DownLoad\Tools.cs" />
+    <Compile Include="Class\UI\UI_From.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class\Utils\NetUtils.cs" />
     <Compile Include="Class\Utils\FileOperate\FileSearch.cs" />
     <Compile Include="Class\Utils\FileOperate\FileWrite.cs" />
-    <Compile Include="Class\Utils\Functions.cs" />
+    <Compile Include="Class\Utils\FuncUtils.cs" />
     <Compile Include="Class\Utils\LongLife.cs" />
     <Compile Include="Program.cs">
       <SubType>Component</SubType>
@@ -160,9 +163,7 @@
     <Content Include="Icon\search.ico" />
     <Content Include="Icon\Set.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ScreenShot\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>

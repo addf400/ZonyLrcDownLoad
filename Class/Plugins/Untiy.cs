@@ -10,8 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Zony_Lrc_Download_2._0.Class.Configs;
-using System.Text;
 
 namespace Zony_Lrc_Download_2._0.Class.Plugins
 {
@@ -21,6 +19,9 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         /// 插件列表
         /// </summary>
         public static List<IPlugin> PluginsList = new List<IPlugin>();
+        /// <summary>
+        /// 插件信息列表
+        /// </summary>
         public static List<PluginInfoAttribute> piProperties = new List<PluginInfoAttribute>();
 
         /// <summary>
@@ -75,34 +76,6 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
                 {
                     return 0;
                 }
-            }
-
-            try
-            {
-                // 判断插件增删
-                if (Config.option_PlugState.Split(',').Length < PluginsList.Count)
-                {
-                    int duartion = PluginsList.Count - Config.option_PlugState.Split(',').Length;
-                    StringBuilder sb = new StringBuilder(Config.option_PlugState);
-                    for (int i = 0; i < duartion; i++)
-                    {
-                        sb.Append(",0");
-                    }
-                    Config.option_PlugState = sb.ToString();
-                    Config.Save();
-                }
-                else
-                {
-                    int duartion = Config.option_PlugState.Split(',').Length - PluginsList.Count;
-                    StringBuilder sb = new StringBuilder(Config.option_PlugState);
-                    sb.Remove(sb.Length - duartion * 2, duartion * 2);
-                    Config.option_PlugState = sb.ToString();
-                    Config.Save();
-                }
-            }
-            catch (NullReferenceException exp)
-            {
-
             }
 
             return PluginsList.Count;

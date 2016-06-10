@@ -8,10 +8,11 @@
 using System;
 using System.Windows.Forms;
 using Zony_Lrc_Download_2._0.Class.Configs;
+using Zony_Lrc_Download_2._0.Class.UI;
 
 namespace Zony_Lrc_Download_2._0.Window
 {
-    public partial class Window_Config : Form
+    public partial class Window_Config : UI_From
     {
         public Window_Config()
         {
@@ -20,8 +21,6 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Config_Load(object sender, EventArgs e)
         {
-            Icon = Resource1._6;
-
             Config.Load();
             comboBox_EncodingOption.SelectedIndex = Config.option_Encoding;
             if(Config.option_UserDirectory != "null")
@@ -47,7 +46,8 @@ namespace Zony_Lrc_Download_2._0.Window
                 Config.option_UserDirectory = "null";
             }
             Config.Save();
-            // 同步
+
+            // 同步并发链接数
             System.Net.ServicePointManager.DefaultConnectionLimit = Config.option_ThreadNumber;
         }
 
@@ -63,5 +63,6 @@ namespace Zony_Lrc_Download_2._0.Window
                 }
             }
         }
+
     }
 }

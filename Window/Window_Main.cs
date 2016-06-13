@@ -119,7 +119,7 @@ namespace Zony_Lrc_Download_2._0.Window
             {
                 try
                 {
-                    var fs = new FileWrite();
+                    FileWrite fs = new FileWrite();
                     byte[] lrcData = null;
                     if (Config.option_IgnoreFile == 1 && File.Exists(Path.GetDirectoryName(item.Value) + "\\" + Path.GetFileNameWithoutExtension(item.Value) + ".lrc"))
                     {
@@ -162,6 +162,7 @@ namespace Zony_Lrc_Download_2._0.Window
 
         }
 
+        #region 更新检测
         private void updateCheck()
         {
             if (Config.option_Update == 1)
@@ -187,6 +188,7 @@ namespace Zony_Lrc_Download_2._0.Window
                 }).Start();
             }
         }
+        #endregion
 
         #region 界面互操作
         private void Window_Main_FormClosing(object sender, FormClosingEventArgs e)

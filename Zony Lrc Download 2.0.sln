@@ -1,9 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zony Lrc Download 2.0", "Zony Lrc Download 2.0.csproj", "{5FB07048-6350-49BF-94EB-19C60AF79C5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibIPlug", "..\..\WorkTest\Plugins\LibIPlug\LibIPlug\LibIPlug.csproj", "{B63B284D-935C-4DE5-B165-F9E756AE02A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNet", "..\..\WorkTest\Plugins\LibNet\LibNet\LibNet.csproj", "{15F344C6-49CC-4511-BD0A-FCA56EDD98CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibBaidu", "..\..\WorkTest\Plugins\LibBaidu\LibBaidu\LibBaidu.csproj", "{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibCnlyric", "..\..\WorkTest\Plugins\LibCnlyric\LibCnlyric\LibCnlyric.csproj", "{077B956D-1D2C-4C09-8F8B-D4C11F77C2B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLrcgc", "..\..\WorkTest\Plugins\LibLrcgc\LibLrcgc\LibLrcgc.csproj", "{EA12A2B6-7D2F-48EF-87E6-A8A627EBD2EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNetease", "..\..\WorkTest\Plugins\LibNetease\LibNetease\LibNetease.csproj", "{B9882493-2712-46B9-83C1-C0F47BEDF3AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +27,30 @@ Global
 		{5FB07048-6350-49BF-94EB-19C60AF79C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FB07048-6350-49BF-94EB-19C60AF79C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FB07048-6350-49BF-94EB-19C60AF79C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63B284D-935C-4DE5-B165-F9E756AE02A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63B284D-935C-4DE5-B165-F9E756AE02A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63B284D-935C-4DE5-B165-F9E756AE02A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63B284D-935C-4DE5-B165-F9E756AE02A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F344C6-49CC-4511-BD0A-FCA56EDD98CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F344C6-49CC-4511-BD0A-FCA56EDD98CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F344C6-49CC-4511-BD0A-FCA56EDD98CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F344C6-49CC-4511-BD0A-FCA56EDD98CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077B956D-1D2C-4C09-8F8B-D4C11F77C2B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077B956D-1D2C-4C09-8F8B-D4C11F77C2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077B956D-1D2C-4C09-8F8B-D4C11F77C2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077B956D-1D2C-4C09-8F8B-D4C11F77C2B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA12A2B6-7D2F-48EF-87E6-A8A627EBD2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA12A2B6-7D2F-48EF-87E6-A8A627EBD2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA12A2B6-7D2F-48EF-87E6-A8A627EBD2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA12A2B6-7D2F-48EF-87E6-A8A627EBD2EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9882493-2712-46B9-83C1-C0F47BEDF3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9882493-2712-46B9-83C1-C0F47BEDF3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9882493-2712-46B9-83C1-C0F47BEDF3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9882493-2712-46B9-83C1-C0F47BEDF3AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

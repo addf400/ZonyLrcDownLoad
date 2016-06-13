@@ -6,7 +6,6 @@ namespace LibIPlug
     public interface IPlugin
     {
         PluginInfoAttribute PluginInfo { get; set; }
-        string filePath { get; set; }
         /// <summary>
         /// 歌词下载接口
         /// </summary>

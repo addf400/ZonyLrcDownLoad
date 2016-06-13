@@ -83,14 +83,13 @@ namespace Zony_Lrc_Download_2._0.Window
                     
                     // 检测各项插件开关
                     string[] state = Config.option_PlugState.Split(',');
-                    for(int i=0,j=0;i<Untiy.PluginsList.Count;i++) // j用于记录是否有多个插件
+                    for(int i=0;i<Untiy.PluginsList.Count;i++)
                     {
-                        if(Untiy.piProperties[i].Ptype == 0 && state[i] == "1" && j==0)
+                        if(Untiy.piProperties[i].Ptype == 0 && state[i] == "1" && i == 0)
                         {
-                            j++;
                             ParallelDownLoad(LongLife.MusicPathList, Untiy.piProperties[i].Name + "正在下载...", Untiy.PluginsList[i]);
                         }
-                        else if(Untiy.piProperties[i].Ptype ==0 && state[i] == "1" && j > 0)
+                        else if(Untiy.piProperties[i].Ptype ==0 && state[i] == "1" && i > 0)
                         {
                             /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
                             var no = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
@@ -99,10 +98,8 @@ namespace Zony_Lrc_Download_2._0.Window
                     }
 
                     toolStripStatusLabel_Information.Text = string.Format("下载完成，总文件：{0}成功：{1} 失败{2}...", LongLife.MusicPathList.Count,LongLife.MusicPathList.Count - LongLife.MusicPathFailedList.Count, LongLife.MusicPathFailedList.Count);
-
                     toolStripProgressBar_DownLoad.Value = 0;
                     toolStripProgressBar_DownLoad.Maximum = 0;
-
                     toolStripButton_DownLoad.Enabled = true;
                     toolStripButton_Search.Enabled = true;
                 }).Start();

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}</ProjectGuid>
+    <ProjectGuid>{F00E189D-D814-4B81-B392-145086C06C1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibBaidu</RootNamespace>
-    <AssemblyName>LibBaidu</AssemblyName>
+    <RootNamespace>SingleLyricSearch</RootNamespace>
+    <AssemblyName>SingleLyricSearch</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ID3">
-      <HintPath>..\..\..\DLL\ID3.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,18 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LibBaidu.cs" />
+    <Compile Include="LibSingleLyricSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\LibIPlug\LibIPlug\LibIPlug.csproj">
-      <Project>{b63b284d-935c-4de5-b165-f9e756ae02a4}</Project>
-      <Name>LibIPlug</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LibNet\LibNet\LibNet.csproj">
-      <Project>{15f344c6-49cc-4511-bd0a-fca56edd98cb}</Project>
-      <Name>LibNet</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

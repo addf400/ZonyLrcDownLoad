@@ -32,16 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ID3">
-      <HintPath>..\..\..\..\Git\ZonyLrcDownload\DLL\ID3.dll</HintPath>
-    </Reference>
-    <Reference Include="LibIPlug">
-      <HintPath>..\..\..\..\Git\ZonyLrcDownload\DLL\LibIPlug.dll</HintPath>
-    </Reference>
-    <Reference Include="LibNet">
-      <HintPath>..\..\..\..\Git\ZonyLrcDownload\DLL\LibNet.dll</HintPath>
+      <HintPath>..\..\..\DLL\ID3.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Git\ZonyLrcDownload\DLL\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\DLL\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +48,16 @@
   <ItemGroup>
     <Compile Include="LibNetease.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LibIPlug\LibIPlug\LibIPlug.csproj">
+      <Project>{b63b284d-935c-4de5-b165-f9e756ae02a4}</Project>
+      <Name>LibIPlug</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibNet\LibNet\LibNet.csproj">
+      <Project>{15f344c6-49cc-4511-bd0a-fca56edd98cb}</Project>
+      <Name>LibNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

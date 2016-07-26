@@ -185,9 +185,10 @@
             this.Controls.Add(this.statusStrip_Main);
             this.Controls.Add(this.toolStrip_Main);
             this.Controls.Add(this.listView_Music);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Window_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ZonyLrcDownLoad 3.2";
+            this.Text = "ZonyLrcDownLoad 3.2.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_Main_FormClosing);
             this.Load += new System.EventHandler(this.Window_Main_Load);
             this.toolStrip_Main.ResumeLayout(false);

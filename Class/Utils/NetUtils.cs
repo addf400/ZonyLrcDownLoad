@@ -9,7 +9,6 @@ using System;
 using System.Text;
 using System.Net;
 using System.IO;
-using System.Collections.Generic;
 
 namespace Zony_Lrc_Download_2._0.Class.Utils.DownLoad
 {

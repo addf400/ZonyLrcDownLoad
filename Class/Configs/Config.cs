@@ -68,13 +68,16 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
                 sw.WriteLine("Update=1");
                 sw.WriteLine("FileSuffix=*.acc;*.mp3;*.ape;*.flac");
                 #region 写入默认插件状态
-                var str = new StringBuilder();
-                for (int i = 0; i < Untiy.PluginsList.Count;i++)
+                if(Untiy.Plugs.Count != 0)
                 {
-                    str.Append("1,");
+                    var str = new StringBuilder();
+                    for (int i = 0; i < Untiy.Plugs.Count; i++)
+                    {
+                        str.Append("1,");
+                    }
+                    str.Remove(str.Length - 1, 1);
+                    sw.Write("PlugState=" + str.ToString());
                 }
-                str.Remove(str.Length-1, 1);
-                sw.Write("PlugState=" + str.ToString());
                 #endregion
                 sw.Close();
                 iniFile.Close();
@@ -99,9 +102,9 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
             if (option_PlugState != null)
             {
                 // 判断插件增删
-                if (option_PlugState.Split(',').Length < Untiy.PluginsList.Count)
+                if (option_PlugState.Split(',').Length < Untiy.Plugs.Count)
                 {
-                    int duartion = Untiy.PluginsList.Count - option_PlugState.Split(',').Length;
+                    int duartion = Untiy.Plugs.Count - option_PlugState.Split(',').Length;
                     StringBuilder sb = new StringBuilder(option_PlugState);
                     for (int i = 0; i < duartion; i++)
                     {
@@ -112,7 +115,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
                 }
                 else
                 {
-                    int duartion = option_PlugState.Split(',').Length - Untiy.PluginsList.Count;
+                    int duartion = option_PlugState.Split(',').Length - Untiy.Plugs.Count;
                     StringBuilder sb = new StringBuilder(option_PlugState);
                     sb.Remove(sb.Length - duartion * 2, duartion * 2);
                     option_PlugState = sb.ToString();

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace Zony_Lrc_Download_2._0.Class.Plugins
 {
@@ -18,7 +19,7 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         /// <summary>
         /// 插件列表
         /// </summary>
-        public static List<IPlugin> PluginsList = new List<IPlugin>();
+        public static List<IPlugin> Plugs = new List<IPlugin>();
         /// <summary>
         /// 插件信息列表
         /// </summary>
@@ -30,7 +31,7 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         /// <returns>成功载入的插件数目，返回0则是出现错误</returns>
         public static int LoadPlugins()
         {
-            PluginsList.Clear();
+            Plugs.Clear();
             piProperties.Clear();
             if (!Directory.Exists(Environment.CurrentDirectory + @"\Plugins")) return 0;
 
@@ -51,7 +52,7 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
                         if (t.GetInterface("IPlugin") != null)
                         {
                             IPlugin plugin = (IPlugin)tmp.CreateInstance(t.FullName);
-                            PluginsList.Add(plugin);
+                            Plugs.Add(plugin);
                             object[] attbs = t.GetCustomAttributes(typeAttribute.GetType(),false);
                             PluginInfoAttribute attribute = null;
                             foreach (object attb in attbs)
@@ -72,13 +73,14 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
+                    MessageBox.Show("产生异常：\r\n" + exp.ToString());
                     return 0;
                 }
             }
 
-            return PluginsList.Count;
+            return Plugs.Count;
         }
     }
 }

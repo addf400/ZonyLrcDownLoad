@@ -28,14 +28,12 @@ namespace Zony_Lrc_Download_2._0.Window
             {
                 MessageBox.Show("基础插件加载失败，无法正常运行程序，请点击反馈按钮寻找技术支持。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Config.Load();
-
-            // 允许跨线程操作控件
-            CheckForIllegalCrossThreadCalls = false;
-            // 设定网络最大并发链接数目
-            System.Net.ServicePointManager.DefaultConnectionLimit = Config.option_ThreadNumber;
-
-            updateCheck();
+            else
+            {
+                Config.Load();
+                applicationSet();
+                updateCheck();
+            }
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)
@@ -50,7 +48,7 @@ namespace Zony_Lrc_Download_2._0.Window
                 listView_Music.Items.Clear();
 
                 // 搜寻文件
-                if (new FileSearch().Search(ref LongLife.MusicPathList,fb.SelectedPath,FuncUtils.SplitString(Config.option_FileSuffix,';')) == FileSearch.FileSearchResult.Normal)
+                if (new FileSearch().Search(ref LongLife.MusicPathList,fb.SelectedPath,FuncUtils.SplitString(Config.configValue.option_FileSuffix,';')) == FileSearch.FileSearchResult.Normal)
                 {
                     foreach (KeyValuePair<int,string> key in LongLife.MusicPathList)
                     {
@@ -80,28 +78,30 @@ namespace Zony_Lrc_Download_2._0.Window
                     toolStripButton_Search.Enabled = false;
 
                     LongLife.MusicPathFailedList.Clear();
-                    
+                    bool firstPlug = true;
+                    int count = 0;
+
                     // 检测各项插件开关
-                    string[] state = Config.option_PlugState.Split(',');
-                    for(int i=0;i<Untiy.Plugs.Count;i++)
+                    foreach(var item in Config.configValue.option_PlugStatus)
                     {
-                        if(Untiy.piProperties[i].Ptype == 0 && state[i] == "1" && i == 0)
+                        if(item.IsOpen && Untiy.piProperties[count].Ptype == 0)
                         {
-                            ParallelDownLoad(LongLife.MusicPathList, Untiy.piProperties[i].Name + "正在下载...", Untiy.Plugs[i]);
-                        }
-                        else if(Untiy.piProperties[i].Ptype ==0 && state[i] == "1" && i > 0)
-                        {
-                            /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
-                            var no = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
-                            ParallelDownLoad(no, Untiy.piProperties[i].Name + "正在下载...", Untiy.Plugs[i]);
+                            if(firstPlug)
+                            {
+                                ParallelDownLoad(LongLife.MusicPathList, Untiy.piProperties[count].Name + "正在下载...", Untiy.Plugs[count]);
+                                firstPlug = false;
+                            }
+                            else
+                            {
+                                /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
+                                var no = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
+                                ParallelDownLoad(no, Untiy.piProperties[count].Name + "正在下载...", Untiy.Plugs[count]);
+                            }
+                            count++;
                         }
                     }
 
-                    toolStripStatusLabel_Information.Text = string.Format("下载完成，总文件：{0}成功：{1} 失败{2}...", LongLife.MusicPathList.Count,LongLife.MusicPathList.Count - LongLife.MusicPathFailedList.Count, LongLife.MusicPathFailedList.Count);
-                    toolStripProgressBar_DownLoad.Value = 0;
-                    toolStripProgressBar_DownLoad.Maximum = 0;
-                    toolStripButton_DownLoad.Enabled = true;
-                    toolStripButton_Search.Enabled = true;
+                    uiRest();
                 }).Start();
             }
         }
@@ -112,23 +112,23 @@ namespace Zony_Lrc_Download_2._0.Window
             toolStripProgressBar_DownLoad.Value = 0;
             toolStripProgressBar_DownLoad.Maximum = container.Count;
 
-            Parallel.ForEach(container, new ParallelOptions() { MaxDegreeOfParallelism = Config.option_ThreadNumber }, (item) =>
+            Parallel.ForEach(container, new ParallelOptions() { MaxDegreeOfParallelism = Config.configValue.option_ThreadNumber }, (item) =>
             {
                 try
                 {
                     FileWrite fs = new FileWrite();
                     byte[] lrcData = null;
-                    if (Config.option_IgnoreFile == 1 && File.Exists(Path.GetDirectoryName(item.Value) + "\\" + Path.GetFileNameWithoutExtension(item.Value) + ".lrc"))
+                    if (Config.configValue.option_IgnoreFile && checkMusicExits(item.Value))
                     {
                         listView_Music.Items[item.Key].SubItems[1].Text = "略过";
                     }
                     else
                     {
                         // 下载歌词
-                        if (lrcDown.Down(item.Value, ref lrcData,Config.option_ThreadNumber) == true)
+                        if (lrcDown.Down(item.Value, ref lrcData,Config.configValue.option_ThreadNumber) == true)
                         {
                             listView_Music.Items[item.Key].SubItems[1].Text = "成功";
-                            if (fs.Write(ref lrcData, item.Value, Config.option_Encoding, Config.option_UserDirectory))
+                            if (fs.Write(ref lrcData, item.Value, Config.configValue.option_Encoding, Config.configValue.option_UserDirectory))
                             {
                                 lock (LongLife.MusicPathFailedList) LongLife.MusicPathFailedList.Remove(item.Key);
                             }
@@ -159,10 +159,42 @@ namespace Zony_Lrc_Download_2._0.Window
 
         }
 
+        // 检测lrc文件是否存在
+        private bool checkMusicExits(string musicPath)
+        {
+            return File.Exists(Path.GetDirectoryName(musicPath) + "\\" + Path.GetFileNameWithoutExtension(musicPath) + ".lrc");
+        }
+
+        // ui重置
+        private void uiRest()
+        {
+            toolStripStatusLabel_Information.Text = string.Format("下载完成，总文件：{0}成功：{1} 失败{2}...", LongLife.MusicPathList.Count, LongLife.MusicPathList.Count - LongLife.MusicPathFailedList.Count, LongLife.MusicPathFailedList.Count);
+            toolStripProgressBar_DownLoad.Value = 0;
+            toolStripProgressBar_DownLoad.Maximum = 0;
+            toolStripButton_DownLoad.Enabled = true;
+            toolStripButton_Search.Enabled = true;
+        }
+
+        #region 应用程序设置
+        /// <summary>
+        /// 应用程序设置
+        /// </summary>
+        private void applicationSet()
+        {
+            // 允许跨线程操作控件
+            CheckForIllegalCrossThreadCalls = false;
+            // 设定网络最大并发链接数目
+            System.Net.ServicePointManager.DefaultConnectionLimit = Config.configValue.option_ThreadNumber;
+        }
+        #endregion
+
         #region 更新检测
+        /// <summary>
+        /// 更新检测
+        /// </summary>
         private void updateCheck()
         {
-            if (Config.option_Update == 1)
+            if (Config.configValue.option_Update)
             {
                 new Thread(() =>
                 {

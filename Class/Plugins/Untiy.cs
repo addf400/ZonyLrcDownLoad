@@ -2,15 +2,15 @@
  * 描述：负责插件加载与管理的静态类
  * 作者：Zony
  * 创建日期：2016/05/10
- * 最后修改日期：2016/05/26
- * 版本：1.0
+ * 最后修改日期：2016/08/05
+ * 版本：1.1
  */
-using LibIPlug;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using LibIPlug;
 
 namespace Zony_Lrc_Download_2._0.Class.Plugins
 {
@@ -20,7 +20,6 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         /// 插件列表
         /// </summary>
         public static List<IPlugin> Plugs = new List<IPlugin>();
-        /// <summary>
         /// 插件信息列表
         /// </summary>
         public static List<PluginInfoAttribute> piProperties = new List<PluginInfoAttribute>();

@@ -25,64 +25,45 @@ namespace Zony_Lrc_Download_2._0.Window
         private void Window_Plugins_Load(object sender, EventArgs e)
         {
             Untiy.LoadPlugins();
-            LoadPlugsList();
+            loadPlug();
         }
 
         private void Window_Plugins_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SavePlugsList();
+            savePlugsList();
         }
 
-        private void LoadPlugsList()
+        private void loadPlug()
         {
             // 加载插件状态
             Config.Load();
-            string[] stra = Config.option_PlugState.Split(',');
-            int count = 0;
 
+            int count=0;
             // 加载插件列表
-            foreach (PluginInfoAttribute info in Untiy.piProperties)
+            foreach (var item in Untiy.piProperties)
             {
                 listView_Plugins.Items.Add(new ListViewItem(new string[]
                 {
-                    info.Name,info.Descript,info.Version,info.Author,info.Ptype.ToString()
+                    item.Name,
+                    item.Descript,
+                    item.Version,
+                    item.Author,
+                    item.Ptype.ToString()
                 }));
 
-                try
-                {
-                    if (stra[count] == "0")
-                    {
-                        listView_Plugins.Items[count].Checked = false;
-                    }
-                    else
-                    {
-                        listView_Plugins.Items[count].Checked = true;
-                    }
-                }
-                catch (Exception)
-                {
-                    listView_Plugins.Items[count].Checked = false;
-                }
-
+                listView_Plugins.Items[count].Checked = Config.configValue.option_PlugStatus[count].IsOpen;
                 count++;
             }
         }
-        private void SavePlugsList()
+        private void savePlugsList()
         {
-            var str = new StringBuilder();
-            for (int i = 0; i < listView_Plugins.Items.Count; i++)
+            Config.Load();
+            int count = 0;
+            foreach(var item in Config.configValue.option_PlugStatus)
             {
-                if (listView_Plugins.Items[i].Checked)
-                {
-                    str.Append("1,");
-                }
-                else
-                {
-                    str.Append("0,");
-                }
+                item.IsOpen = listView_Plugins.Items[count].Checked;
+                count++;
             }
-            str.Remove(str.Length - 1, 1);
-            Config.option_PlugState = str.ToString();
             Config.Save();
         }
     }

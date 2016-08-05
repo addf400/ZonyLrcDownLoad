@@ -42,6 +42,16 @@
     <Compile Include="LibSingleLyricSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LibIPlug\LibIPlug\LibIPlug.csproj">
+      <Project>{b63b284d-935c-4de5-b165-f9e756ae02a4}</Project>
+      <Name>LibIPlug</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibNet\LibNet\LibNet.csproj">
+      <Project>{15f344c6-49cc-4511-bd0a-fca56edd98cb}</Project>
+      <Name>LibNet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

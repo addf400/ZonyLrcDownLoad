@@ -61,10 +61,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
             if(configValue.option_PlugStatus.Count != Untiy.piProperties.Count)
             {
                 configValue.option_PlugStatus.Clear();
-                foreach (var item in Untiy.Plugs)
-                {
-                    configValue.option_PlugStatus.Add(new PlugStatus { IsOpen = true });
-                }
+                initPlugStatus();
             }
         }
 
@@ -78,7 +75,13 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
             configValue.option_UserDirectory = "null";
             configValue.option_ThreadNumber = 4;
             configValue.option_PlugStatus = new List<PlugStatus>();
-            foreach (var item in Untiy.Plugs)
+            initPlugStatus();
+        }
+
+        // 默认插件状态
+        private static void initPlugStatus()
+        {
+            foreach (var item in Untiy.piProperties)
             {
                 configValue.option_PlugStatus.Add(new PlugStatus { IsOpen = true});
             }

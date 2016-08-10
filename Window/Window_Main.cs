@@ -94,11 +94,11 @@ namespace Zony_Lrc_Download_2._0.Window
                             else
                             {
                                 /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
-                                var no = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
-                                ParallelDownLoad(no, Untiy.piProperties[count].Name + "正在下载...", Untiy.Plugs[count]);
+                                var _oldDic = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
+                                ParallelDownLoad(_oldDic, Untiy.piProperties[count].Name + "正在下载...", Untiy.Plugs[count]);
                             }
-                            count++;
                         }
+                        count++;
                     }
 
                     uiRest();

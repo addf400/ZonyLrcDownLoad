@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace LibNetease
 {
-    [PluginInfoAttribute("网易云音乐","v1.1","Zony","支持从网易云音乐下载歌词。",0)]
+    [PluginInfoAttribute("网易云音乐","v1.2","Zony","支持从网易云音乐下载歌词。",0)]
     public class Netease : IPlugin
     {
         public PluginInfoAttribute PluginInfo
@@ -23,7 +23,7 @@ namespace LibNetease
             string RequestURL = "http://music.163.com/api/search/get/web?csrf_token=";
             string ResponseURL = "http://music.163.com/api/song/lyric?os=osx&id=";
             var m_tools = new NetUtils();
-            var m_info = new MusicInfo(filePath, 0);
+            var m_info = new MusicInfo(filePath);
 
             try
             {
@@ -35,7 +35,20 @@ namespace LibNetease
                 // 获得歌曲ID
                 JObject jsonSID = JObject.Parse(resultJson);
                 JArray jsonArraySID = (JArray)jsonSID["result"]["songs"];
-                string sid = jsonArraySID[0]["id"].ToString();
+                string sid = null;
+
+                // 二级匹配
+                bool flag = false;
+                foreach (var item in jsonArraySID)
+                {
+                    if (item["artists"][0]["name"].ToString() == m_info.Singer)
+                    {
+                        sid = item["id"].ToString();
+                        flag = true;
+                    }
+                }
+                if(!flag) sid = jsonArraySID[0]["id"].ToString();
+
 
                 string lrcUrl = ResponseURL + sid + "&lv=-1&kv=-1&tv=-1";
                 string lrcString = m_tools.Http_Get(lrcUrl, Encoding.UTF8, true);
@@ -85,8 +98,7 @@ namespace LibNetease
         /// 获得歌曲文件信息
         /// </summary>
         /// <param name="filePath">源歌曲文件路径</param>
-        /// <param name="flag">标志位，根据设置而定</param>
-        public MusicInfo(string filePath, int flag)
+        public MusicInfo(string filePath)
         {
             try
             {

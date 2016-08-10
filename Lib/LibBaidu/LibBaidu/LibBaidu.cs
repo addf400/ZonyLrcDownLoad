@@ -22,7 +22,7 @@ namespace LibBaidu
             System.Net.ServicePointManager.DefaultConnectionLimit = iThread;
             string RequestURL = "http://music.baidu.com/search/lrc?key=";
             string ResponseURL = "http://music.baidu.com";
-            var m_info = new MusicInfo(filePath, 0);
+            var m_info = new MusicInfo(filePath);
             var m_tools = new NetUtils();
 
             string getURL = RequestURL + m_info.Title;
@@ -66,8 +66,7 @@ namespace LibBaidu
         /// 获得歌曲文件信息
         /// </summary>
         /// <param name="filePath">源歌曲文件路径</param>
-        /// <param name="flag">标志位，根据设置而定</param>
-        public MusicInfo(string filePath, int flag)
+        public MusicInfo(string filePath)
         {
             try
             {

@@ -11,6 +11,7 @@ using System.Text;
 using System.Collections.Generic;
 using Zony_Lrc_Download_2._0.Class.Plugins;
 using Newtonsoft.Json;
+using Zony_Lrc_Download_2._0.Class.Utils;
 
 namespace Zony_Lrc_Download_2._0.Class.Configs
 {
@@ -22,7 +23,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// <summary>
         /// 设置项值
         /// </summary>
-        public static ConfigObject configValue = new ConfigObject();
+        public static ConfigModel configValue = new ConfigModel();
         private static FileStream fs;
         private static string setPath = Environment.CurrentDirectory + @"\set.conf";
 
@@ -54,18 +55,21 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
             fs = File.Open(setPath, FileMode.Open);
             StreamReader sr = new StreamReader(fs);
             string jsonStr = sr.ReadToEnd();
-            configValue = JsonConvert.DeserializeObject<ConfigObject>(jsonStr);
+            configValue = JsonConvert.DeserializeObject<ConfigModel>(jsonStr);
             sr.Close();
             fs.Close();
             // 检测到插件更改
-            if(configValue.option_PlugStatus.Count != Untiy.piProperties.Count)
+            if (configValue.option_PlugStatus.Count != LongLife.Plug_Lrc.PlugsInfo.Count)
             {
                 configValue.option_PlugStatus.Clear();
                 initPlugStatus();
             }
         }
 
-        // 默认选项设置
+        #region 私有方法
+        /// <summary>
+        /// 默认选项设置
+        /// </summary>
         private static void defaultOption()
         {
             configValue.option_Encoding = 0;
@@ -78,17 +82,20 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
             initPlugStatus();
         }
 
-        // 默认插件状态
+        /// <summary>
+        /// 设置默认插件状态
+        /// </summary>
         private static void initPlugStatus()
         {
-            foreach (var item in Untiy.piProperties)
+            foreach (var item in LongLife.Plug_Lrc.PlugsInfo)
             {
-                configValue.option_PlugStatus.Add(new PlugStatus { IsOpen = true});
+                configValue.option_PlugStatus.Add(new PlugStatus { IsOpen = true });
             }
         }
+        #endregion
     }
 
-    public class ConfigObject
+    public class ConfigModel
     {
         /// <summary>
         /// 编码方式
@@ -119,4 +126,4 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// </summary>
         public List<PlugStatus> option_PlugStatus { get; set; }
     }
-} 
+}

@@ -7,11 +7,9 @@
  */
 using System;
 using System.Windows.Forms;
-using Zony_Lrc_Download_2._0.Class.Plugins;
-using LibIPlug;
-using System.Text;
 using Zony_Lrc_Download_2._0.Class.Configs;
 using Zony_Lrc_Download_2._0.Class.UI;
+using Zony_Lrc_Download_2._0.Class.Utils;
 
 namespace Zony_Lrc_Download_2._0.Window
 {
@@ -24,7 +22,7 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Plugins_Load(object sender, EventArgs e)
         {
-            Untiy.LoadPlugins();
+            LongLife.Plug_Lrc.LoadPlugs();
             loadPlug();
         }
 
@@ -38,9 +36,9 @@ namespace Zony_Lrc_Download_2._0.Window
             // 加载插件状态
             Config.Load();
 
-            int count=0;
+            int count = 0;
             // 加载插件列表
-            foreach (var item in Untiy.piProperties)
+            foreach (var item in LongLife.Plug_Lrc.PlugsInfo)
             {
                 listView_Plugins.Items.Add(new ListViewItem(new string[]
                 {
@@ -59,7 +57,7 @@ namespace Zony_Lrc_Download_2._0.Window
         {
             Config.Load();
             int count = 0;
-            foreach(var item in Config.configValue.option_PlugStatus)
+            foreach (var item in Config.configValue.option_PlugStatus)
             {
                 item.IsOpen = listView_Plugins.Items[count].Checked;
                 count++;

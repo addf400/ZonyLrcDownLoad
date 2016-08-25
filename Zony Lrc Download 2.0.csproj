@@ -76,6 +76,9 @@
     <Compile Include="Class\Configs\Ver.cs" />
     <Compile Include="Class\Plugins\PlugStatus.cs" />
     <Compile Include="Class\Plugins\Untiy.cs" />
+    <Compile Include="Class\UI\ListVIewNF.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Class\UI\UI_From.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,9 +87,7 @@
     <Compile Include="Class\Utils\FileOperate\FileWrite.cs" />
     <Compile Include="Class\Utils\FuncUtils.cs" />
     <Compile Include="Class\Utils\LongLife.cs" />
-    <Compile Include="Program.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>

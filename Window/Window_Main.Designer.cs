@@ -1,4 +1,6 @@
-﻿namespace Zony_Lrc_Download_2._0.Window
+﻿using Zony_Lrc_Download_2._0.Class.UI;
+
+namespace Zony_Lrc_Download_2._0.Window
 {
     partial class Window_Main
     {
@@ -41,7 +43,7 @@
             this.statusStrip_Main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Information = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar_DownLoad = new System.Windows.Forms.ToolStripProgressBar();
-            this.listView_Music = new Zony_Lrc_Download_2._0.ListViewNF();
+            this.listView_Music = new ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip_Main.SuspendLayout();
@@ -202,7 +204,7 @@
 
         #endregion
 
-        private Zony_Lrc_Download_2._0.ListViewNF listView_Music;
+        private ListViewNF listView_Music;
         private System.Windows.Forms.ToolStrip toolStrip_Main;
         private System.Windows.Forms.ToolStripButton toolStripButton_Search;
         private System.Windows.Forms.ToolStripButton toolStripButton_DownLoad;

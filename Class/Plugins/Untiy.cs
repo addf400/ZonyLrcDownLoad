@@ -2,84 +2,97 @@
  * 描述：负责插件加载与管理的静态类
  * 作者：Zony
  * 创建日期：2016/05/10
- * 最后修改日期：2016/08/05
- * 版本：1.1
+ * 最后修改日期：2016/08/26
+ * 版本：1.2
  */
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using LibIPlug;
 
 namespace Zony_Lrc_Download_2._0.Class.Plugins
 {
-    public static class Untiy
+    public class BasePlug<T> where T : class
     {
-        /// <summary>
-        /// 插件列表
-        /// </summary>
-        public static List<IPlugin> Plugs = new List<IPlugin>();
-        /// 插件信息列表
-        /// </summary>
-        public static List<PluginInfoAttribute> piProperties = new List<PluginInfoAttribute>();
+        public List<T> Plugs { get; }
+        public List<PluginInfoAttribute> PlugsInfo { get; }
+        private Type interType;
 
-        /// <summary>
-        /// 载入插件
-        /// </summary>
-        /// <returns>成功载入的插件数目，返回0则是出现错误</returns>
-        public static int LoadPlugins()
+        public BasePlug()
+        {
+            interType = typeof(T);
+            PlugsInfo = new List<PluginInfoAttribute>();
+            Plugs = new List<T>();
+        }
+
+        public int LoadPlugs()
         {
             Plugs.Clear();
-            piProperties.Clear();
+            PlugsInfo.Clear();
+
             if (!Directory.Exists(Environment.CurrentDirectory + @"\Plugins")) return 0;
 
             string[] files = Directory.GetFiles(Environment.CurrentDirectory + @"\Plugins");
             PluginInfoAttribute typeAttribute = new PluginInfoAttribute();
 
-            foreach (string file in files)
+            foreach (var item in files)
             {
-                string ext = file.Substring(file.LastIndexOf("."));
+                string ext = Path.GetExtension(item);
                 if (ext != ".dll") continue;
+
                 try
                 {
-                    Assembly tmp = Assembly.LoadFile(file);
+                    Assembly tmp = Assembly.LoadFile(item);
                     Type[] types = tmp.GetTypes();
-                    // 遍历实例，获得实现接口的类
+                    // 遍历实例获得实现接口的类
                     foreach (Type t in types)
                     {
-                        if (t.GetInterface("IPlugin") != null)
+                        if (t.GetInterface(interType.Name) != null)
                         {
-                            IPlugin plugin = (IPlugin)tmp.CreateInstance(t.FullName);
-                            Plugs.Add(plugin);
-                            object[] attbs = t.GetCustomAttributes(typeAttribute.GetType(),false);
+                            T plug = (T)tmp.CreateInstance(t.FullName);
+                            Plugs.Add(plug);
+
+                            object[] attbs = t.GetCustomAttributes(typeAttribute.GetType(), false);
                             PluginInfoAttribute attribute = null;
                             foreach (object attb in attbs)
                             {
-                                if(attb is PluginInfoAttribute)
+                                if (attb is PluginInfoAttribute)
                                 {
                                     attribute = (PluginInfoAttribute)attb;
                                     break;
                                 }
                             }
 
-                            // 载入插件信息
-                            if(attribute != null)
+                            if (attribute != null)
                             {
-                                piProperties.Add(attribute);
-                                plugin.PluginInfo = attribute;
+                                PlugsInfo.Add(attribute);
                             }
+
+                            CallBack();
                         }
                     }
                 }
                 catch (Exception exp)
                 {
-                    MessageBox.Show("产生异常：\r\n" + exp.ToString());
-                    return 0;
+                    throw exp;
                 }
             }
 
             return Plugs.Count;
+        }
+
+        protected virtual void CallBack() { }
+    }
+
+    public class Plug_LrcDown : BasePlug<IPlugin>
+    {
+        protected override void CallBack()
+        {
+            for (int i = 0; i < Plugs.Count; i++)
+            {
+                Plugs[i].PluginInfo = PlugsInfo[i];
+            }
         }
     }
 }

@@ -9,7 +9,6 @@ using Zony_Lrc_Download_2._0.Class.Utils.FileOperate;
 using Zony_Lrc_Download_2._0.Class.Utils;
 using Zony_Lrc_Download_2._0.Class.Utils.DownLoad;
 using Zony_Lrc_Download_2._0.Class.Configs;
-using Zony_Lrc_Download_2._0.Class.Plugins;
 using Zony_Lrc_Download_2._0.Class.UI;
 using LibIPlug;
 
@@ -24,7 +23,7 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Main_Load(object sender, EventArgs e)
         {
-            if (Untiy.LoadPlugins() == 0)
+            if (LongLife.Plug_Lrc.LoadPlugs() == 0)
             {
                 MessageBox.Show("基础插件加载失败，无法正常运行程序，请点击反馈按钮寻找技术支持。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -34,6 +33,7 @@ namespace Zony_Lrc_Download_2._0.Window
                 applicationSet();
                 updateCheck();
             }
+            throw new NullReferenceException();
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)
@@ -48,9 +48,9 @@ namespace Zony_Lrc_Download_2._0.Window
                 listView_Music.Items.Clear();
 
                 // 搜寻文件
-                if (new FileSearch().Search(ref LongLife.MusicPathList,fb.SelectedPath,FuncUtils.SplitString(Config.configValue.option_FileSuffix,';')) == FileSearch.FileSearchResult.Normal)
+                if (new FileSearch().Search(ref LongLife.MusicPathList, fb.SelectedPath, FuncUtils.SplitString(Config.configValue.option_FileSuffix, ';')) == FileSearch.FileSearchResult.Normal)
                 {
-                    foreach (KeyValuePair<int,string> key in LongLife.MusicPathList)
+                    foreach (KeyValuePair<int, string> key in LongLife.MusicPathList)
                     {
                         // 向ListView添加条目
                         string[] str = { Path.GetFileNameWithoutExtension(key.Value), "" };
@@ -82,20 +82,20 @@ namespace Zony_Lrc_Download_2._0.Window
                     int count = 0;
 
                     // 检测各项插件开关
-                    foreach(var item in Config.configValue.option_PlugStatus)
+                    foreach (var item in Config.configValue.option_PlugStatus)
                     {
-                        if(item.IsOpen && Untiy.piProperties[count].Ptype == 0)
+                        if (item.IsOpen && LongLife.Plug_Lrc.PlugsInfo[count].Ptype == 0)
                         {
-                            if(firstPlug)
+                            if (firstPlug)
                             {
-                                ParallelDownLoad(LongLife.MusicPathList, Untiy.piProperties[count].Name + "正在下载...", Untiy.Plugs[count]);
+                                ParallelDownLoad(LongLife.MusicPathList, LongLife.Plug_Lrc.PlugsInfo[count].Name + "正在下载...", LongLife.Plug_Lrc.Plugs[count]);
                                 firstPlug = false;
                             }
                             else
                             {
                                 /* 拷贝失败字典是为了防止在Foreach当中对集合进行删除操作所导致的程序崩溃 */
                                 var _oldDic = FuncUtils.DictionaryCopy(ref LongLife.MusicPathFailedList);
-                                ParallelDownLoad(_oldDic, Untiy.piProperties[count].Name + "正在下载...", Untiy.Plugs[count]);
+                                ParallelDownLoad(_oldDic, LongLife.Plug_Lrc.PlugsInfo[count].Name + "正在下载...", LongLife.Plug_Lrc.Plugs[count]);
                             }
                         }
                         count++;
@@ -106,7 +106,7 @@ namespace Zony_Lrc_Download_2._0.Window
             }
         }
 
-        private void ParallelDownLoad(Dictionary<int,string> container,string info,IPlugin lrcDown)
+        private void ParallelDownLoad(Dictionary<int, string> container, string info, IPlugin lrcDown)
         {
             toolStripStatusLabel_Information.Text = info;
             toolStripProgressBar_DownLoad.Value = 0;
@@ -125,7 +125,7 @@ namespace Zony_Lrc_Download_2._0.Window
                     else
                     {
                         // 下载歌词
-                        if (lrcDown.Down(item.Value, ref lrcData,Config.configValue.option_ThreadNumber) == true)
+                        if (lrcDown.Down(item.Value, ref lrcData, Config.configValue.option_ThreadNumber) == true)
                         {
                             listView_Music.Items[item.Key].SubItems[1].Text = "成功";
                             if (fs.Write(ref lrcData, item.Value, Config.configValue.option_Encoding, Config.configValue.option_UserDirectory))

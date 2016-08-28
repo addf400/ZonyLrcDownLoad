@@ -13,6 +13,10 @@ using LibIPlug;
 
 namespace Zony_Lrc_Download_2._0.Class.Plugins
 {
+    /// <summary>
+    /// 插件加载基类定义
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BasePlug<T> where T : class
     {
         public List<T> Plugs { get; }
@@ -85,7 +89,21 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         protected virtual void CallBack() { }
     }
 
+    /// <summary>
+    /// 歌词下载插件加载
+    /// </summary>
     public class Plug_LrcDown : BasePlug<IPlugin>
+    {
+        protected override void CallBack()
+        {
+            for (int i = 0; i < Plugs.Count; i++)
+            {
+                Plugs[i].PluginInfo = PlugsInfo[i];
+            }
+        }
+    }
+
+    public class Plug_Hight : BasePlug<IPlugin_Hight>
     {
         protected override void CallBack()
         {

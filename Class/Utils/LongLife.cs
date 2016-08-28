@@ -22,5 +22,7 @@ namespace Zony_Lrc_Download_2._0.Class.Utils
         public static Dictionary<int, string> MusicPathFailedList = new Dictionary<int, string>();
 
         public static Plug_LrcDown Plug_Lrc = new Plug_LrcDown();
+
+        public static Plug_Hight Plug_High = new Plug_Hight();
     }
 }

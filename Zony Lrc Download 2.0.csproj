@@ -76,9 +76,6 @@
     <Compile Include="Class\Configs\Ver.cs" />
     <Compile Include="Class\Plugins\PlugStatus.cs" />
     <Compile Include="Class\Plugins\Untiy.cs" />
-    <Compile Include="Class\UI\ListVIewNF.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Class\UI\UI_From.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,10 +154,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DLL\ID3.dll" />
+    <Content Include="DLL\ID3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="DLL\LibIPlug.dll" />
     <Content Include="DLL\LibNet.dll" />
-    <Content Include="DLL\Newtonsoft.Json.dll" />
+    <Content Include="DLL\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon\6.ico" />
     <Content Include="Icon\discuz.ico" />
     <Content Include="Icon\down.ico" />

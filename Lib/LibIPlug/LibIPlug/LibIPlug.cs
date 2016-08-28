@@ -17,6 +17,14 @@ namespace LibIPlug
     }
     #endregion
 
+    #region 高级插件
+    public interface IPlugin_Hight
+    {
+        PluginInfoAttribute PluginInfo { get; set; }
+        void Init(ref ResourceModule module);
+    }
+    #endregion
+
     #region 插件描述信息
     public class PluginInfoAttribute : Attribute
     {

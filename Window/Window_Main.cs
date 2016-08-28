@@ -33,7 +33,9 @@ namespace Zony_Lrc_Download_2._0.Window
                 applicationSet();
                 updateCheck();
             }
-            throw new NullReferenceException();
+            LongLife.Plug_High.LoadPlugs();
+            var test = new ResourceModule { MainListBox = listView_Music, ListContextMenu = new ContextMenu() };
+            LongLife.Plug_High.Plugs[0].Init(ref test);
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)

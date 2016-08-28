@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
-namespace Zony_Lrc_Download_2._0.Class.UI
+namespace LibIPlug
 {
     public class ListViewNF : ListView
     {

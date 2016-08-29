@@ -34,7 +34,13 @@ namespace Zony_Lrc_Download_2._0.Window
                 updateCheck();
             }
             LongLife.Plug_High.LoadPlugs();
-            var test = new ResourceModule { MainListBox = listView_Music, ListContextMenu = new ContextMenu() };
+            var test = new ResourceModule {
+                MainListBox = listView_Music,
+                ListContextMenu = new ContextMenu(),
+                MainProgressBar = toolStripProgressBar_DownLoad,
+                MusicPathList = LongLife.MusicPathList,
+                MainStatusStrip = toolStripStatusLabel_Information
+            };
             LongLife.Plug_High.Plugs[0].Init(ref test);
         }
 

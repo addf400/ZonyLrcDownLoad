@@ -54,7 +54,7 @@ namespace Zony_Lrc_Download_2._0.Class.Utils.FileOperate
             int invalidCount=0;
             searchDirectoryPath.Trim();
 
-            if(searchDirectoryPath == "" || !Directory.Exists(searchDirectoryPath))
+            if(searchDirectoryPath.Equals("") || !Directory.Exists(searchDirectoryPath))
             {
                 return FileSearchResult.Directory_Path_Invalid;
             }

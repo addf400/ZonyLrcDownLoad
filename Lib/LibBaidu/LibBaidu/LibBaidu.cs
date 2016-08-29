@@ -28,13 +28,13 @@ namespace LibBaidu
             string getURL = RequestURL + m_info.Title;
             string lrcHtml = m_tools.Http_Get(getURL, Encoding.UTF8);
 
-            if (lrcHtml == "") return false;
+            if (lrcHtml.Equals("")) return false;
 
             Regex reg = new Regex(@"/data2/lrc/\d*/\d*.lrc");
             try
             {
                 string result = reg.Match(lrcHtml).ToString();
-                if (result == "") return false;
+                if (result.Equals("")) return false;
 
                 lrcData = new WebClient().DownloadData(ResponseURL + result);
                 return true;
@@ -74,7 +74,7 @@ namespace LibBaidu
                 ID3Info id3 = new ID3Info(filePath, true);
                 Title = id3.ID3v1Info.Title != null ? id3.ID3v1Info.Title : id3.ID3v2Info.GetTextFrame("TIT2");
                 Singer = id3.ID3v1Info.Artist != null ? id3.ID3v1Info.Artist : id3.ID3v2Info.GetTextFrame("TPE1");
-                if (Title == "")
+                if (Title.Equals(""))
                 {
                     // 尝试手工分割文件名
                     string fileName = Path.GetFileNameWithoutExtension(filePath);

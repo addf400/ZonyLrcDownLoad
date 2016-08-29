@@ -28,14 +28,14 @@ namespace LibLrcgc
                 string lrcHtml = m_tools.Http_Get(getPageLink, Encoding.UTF8);
                 
                 // 获得第一个歌词页面
-                if (lrcHtml == "") return false;
+                if (lrcHtml.Equals("")) return false;
                 Regex reg = new Regex(@"lyric-\d+-\d+.html");
                 string page = reg.Match(lrcHtml).ToString();
-                if (page == "") return false;
+                if (page.Equals("")) return false;
                 // 筛选ID
                 Regex regId = new Regex(@"\d+-\d+");
                 string id = regId.Match(page).ToString();
-                if (id == "") return false;
+                if (id.Equals("")) return false;
 
                 // 获得歌词具体下载地址
                 string getPage = m_tools.Http_Get(mainDomain + page, Encoding.UTF8);
@@ -43,7 +43,7 @@ namespace LibLrcgc
                 string lrcURL = reg2.Match(getPage).ToString();
 
                 // 下载歌词
-                if (lrcURL == "") return false;
+                if (lrcURL.Equals("")) return false;
                 lrcData = new WebClient().DownloadData(mainDomain + lrcURL.Remove(lrcURL.Length - 2, 2));
                 return true;
             }
@@ -84,7 +84,7 @@ namespace LibLrcgc
                     ID3Info id3 = new ID3Info(filePath, true);
                     Title = id3.ID3v1Info.Title != null ? id3.ID3v1Info.Title : id3.ID3v2Info.GetTextFrame("TIT2");
                     Singer = id3.ID3v1Info.Artist != null ? id3.ID3v1Info.Artist : id3.ID3v2Info.GetTextFrame("TPE1");
-                    if (Title == "")
+                    if (Title.Equals(""))
                     {
                         // 尝试手工分割文件名
                         string fileName = Path.GetFileNameWithoutExtension(filePath);

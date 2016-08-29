@@ -30,7 +30,7 @@ namespace LibNetease
                 string postStr = "&s=" + m_tools.URL_Encoding(m_info.Title, Encoding.UTF8) + "&type=1&offset=0&total=true&limit=5";
                 string resultJson = m_tools.Http_Post(RequestURL, postStr);
 
-                if (resultJson == "") return false;
+                if (resultJson.Equals("")) return false;
 
                 // 获得歌曲ID
                 JObject jsonSID = JObject.Parse(resultJson);
@@ -56,7 +56,7 @@ namespace LibNetease
                 // 从Json当中分析歌词信息
                 JObject lrcObject = JObject.Parse(lrcString);
                 string lrcDataString = lrcObject["lrc"]["lyric"].ToString();
-                if (lrcDataString == "") return false;
+                if (lrcDataString.Equals("")) return false;
                 // 去掉网易时间轴后一位
                 Regex reg = new Regex(@"\[\d+:\d+.\d+\]");
                 string deal_ok = reg.Replace(lrcDataString, new MatchEvaluator((Match machs)=> 
@@ -106,7 +106,7 @@ namespace LibNetease
                 ID3Info id3 = new ID3Info(filePath, true);
                 Title = id3.ID3v1Info.Title != null ? id3.ID3v1Info.Title : id3.ID3v2Info.GetTextFrame("TIT2");
                 Singer = id3.ID3v1Info.Artist != null ? id3.ID3v1Info.Artist : id3.ID3v2Info.GetTextFrame("TPE1");
-                if (Title == "")
+                if (Title.Equals(""))
                 {
                     // 尝试手工分割文件名
                     string fileName = Path.GetFileNameWithoutExtension(filePath);

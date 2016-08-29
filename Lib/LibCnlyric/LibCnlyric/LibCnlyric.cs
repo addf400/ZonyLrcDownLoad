@@ -26,13 +26,13 @@ namespace LibCnlyric
             string getURL = RequestURL + m_tools.URL_Encoding(m_info.Title, Encoding.GetEncoding("gb2312")) + "&t=s";
             string lrcHtml = m_tools.Http_Get(getURL, Encoding.GetEncoding("gb2312"));
 
-            if (lrcHtml == "") return false;
+            if (lrcHtml.Equals("")) return false;
 
             Regex reg = new Regex(@"LrcDown/\d*/\d*.lrc");
             try
             {
                 string result = reg.Match(lrcHtml).ToString();
-                if (result == "") return false;
+                if (result.Equals("")) return false;
 
                 byte[] gb2312Bytes = new WebClient().DownloadData(ResponseURL + result);
                 // 编码统一转换为UTF-8
@@ -76,7 +76,7 @@ namespace LibCnlyric
                 ID3Info id3 = new ID3Info(filePath, true);
                 Title = id3.ID3v1Info.Title != null ? id3.ID3v1Info.Title : id3.ID3v2Info.GetTextFrame("TIT2");
                 Singer = id3.ID3v1Info.Artist != null ? id3.ID3v1Info.Artist : id3.ID3v2Info.GetTextFrame("TPE1");
-                if (Title == "")
+                if (Title.Equals(""))
                 {
                     // 尝试手工分割文件名
                     string fileName = Path.GetFileNameWithoutExtension(filePath);

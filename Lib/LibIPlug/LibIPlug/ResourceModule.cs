@@ -30,10 +30,10 @@ namespace LibIPlug
         /// <summary>
         /// 底部进度条
         /// </summary>
-        public ProgressBar MainProgressBar { get; set; }
+        public ToolStripProgressBar MainProgressBar { get; set; }
         /// <summary>
         /// 底部状态栏
         /// </summary>
-        public StatusStrip MainStatusStrip { get; set; }
+        public ToolStripStatusLabel MainStatusStrip { get; set; }
     }
 }

@@ -154,14 +154,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DLL\ID3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DLL\LibIPlug.dll" />
-    <Content Include="DLL\LibNet.dll" />
-    <Content Include="DLL\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Dll\ID3.dll" />
+    <Content Include="Dll\Newtonsoft.Json.dll" />
     <Content Include="Icon\6.ico" />
     <Content Include="Icon\discuz.ico" />
     <Content Include="Icon\down.ico" />
@@ -198,6 +192,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(SolutionDir)\DLL\ID3.dll" "$(TargetDir)"
+copy "$(SolutionDir)\DLL\Newtonsoft.Json.dll" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

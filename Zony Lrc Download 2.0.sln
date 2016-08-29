@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNet", "Lib\LibNet\LibNet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNetease", "Lib\LibNetease\LibNetease\LibNetease.csproj", "{B9882493-2712-46B9-83C1-C0F47BEDF3AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleLyricSearch", "Lib\SingleLyricSearch\SingleLyricSearch\SingleLyricSearch.csproj", "{F00E189D-D814-4B81-B392-145086C06C1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNeteaseTmp", "Lib\SingleLyricSearch\SingleLyricSearch\LibNeteaseTmp.csproj", "{F00E189D-D814-4B81-B392-145086C06C1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibBaidu", "Lib\LibBaidu\LibBaidu\LibBaidu.csproj", "{7B9EEF1E-7F74-4604-BC60-AD6F588B82F5}"
 EndProject

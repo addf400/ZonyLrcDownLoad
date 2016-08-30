@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using LibNet;
 using System.Threading;
+using System;
 
 namespace LibLibNeteaseTmp
 {
@@ -62,95 +63,117 @@ namespace LibLibNeteaseTmp
                 module.MainStatusStrip.Text = "开始对临时文件进行转换..";
                 new Thread(() =>
                 {
+                    int _count = 0;
+                    int _success = 0;
+                    int _failed = 0;
                     foreach (var item in files)
                     {
                         if (tmpConvert(item))
                         {
-                            module.MainProgressBar.Value++;
+                            module.MainListBox.Items[_count].SubItems[1].Text = "成功";
+                            _success++;
                         }
+                        else
+                        {
+                            module.MainListBox.Items[_count].SubItems[1].Text = "失败";
+                            _failed++;
+                        }
+
+                        module.MainProgressBar.Value++;
+                        _count++;
                     }
+
+                    module.MainStatusStrip.Text = "网易云音乐文件转换完成!";
+                    MessageBox.Show(string.Format("已经转换完成：\n总文件数目：{0}\n转换成功：{1}\n转换失败：{2}",files.Length,_success,_failed), "转换完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }).Start();
             }
         }
 
         private bool tmpConvert(string filePath)
         {
-            FileStream _rdfs = new FileStream(filePath, FileMode.Open);
-            StreamReader _rdsr = new StreamReader(_rdfs);
-
-            string _lrcData = _rdsr.ReadToEnd();
-            JObject _jsonLrc = JObject.Parse(_lrcData);
-            List<string> _lrcItem = new List<string>();
-
-            // 判断是否有翻译歌词
-            if(!_jsonLrc["translateLyric"].ToString().Equals(""))
+            try
             {
-                string _orglrc = _jsonLrc["lyric"].ToString();
-                Regex _orgReg = new Regex(@"\[\d+:\d+.\d+\].+");
-                var _orgResult = _orgReg.Matches(_orglrc);
-                foreach (var item in _orgResult)
+                FileStream _rdfs = new FileStream(filePath, FileMode.Open);
+                StreamReader _rdsr = new StreamReader(_rdfs);
+
+                string _lrcData = _rdsr.ReadToEnd();
+                JObject _jsonLrc = JObject.Parse(_lrcData);
+                List<string> _lrcItem = new List<string>();
+
+                // 判断是否有翻译歌词
+                if (!_jsonLrc["translateLyric"].ToString().Equals(""))
                 {
-                    _lrcItem.Add(item.ToString());
+                    string _orglrc = _jsonLrc["lyric"].ToString();
+                    Regex _orgReg = new Regex(@"\[\d+:\d+.\d+\].+");
+                    var _orgResult = _orgReg.Matches(_orglrc);
+                    foreach (var item in _orgResult)
+                    {
+                        _lrcItem.Add(item.ToString());
+                    }
+                    // 获得翻译歌词
+                    string _transLrc = _jsonLrc["translateLyric"].ToString();
+                    Regex _transReg = new Regex(@"\[\d+:\d+.\d+\].+");
+                    var _transResult = _transReg.Matches(_transLrc);
+                    // 分割并且并入英文歌词当中
+                    int _count = 0;
+                    foreach (var item in _transResult)
+                    {
+                        var _tmp = item.ToString();
+                        string[] _lrcItemArray = _tmp.Split(']');
+                        _lrcItem[_count] = string.Format("{0} {1}", _lrcItem[_count], _lrcItemArray[1]);
+                        _count++;
+                    }
                 }
-                // 获得翻译歌词
-                string _transLrc = _jsonLrc["translateLyric"].ToString();
-                Regex _transReg = new Regex(@"\[\d+:\d+.\d+\].+");
-                var _transResult = _transReg.Matches(_transLrc);
-                // 分割并且并入英文歌词当中
-                int _count = 0;
-                foreach(var item in _transResult)
+                else
                 {
-                    var _tmp = item.ToString();
-                    string[] _lrcItemArray = _tmp.Split(']');
-                    _lrcItem[_count] = string.Format("{0} {1}", _lrcItem[_count], _lrcItemArray[1]);
-                    _count++;
+                    string _orglrc = _jsonLrc["lyric"].ToString();
+                    Regex _orgReg = new Regex(@"\[\d+:\d+.\d+\].+");
+                    var _orgResult = _orgReg.Matches(_orglrc);
+                    foreach (var item in _orgResult)
+                    {
+                        _lrcItem.Add(item.ToString());
+                    }
                 }
-            }
-            else
-            {
-                string _orglrc = _jsonLrc["lyric"].ToString();
-                Regex _orgReg = new Regex(@"\[\d+:\d+.\d+\].+");
-                var _orgResult = _orgReg.Matches(_orglrc);
-                foreach (var item in _orgResult)
+                // 获得歌手信息与歌曲名称
+                NetUtils nt = new NetUtils();
+                string lrcresult = nt.Http_Get(string.Format("http://music.163.com/api/song/detail/?id={0}&ids=%5B{0}%5D", _jsonLrc["musicId"].ToString()), Encoding.UTF8, true);
+                JObject _jsonMusic = JObject.Parse(lrcresult);
+                JArray _jsonSongs = (JArray)_jsonMusic["songs"];
+                JArray _jsonArtists = (JArray)_jsonSongs[0]["artists"];
+                string _artist = _jsonArtists[0]["name"].ToString();
+                string _title = _jsonSongs[0]["name"].ToString();
+                // 构建文件名
+                string _fileName = string.Format("{0} - {1}", _artist, _title);
+
+                // 关闭文件流
+                _rdsr.Close();
+                _rdfs.Close();
+
+                //构造歌词数据
+                StringBuilder _sb = new StringBuilder();
+                foreach (var item in _lrcItem)
                 {
-                    _lrcItem.Add(item.ToString());
+                    _sb.Append(item + "\n");
                 }
+                // 去掉网易时间轴后一位
+                Regex _reg = new Regex(@"\[\d+:\d+.\d+\]");
+                string _covertOkString = _reg.Replace(_sb.ToString(), new MatchEvaluator((Match machs) =>
+                {
+                    string time = machs.ToString();
+                    return time.Remove(time.Length - 2, 1);
+                }));
+                // 输出到文件
+                string path = Path.GetDirectoryName(filePath) + @"\" + _fileName + ".lrc";
+                FileStream _wrfs = new FileStream(path, FileMode.Create);
+                byte[] _lrcbyte = Encoding.UTF8.GetBytes(_covertOkString);
+                _wrfs.Write(_lrcbyte, 0, _lrcbyte.Length);
+                _wrfs.Close();
+                return true;
             }
-            // 获得歌手信息与歌曲名称
-            NetUtils nt = new NetUtils();
-            string lrcresult = nt.Http_Get(string.Format("http://music.163.com/api/song/detail/?id={0}&ids=%5B{0}%5D", _jsonLrc["musicId"].ToString()), Encoding.UTF8, true);
-            JObject _jsonMusic = JObject.Parse(lrcresult);
-            JArray _jsonSongs = (JArray)_jsonMusic["songs"];
-            JArray _jsonArtists = (JArray)_jsonSongs[0]["artists"];
-            string _artist = _jsonArtists[0]["name"].ToString();
-            string _title = _jsonSongs[0]["name"].ToString();
-            // 构建文件名
-            string _fileName = string.Format("{0} - {1}", _artist, _title);
-
-            // 关闭文件流
-            _rdsr.Close();
-            _rdfs.Close();
-
-            //构造歌词数据
-            StringBuilder _sb = new StringBuilder();
-            foreach (var item in _lrcItem)
+            catch (Exception ex)
             {
-                _sb.Append(item + "\n");
+                return false;
             }
-            // 去掉网易时间轴后一位
-            Regex _reg = new Regex(@"\[\d+:\d+.\d+\]");
-            string _covertOkString = _reg.Replace(_sb.ToString(), new MatchEvaluator((Match machs) =>
-            {
-                string time = machs.ToString();
-                return time.Remove(time.Length - 2, 1);
-            }));
-            // 输出到文件
-            string path = Path.GetDirectoryName(filePath) + @"\" + _fileName + ".lrc";
-            FileStream _wrfs = new FileStream(path, FileMode.Create);
-            byte[] _lrcbyte = Encoding.UTF8.GetBytes(_covertOkString);
-            _wrfs.Write(_lrcbyte, 0, _lrcbyte.Length);
-            _wrfs.Close();
-            return true;
         }
     }
 }

@@ -103,6 +103,10 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
         }
     }
 
+    /// <summary>
+    /// 高级扩展插件加载
+    /// 
+    /// </summary>
     public class Plug_Hight : BasePlug<IPlugin_Hight>
     {
         protected override void CallBack()

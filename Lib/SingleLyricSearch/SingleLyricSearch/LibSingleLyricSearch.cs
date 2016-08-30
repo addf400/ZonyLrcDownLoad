@@ -155,17 +155,10 @@ namespace LibLibNeteaseTmp
                 {
                     _sb.Append(item + "\n");
                 }
-                // 去掉网易时间轴后一位
-                Regex _reg = new Regex(@"\[\d+:\d+.\d+\]");
-                string _covertOkString = _reg.Replace(_sb.ToString(), new MatchEvaluator((Match machs) =>
-                {
-                    string time = machs.ToString();
-                    return time.Remove(time.Length - 2, 1);
-                }));
                 // 输出到文件
                 string path = Path.GetDirectoryName(filePath) + @"\" + _fileName + ".lrc";
                 FileStream _wrfs = new FileStream(path, FileMode.Create);
-                byte[] _lrcbyte = Encoding.UTF8.GetBytes(_covertOkString);
+                byte[] _lrcbyte = Encoding.UTF8.GetBytes(_sb.ToString());
                 _wrfs.Write(_lrcbyte, 0, _lrcbyte.Length);
                 _wrfs.Close();
                 return true;

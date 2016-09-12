@@ -23,6 +23,7 @@ namespace Zony_Lrc_Download_2._0.Window
         private void Window_Plugins_Load(object sender, EventArgs e)
         {
             LongLife.Plug_Lrc.LoadPlugs();
+            LongLife.Plug_High.LoadPlugs();
             loadPlug();
         }
 

@@ -41,7 +41,11 @@ namespace Zony_Lrc_Download_2._0.Window
                 MusicPathList = LongLife.MusicPathList,
                 MainStatusStrip = toolStripStatusLabel_Information
             };
-            LongLife.Plug_High.Plugs[0].Init(ref test);
+
+            foreach (var item in LongLife.Plug_High.Plugs)
+            {
+                item.Init(ref test);
+            }
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)

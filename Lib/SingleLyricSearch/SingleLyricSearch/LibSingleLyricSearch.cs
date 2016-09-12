@@ -1,7 +1,6 @@
 ﻿using LibIPlug;
 using System.Windows.Forms;
 using System.IO;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -12,7 +11,7 @@ using System;
 
 namespace LibLibNeteaseTmp
 {
-    [PluginInfo("单歌词下载插件", "v1.0", "Zony", "可以下载指定歌曲的歌词。", 1)]
+    [PluginInfo("单歌词下载插件", "v1.0", "Zony", "可以对网易临时文件歌曲进行扫描。", 1)]
     public class LibNeteaseTmp : IPlugin_Hight
     {
         public PluginInfoAttribute PluginInfo{ get;set; }

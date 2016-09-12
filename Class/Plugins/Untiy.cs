@@ -47,7 +47,7 @@ namespace Zony_Lrc_Download_2._0.Class.Plugins
 
                 try
                 {
-                    Assembly tmp = Assembly.LoadFile(item);
+                    Assembly tmp = Assembly.UnsafeLoadFrom(item);
                     Type[] types = tmp.GetTypes();
                     // 遍历实例获得实现接口的类
                     foreach (Type t in types)

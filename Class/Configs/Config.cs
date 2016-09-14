@@ -2,7 +2,7 @@
  * 描述：封装了对INI文件的操作，提供对程序设置项目保存与读取的接口。
  * 作者：Zony
  * 创建日期：2016/05/04
- * 最后修改日期：2016/08/05
+ * 最后修改日期：2016/09/14
  * 版本：2.0
  */
 using System;
@@ -25,7 +25,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// </summary>
         public static ConfigModel configValue = new ConfigModel();
         private static FileStream fs;
-        private static string setPath = Environment.CurrentDirectory + @"\set.conf";
+        private static string _setPath = Environment.CurrentDirectory + @"\set.conf";
 
         /// <summary>
         /// 保存设置
@@ -34,7 +34,7 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         {
             string jsonResult = JsonConvert.SerializeObject(configValue);
             byte[] jsonByte = Encoding.ASCII.GetBytes(jsonResult);
-            fs = File.Open(setPath, FileMode.OpenOrCreate);
+            fs = File.Open(_setPath, FileMode.OpenOrCreate);
             fs.SetLength(0);
             fs.Write(jsonByte, 0, jsonByte.Length);
             fs.Close();
@@ -45,14 +45,14 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         /// </summary>
         public static void Load()
         {
-            if (!File.Exists(setPath))
+            if (!File.Exists(_setPath))
             {
                 defaultOption();
                 Save();
                 return;
             }
 
-            fs = File.Open(setPath, FileMode.Open);
+            fs = File.Open(_setPath, FileMode.Open);
             StreamReader sr = new StreamReader(fs);
             string jsonStr = sr.ReadToEnd();
             configValue = JsonConvert.DeserializeObject<ConfigModel>(jsonStr);
@@ -95,6 +95,9 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
         #endregion
     }
 
+    /// <summary>
+    /// 插件存储模型
+    /// </summary>
     public class ConfigModel
     {
         /// <summary>

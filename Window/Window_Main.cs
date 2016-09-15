@@ -23,6 +23,7 @@ namespace Zony_Lrc_Download_2._0.Window
 
         private void Window_Main_Load(object sender, EventArgs e)
         {
+            #region 基础插件初始化
             if (LongLife.Plug_Lrc.LoadPlugs() == 0)
             {
                 MessageBox.Show("基础插件加载失败，无法正常运行程序，请点击反馈按钮寻找技术支持。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -33,6 +34,9 @@ namespace Zony_Lrc_Download_2._0.Window
                 applicationSet();
                 updateCheck();
             }
+            #endregion
+
+            #region 高级插件初始化
             LongLife.Plug_High.LoadPlugs();
             var test = new ResourceModule {
                 MainListBox = listView_Music,
@@ -46,6 +50,7 @@ namespace Zony_Lrc_Download_2._0.Window
             {
                 item.Init(ref test);
             }
+            #endregion
         }
 
         private void toolStripButton_Search_Click(object sender, EventArgs e)

@@ -9,6 +9,6 @@ namespace Zony_Lrc_Download_2._0.Class.Configs
 {
     static class Ver
     {
-        public const int CurrentVersion = 3230;
+        public const int CurrentVersion = 3232;
     }
 }

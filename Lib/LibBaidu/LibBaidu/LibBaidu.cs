@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Text;
-using LibIPlug;
-using LibNet;
 using System.Text.RegularExpressions;
 using System.Net;
+using LibIPlug;
+using LibNet;
 using ID3;
 using System.IO;
 
 namespace LibBaidu
 {
-    [PluginInfoAttribute("百度音乐歌词","v1.0","Zony","从百度云音乐下载歌词。",0)]
+    [PluginInfo("百度音乐歌词","v1.0","Zony","从百度云音乐下载歌词。",0)]
     public class Baidu : IPlugin
     {
         public PluginInfoAttribute PluginInfo

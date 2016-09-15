@@ -190,7 +190,7 @@ namespace Zony_Lrc_Download_2._0.Window
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Window_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ZonyLrcDownLoad 3.2.3";
+            this.Text = "ZonyLrcDownLoad 3.2.3 Beta2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_Main_FormClosing);
             this.Load += new System.EventHandler(this.Window_Main_Load);
             this.toolStrip_Main.ResumeLayout(false);

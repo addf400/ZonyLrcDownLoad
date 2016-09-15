@@ -11,7 +11,7 @@ using System;
 
 namespace LibLibNeteaseTmp
 {
-    [PluginInfo("单歌词下载插件", "v1.0", "Zony", "可以对网易临时文件歌曲进行扫描。", 1)]
+    [PluginInfo("网易临时文件转换", "v1.0", "Zony", "可以对网易临时文件歌曲进行扫描。", 1)]
     public class LibNeteaseTmp : IPlugin_Hight
     {
         public PluginInfoAttribute PluginInfo{ get;set; }

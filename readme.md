@@ -1,3 +1,6 @@
+# 本项目已经停止维护，目前在更新与维护另外一个分支。
+[https://github.com/GameBelial/ZonyLrcTools](https://github.com/GameBelial/ZonyLrcTools)
+
 ## 更新记录请参见Wiki：
 [http://git.oschina.net/jokers/ZonyLrcDownload/wikis/home](http://git.oschina.net/jokers/ZonyLrcDownload/wikis/home)
 ## 捐赠记录
